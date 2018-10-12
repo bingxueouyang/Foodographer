@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">Foodographer</string>
-    <string name="action_settings">Settings</string>
-    <string name="prompt_email">Settings</string>
-    <string name="prompt_password">Settings</string>
-    <string name="action_sign_in_short">Settings</string>
-    <string name="action_sign_in">Settings</string>
-    
-</resources>
