@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Foodographer</string>
     <string name="title_home">Home</string>
@@ -16,4 +17,22 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <string-array name="expertise_array">
+        <item>Chinese</item>
+        <item>Korean</item>
+        <item>Japanese</item>
+        <item>Italian</item>
+        <item>Vietnamese</item>
+        <item>Idian</item>
+        <item>American</item>
+    </string-array>
+
+    <string-array name="flavor_array">
+        <item>Spicy</item>
+        <item>Sweet</item>
+        <item>Sour</item>
+        <item>Salty</item>
+    </string-array>
 </resources>
+
