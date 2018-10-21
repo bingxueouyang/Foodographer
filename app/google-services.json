@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "853196373428",
+    "firebase_url": "https://food-3f5ad.firebaseio.com",
+    "project_id": "food-3f5ad",
+    "storage_bucket": "food-3f5ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:853196373428:android:3dd1639ffdf8643f",
+        "android_client_info": {
+          "package_name": "com.example.jasonsong.firsteverapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "853196373428-4cv4rbln2trk2hab4crrcve8bm7964lv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnJU37UY9ahQsClypcU0pvlb0xyWYdcI4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:853196373428:android:33d306b55bd5c91e",
+        "android_client_info": {
+          "package_name": "com.foodie.foodographer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "853196373428-4cv4rbln2trk2hab4crrcve8bm7964lv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnJU37UY9ahQsClypcU0pvlb0xyWYdcI4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

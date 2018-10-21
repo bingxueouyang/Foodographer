@@ -28,6 +28,19 @@
         <item>American</item>
     </string-array>
 
+    <string-array name="rating_array">
+        <item>Taste</item>
+        <item>Service</item>
+        <item>Overall</item>
+    </string-array>
+
+    <string-array name="distance_array">
+        <item>1</item>
+        <item>3</item>
+        <item>10</item>
+        <item>20</item>
+    </string-array>
+
     <string-array name="flavor_array">
         <item>Spicy</item>
         <item>Sweet</item>

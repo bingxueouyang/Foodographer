@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
-
+    tools:context=".profileforuser">
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="wrap_content"
@@ -49,5 +48,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_welcome" />
-
 </android.support.constraint.ConstraintLayout>
