@@ -35,7 +35,7 @@ public class profileforuser extends AppCompatActivity implements View.OnClickLis
         mAuth3=FirebaseAuth.getInstance();
         if(mAuth3.getCurrentUser()==null){
             finish();
-            startActivity(new Intent(this, login_test.class));
+            startActivity(new Intent(this, Log_inActivity.class));
         }
         FirebaseUser firebaseUser=mAuth3.getCurrentUser();
         userEmail_textview= (TextView) findViewById(R.id.textViewUseremail);
@@ -49,7 +49,7 @@ public class profileforuser extends AppCompatActivity implements View.OnClickLis
         if(view==signout){
             mAuth3.signOut();
             finish();
-            startActivity(new Intent(this,login_test.class));
+            startActivity(new Intent(this, Log_inActivity.class));
         }
     }
 }

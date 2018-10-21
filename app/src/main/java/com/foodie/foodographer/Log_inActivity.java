@@ -24,7 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 //import com.google.firebase.firsteverapp.auth.R;
 
-public class login_test extends AppCompatActivity implements View.OnClickListener {
+public class Log_inActivity extends AppCompatActivity implements View.OnClickListener {
     private Button loginBut;
     private EditText user_input_email;
     private EditText user_input_password;
@@ -74,7 +74,7 @@ public class login_test extends AppCompatActivity implements View.OnClickListene
                             startActivity(new Intent(getApplicationContext(), profileforuser.class));
                         }else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(login_test.this,"login error",Toast.LENGTH_SHORT).show();
+
                         }
                         progressDialog2.dismiss();
 
