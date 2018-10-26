@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SearchResult">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <SearchView
+            android:layout_width="325dp"
+            android:layout_height="wrap_content"
+            android:queryHint="sushi, poki bowl, BBQ, etc.">
+
+        </SearchView>
+
+        <ImageButton
+            android:id="@+id/filter_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="1">
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/diviline" />
+            <!-- Card1 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/card1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/rest1_IMG"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
+
+                    <LinearLayout
+                        android:layout_width="235dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:columnCount="4"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/rest1_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="1dp"
+                                android:text="1. Rest"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:id="@+id/rest1_distance"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:padding="2dp"
+                                android:text="2.7 mi"
+                                android:textAlignment="textEnd"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:columnCount="2"
+                            android:orientation="horizontal"
+                            android:padding="1dp">
+
+                            <RatingBar
+                                android:id="@+id/rest1_rating"
+                                style="?attr/ratingBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:max="5"
+                                android:rating="3.5"
+                                android:transformPivotX="0dp"
+                                android:transformPivotY="0dp" />
+
+                            <TextView
+                                android:id="@+id/rest1_reviews"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:paddingLeft="5dp"
+                                android:text="15 Reviews"
+                                android:textAlignment="textStart" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/rest1_tags"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="1dp"
+                            android:text="$$ • Chinese • Hot Pot • Spicy • WiFi"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/rest1_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="1dp"
+                            android:text="Santa Cruz, CA"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/diviline" />
+            <!-- Card2 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/card2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/rest2_IMG"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
+
+                    <LinearLayout
+                        android:layout_width="235dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:columnCount="4"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/rest2_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="1dp"
+                                android:text="1. Rest"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:id="@+id/rest2_distance"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:padding="2dp"
+                                android:text="3.1 mi"
+                                android:textAlignment="textEnd"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:columnCount="2"
+                            android:orientation="horizontal"
+                            android:padding="1dp">
+
+                            <RatingBar
+                                android:id="@+id/rest2_rating"
+                                style="?attr/ratingBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:max="5"
+                                android:rating="3.5"
+                                android:transformPivotX="0dp"
+                                android:transformPivotY="0dp" />
+
+                            <TextView
+                                android:id="@+id/rest2_reviews"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:paddingLeft="5dp"
+                                android:text="15 Reviews"
+                                android:textAlignment="textStart" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/rest2_tags"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="1dp"
+                            android:text="$$$ • Chinese • Dim Sum"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/rest2_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="1dp"
+                            android:text="Santa Cruz, CA"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/diviline" />
+            <!-- Card3 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/card3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/rest3_IMG"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
+
+                    <LinearLayout
+                        android:layout_width="235dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:columnCount="4"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/rest3_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="1dp"
+                                android:text="1. Rest"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:id="@+id/rest3_distance"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:padding="2dp"
+                                android:text="3.1 mi"
+                                android:textAlignment="textEnd"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:columnCount="2"
+                            android:orientation="horizontal"
+                            android:padding="1dp">
+
+                            <RatingBar
+                                android:id="@+id/rest3_rating"
+                                style="?attr/ratingBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:max="5"
+                                android:rating="3.5"
+                                android:transformPivotX="0dp"
+                                android:transformPivotY="0dp" />
+
+                            <TextView
+                                android:id="@+id/rest3_reviews"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:paddingLeft="5dp"
+                                android:text="15 Reviews"
+                                android:textAlignment="textStart" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/rest3_tags"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="1dp"
+                            android:text="$ • American Chinese"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/rest3_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="1dp"
+                            android:text="Santa Cruz, CA"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/diviline" />
+            <!-- Card4 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/card4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/rest4_IMG"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
+
+                    <LinearLayout
+                        android:layout_width="235dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:columnCount="4"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/rest3_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="1dp"
+                                android:text="1. Rest"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:id="@+id/rest3_distance"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:padding="2dp"
+                                android:text="3.1 mi"
+                                android:textAlignment="textEnd"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:columnCount="2"
+                            android:orientation="horizontal"
+                            android:padding="1dp">
+
+                            <RatingBar
+                                android:id="@+id/rest3_rating"
+                                style="?attr/ratingBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:max="5"
+                                android:rating="3.5"
+                                android:transformPivotX="0dp"
+                                android:transformPivotY="0dp" />
+
+                            <TextView
+                                android:id="@+id/rest3_reviews"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:paddingLeft="5dp"
+                                android:text="15 Reviews"
+                                android:textAlignment="textStart" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/rest3_tags"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="1dp"
+                            android:text="$ • American Chinese"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/rest3_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="1dp"
+                            android:text="Santa Cruz, CA"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/diviline" />
+            <!-- Card5 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/card2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/rest3_IMG"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
+
+                    <LinearLayout
+                        android:layout_width="235dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:columnCount="4"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/rest3_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="1dp"
+                                android:text="1. Rest"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:id="@+id/rest3_distance"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:padding="2dp"
+                                android:text="3.1 mi"
+                                android:textAlignment="textEnd"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:columnCount="2"
+                            android:orientation="horizontal"
+                            android:padding="1dp">
+
+                            <RatingBar
+                                android:id="@+id/rest3_rating"
+                                style="?attr/ratingBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:max="5"
+                                android:rating="3.5"
+                                android:transformPivotX="0dp"
+                                android:transformPivotY="0dp" />
+
+                            <TextView
+                                android:id="@+id/rest3_reviews"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:paddingLeft="5dp"
+                                android:text="15 Reviews"
+                                android:textAlignment="textStart" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/rest3_tags"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="1dp"
+                            android:text="$ • American Chinese"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/rest3_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="1dp"
+                            android:text="Santa Cruz, CA"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+
+
+
+
+
+
+        </GridLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>
