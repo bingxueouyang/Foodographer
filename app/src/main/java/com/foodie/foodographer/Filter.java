@@ -1,16 +1,25 @@
 package com.foodie.foodographer;
 
+
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
-public class Filter extends AppCompatActivity {
-
+public class Filter extends AppCompatActivity implements View.OnClickListener{
+    private Button compBut;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter);
+
+
+        compBut = (Button) findViewById(R.id.complete_button);
+        compBut.setOnClickListener(this);
 
         Spinner expertSpinner = (Spinner) findViewById(R.id.expert_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -39,5 +48,11 @@ public class Filter extends AppCompatActivity {
         distanceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         distanceSpinner.setAdapter(distanceAdapter);
+
+    }
+
+    @Override
+    public void onClick(View view){
+        startActivity(new Intent(this,SearchResult.class));
     }
 }

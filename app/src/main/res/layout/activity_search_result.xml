@@ -24,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
+            android:onClick="onClick"
             app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
 
     </LinearLayout>
@@ -91,7 +92,6 @@
                                 android:id="@+id/rest1_distance"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
                                 android:layout_weight="1"
                                 android:padding="2dp"
                                 android:text="2.7 mi"
@@ -121,7 +121,6 @@
                                 android:id="@+id/rest1_reviews"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
                                 android:layout_weight="1"
                                 android:paddingLeft="5dp"
                                 android:text="15 Reviews"
@@ -150,6 +149,7 @@
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
@@ -175,7 +175,7 @@
                         android:layout_margin="10dp"
                         android:layout_weight="1"
                         android:scaleType="centerCrop"
-                        tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
+                        tools:srcCompat="@tools:sample/backgrounds/scenic[6]" />
 
                     <LinearLayout
                         android:layout_width="235dp"
@@ -202,7 +202,6 @@
                                 android:id="@+id/rest2_distance"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
                                 android:layout_weight="1"
                                 android:padding="2dp"
                                 android:text="3.1 mi"
@@ -232,7 +231,6 @@
                                 android:id="@+id/rest2_reviews"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
                                 android:layout_weight="1"
                                 android:paddingLeft="5dp"
                                 android:text="15 Reviews"
@@ -261,6 +259,7 @@
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
@@ -286,7 +285,7 @@
                         android:layout_margin="10dp"
                         android:layout_weight="1"
                         android:scaleType="centerCrop"
-                        tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
+                        tools:srcCompat="@tools:sample/backgrounds/scenic[4]" />
 
                     <LinearLayout
                         android:layout_width="235dp"
@@ -313,7 +312,6 @@
                                 android:id="@+id/rest3_distance"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
                                 android:layout_weight="1"
                                 android:padding="2dp"
                                 android:text="3.1 mi"
@@ -343,7 +341,6 @@
                                 android:id="@+id/rest3_reviews"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
                                 android:layout_weight="1"
                                 android:paddingLeft="5dp"
                                 android:text="15 Reviews"
@@ -372,6 +369,7 @@
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
@@ -413,18 +411,17 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/rest3_name"
+                                android:id="@+id/rest4_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="1dp"
-                                android:text="1. Rest"
+                                android:text="4. Rest"
                                 android:textSize="22sp" />
 
                             <TextView
-                                android:id="@+id/rest3_distance"
+                                android:id="@+id/rest4_distance"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
                                 android:layout_weight="1"
                                 android:padding="2dp"
                                 android:text="3.1 mi"
@@ -440,7 +437,7 @@
                             android:padding="1dp">
 
                             <RatingBar
-                                android:id="@+id/rest3_rating"
+                                android:id="@+id/rest4_rating"
                                 style="?attr/ratingBarStyleSmall"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -451,10 +448,9 @@
                                 android:transformPivotY="0dp" />
 
                             <TextView
-                                android:id="@+id/rest3_reviews"
+                                android:id="@+id/rest4_reviews"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
                                 android:layout_weight="1"
                                 android:paddingLeft="5dp"
                                 android:text="15 Reviews"
@@ -462,7 +458,7 @@
                         </LinearLayout>
 
                         <TextView
-                            android:id="@+id/rest3_tags"
+                            android:id="@+id/rest4_tags"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -471,7 +467,7 @@
                             android:textSize="14sp" />
 
                         <TextView
-                            android:id="@+id/rest3_location"
+                            android:id="@+id/rest4_location"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="1dp"
@@ -483,13 +479,14 @@
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/diviline" />
             <!-- Card5 -->
             <android.support.v7.widget.CardView
-                android:id="@+id/card2"
+                android:id="@+id/card5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -501,7 +498,7 @@
                     android:padding="10dp">
 
                     <ImageView
-                        android:id="@+id/rest3_IMG"
+                        android:id="@+id/rest5_IMG"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
@@ -524,7 +521,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/rest3_name"
+                                android:id="@+id/rest5_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="1dp"
@@ -532,10 +529,9 @@
                                 android:textSize="22sp" />
 
                             <TextView
-                                android:id="@+id/rest3_distance"
+                                android:id="@+id/rest5_distance"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
                                 android:layout_weight="1"
                                 android:padding="2dp"
                                 android:text="3.1 mi"
@@ -551,7 +547,7 @@
                             android:padding="1dp">
 
                             <RatingBar
-                                android:id="@+id/rest3_rating"
+                                android:id="@+id/rest5_rating"
                                 style="?attr/ratingBarStyleSmall"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -562,10 +558,9 @@
                                 android:transformPivotY="0dp" />
 
                             <TextView
-                                android:id="@+id/rest3_reviews"
+                                android:id="@+id/rest5_reviews"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
                                 android:layout_weight="1"
                                 android:paddingLeft="5dp"
                                 android:text="15 Reviews"
@@ -573,7 +568,7 @@
                         </LinearLayout>
 
                         <TextView
-                            android:id="@+id/rest3_tags"
+                            android:id="@+id/rest5_tags"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -582,7 +577,7 @@
                             android:textSize="14sp" />
 
                         <TextView
-                            android:id="@+id/rest3_location"
+                            android:id="@+id/rest5_location"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="1dp"
@@ -595,11 +590,10 @@
 
             </android.support.v7.widget.CardView>
 
-
-
-
-
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/diviline" />
 
 
         </GridLayout>

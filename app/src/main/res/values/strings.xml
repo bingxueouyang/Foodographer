@@ -19,13 +19,14 @@
     </string>
 
     <string-array name="expertise_array">
-        <item>Chinese</item>
-        <item>Korean</item>
-        <item>Japanese</item>
-        <item>Italian</item>
-        <item>Vietnamese</item>
-        <item>Idian</item>
         <item>American</item>
+        <item>Chinese</item>
+        <item>French</item>
+        <item>Indian</item>
+        <item>Italian</item>
+        <item>Japanese</item>
+        <item>Korean</item>
+        <item>Vietnamese</item>
     </string-array>
 
     <string-array name="rating_array">

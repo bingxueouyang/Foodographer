@@ -33,7 +33,8 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.HashMap;
 import java.util.Map;
-public class SignupActivity extends AppCompatActivity  implements View.OnClickListener {private Button registBut;
+public class SignupActivity extends AppCompatActivity  implements View.OnClickListener {
+    private Button registBut;
     private EditText getemail;
     private EditText getpassword;
     private TextView signupText2;
@@ -68,7 +69,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
         mySpinner2 = (Spinner) findViewById(R.id.FlavorSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(SignupActivity.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.flavor_array));
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
         // Specify the layout to use when the list of choices appears
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
