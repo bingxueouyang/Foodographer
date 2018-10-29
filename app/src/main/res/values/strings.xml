@@ -26,6 +26,9 @@
         <item>Vietnamese</item>
         <item>Idian</item>
         <item>American</item>
+        <item>Vegan</item>
+        <item>Vegetarian</item>
+
     </string-array>
 
     <string-array name="rating_array">

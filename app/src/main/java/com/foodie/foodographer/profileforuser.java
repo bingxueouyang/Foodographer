@@ -38,8 +38,8 @@ public class profileforuser extends AppCompatActivity implements View.OnClickLis
             startActivity(new Intent(this, Log_inActivity.class));
         }
         FirebaseUser firebaseUser=mAuth3.getCurrentUser();
-        userEmail_textview= (TextView) findViewById(R.id.textViewUseremail);
-        userEmail_textview.setText(firebaseUser.getEmail());
+        //userEmail_textview= (TextView) findViewById(R.id.textViewUseremail);
+        //userEmail_textview.setText(firebaseUser.getEmail());
         signout= (Button) findViewById(R.id.logoutButton);
         signout.setOnClickListener(this);
     }
