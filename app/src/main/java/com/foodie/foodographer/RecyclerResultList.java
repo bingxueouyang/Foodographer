@@ -9,6 +9,7 @@ import java.util.List;
 import android.view.*;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.yelp.fusion.client.models.Business;
 
@@ -44,6 +45,7 @@ public class RecyclerResultList extends RecyclerView.Adapter<RecyclerResultList.
             address = restaurant.getLocation().getAddress1() + ", " + restaurant.getLocation().getCity();
         }
         holder.restLocation.setText(address);
+        new DownloadImageTask(holder.restIMG).execute(restaurant.getImageUrl());
     }
 
 
@@ -56,11 +58,13 @@ public class RecyclerResultList extends RecyclerView.Adapter<RecyclerResultList.
         private TextView restName;
         private RatingBar restRating;
         private TextView restLocation;
+        private ImageView restIMG;
         public MyViewHolder(View itemView) {
             super(itemView);
             restName = (TextView) itemView.findViewById(R.id.rest_name);
             restRating = (RatingBar) itemView.findViewById(R.id.rest_rating);
             restLocation = (TextView) itemView.findViewById(R.id.rest_location);
+            restIMG = (ImageView) itemView.findViewById(R.id.rest_IMG);
         }
     }
 }
