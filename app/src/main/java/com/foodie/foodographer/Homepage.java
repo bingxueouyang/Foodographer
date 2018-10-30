@@ -78,4 +78,8 @@ public class Homepage extends AppCompatActivity {
         startActivity(new Intent(this, SearchBar.class));
     }
 
+    public void gotoUser(MenuItem item){
+        startActivity(new Intent(this, LogIn.class));
+    }
+
 }

@@ -59,7 +59,7 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
         signupText2.setOnClickListener(this);
         mySpinner = (Spinner) findViewById(R.id.ExpertiseSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(SignUp.this,
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>( SignUp.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
         // Specify the layout to use when the list of choices appears
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -68,8 +68,8 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
 
         mySpinner2 = (Spinner) findViewById(R.id.FlavorSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(SignUp.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
+        ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>( SignUp.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.flavor_array));
         // Specify the layout to use when the list of choices appears
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
@@ -79,10 +79,9 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
     }
 
     private void registerUser(){
-        final String infoEmail=getemail.getText().toString().trim();
+        String infoEmail=getemail.getText().toString().trim();
         String infoPassword=getpassword.getText().toString().trim();
-        final String infoExpertise=mySpinner.getSelectedItem().toString().trim();
-        final String infoFlavor=mySpinner2.getSelectedItem().toString().trim();
+
         if(TextUtils.isEmpty(infoEmail)){
             Toast.makeText(this,"Please enter an email !",Toast.LENGTH_SHORT).show();
             return;
@@ -99,17 +98,11 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if(task.isSuccessful()){
-                            Toast.makeText(SignUp.this,"Successfully",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(SignupActivity.this,"Successfully",Toast.LENGTH_SHORT).show();
+                            send_message_verifed_email();
 
-                            String user_id=mAuth.getCurrentUser().getUid();
-                            DatabaseReference mDatabase=FirebaseDatabase.getInstance().getReference().child("users").child(user_id);
-
-                            UserInfo user_info = new UserInfo(infoEmail,infoExpertise,infoFlavor);
-                            mDatabase.setValue(user_info);
-                            finish();
-                            startActivity(new Intent(getApplicationContext(),UserProfile.class));
                         }else{
-                            Toast.makeText(SignUp.this,"Failed",Toast.LENGTH_SHORT).show();
+                            Toast.makeText( SignUp.this,"Failed",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -120,6 +113,34 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
         super.onStart();
         if(mAuth.getCurrentUser()!= null){
             //handle login user
+        }
+    }
+    private void send_message_verifed_email(){
+        final String infoEmail2=getemail.getText().toString().trim();
+        final String infoExpertise=mySpinner.getSelectedItem().toString().trim();
+        final String infoFlavor=mySpinner2.getSelectedItem().toString().trim();
+        FirebaseUser usertemp=mAuth.getCurrentUser();
+        if(usertemp !=null){
+            usertemp.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText( SignUp.this,"Please verified your account",Toast.LENGTH_SHORT).show();
+                        String user_id=mAuth.getCurrentUser().getUid();
+                        DatabaseReference mDatabase=FirebaseDatabase.getInstance().getReference().child("users").child(user_id);
+
+                        UserInfo user_info = new UserInfo(infoEmail2,infoExpertise,infoFlavor);
+                        mDatabase.setValue(user_info);
+                        finish();
+                        startActivity(new Intent(getApplicationContext(),LogIn.class));
+                        mAuth.signOut();
+                    }else{
+                        String grab_message=task.getException().getMessage();
+                        Toast.makeText( SignUp.this,"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                        mAuth.signOut();
+                    }
+                }
+            });
         }
     }
 

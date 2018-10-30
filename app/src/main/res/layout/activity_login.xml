@@ -60,10 +60,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="140dp"
+        android:layout_marginBottom="83dp"
         android:text="IF you do not have an account, sign up here"
         android:textAlignment="center"
         android:textSize="14sp"
+        android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,5 +87,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginStart="159dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginEnd="167dp"
+        android:layout_marginBottom="47dp"
+        android:text="Forgot password?"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hint_signup"
+        app:layout_constraintVertical_bias="0.394" />
+
 
 </android.support.constraint.ConstraintLayout>

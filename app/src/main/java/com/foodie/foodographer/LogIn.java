@@ -31,6 +31,8 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
     private TextView loginText;
     private ProgressDialog progressDialog2;
     private FirebaseAuth mAuth2;
+    private TextView forgotpasswordLink;
+    private Boolean checkingEmail_true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +49,10 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
         user_input_password = (EditText) findViewById(R.id.user_enter_password);
         loginBut= (Button) findViewById(R.id.loginRegister);
         loginText=(TextView) findViewById(R.id.hint_signup);
+        forgotpasswordLink=(TextView) findViewById(R.id.forgot_password);
         loginBut.setOnClickListener(this);
         loginText.setOnClickListener(this);
+        forgotpasswordLink.setOnClickListener(this);
     }
 
     private void userLogin(){
@@ -70,16 +74,27 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //progressDialog2.dismiss();
                         if(task.isSuccessful()){
-                            finish();
-                            startActivity(new Intent(getApplicationContext(), UserProfile.class));
+                            email_verified();
                         }else {
                             // If sign in fails, display a message to the user.
-
+                            String grab_error=task.getException().getMessage();
+                            Toast.makeText(LogIn.this,"Error occur:"+grab_error,Toast.LENGTH_SHORT).show();
                         }
                         progressDialog2.dismiss();
 
                     }
                 });
+    }
+    private void email_verified(){
+        FirebaseUser user=mAuth2.getCurrentUser();
+        checkingEmail_true= user.isEmailVerified();
+        if(checkingEmail_true==true){
+            startActivity(new Intent(getApplicationContext(), UserProfile.class));
+            finish();
+        }else{
+            Toast.makeText(LogIn.this,"Go verified your email please!",Toast.LENGTH_SHORT).show();
+            mAuth2.signOut();
+        }
     }
     @Override
     public void onClick(View view){
@@ -89,6 +104,10 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
         if(view ==loginText){
             finish();
             startActivity(new Intent(this,SignUp.class));
+        }
+        if(view ==forgotpasswordLink){
+            finish();
+            startActivity(new Intent(this,ResetPassword.class));
         }
     }
 }

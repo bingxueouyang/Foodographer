@@ -18,6 +18,7 @@
         android:id="@+id/navigation_user"
         android:icon="@drawable/user_icon"
         android:title="@string/title_user"
+        android:onClick="gotoUser"
         app:showAsAction="ifRoom"/>
 
 </menu>
