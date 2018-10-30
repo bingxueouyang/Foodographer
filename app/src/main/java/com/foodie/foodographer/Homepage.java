@@ -1,10 +1,12 @@
 package com.foodie.foodographer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class Homepage extends AppCompatActivity {
@@ -41,4 +43,13 @@ public class Homepage extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
+    public void searchResult(View view) {
+        Intent intent = new Intent(this, search_bar.class);
+        startActivity(intent);
+    }
+
+    public void gotoFilter(View view) {
+        Intent intent = new Intent(this, Filter.class);
+        startActivity(intent);
+    }
 }

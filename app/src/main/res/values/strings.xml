@@ -3,7 +3,7 @@
     <string name="app_name">Foodographer</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_notifications">User</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -17,6 +17,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="sign_up">No account? Sign up here</string>
 
     <string-array name="expertise_array">
         <item>Chinese</item>
@@ -47,5 +48,6 @@
         <item>Sour</item>
         <item>Salty</item>
     </string-array>
+
 </resources>
 
