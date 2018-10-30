@@ -24,7 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 //import com.google.firebase.firsteverapp.auth.R;
 
-public class Log_inActivity extends AppCompatActivity implements View.OnClickListener {
+public class LogIn extends AppCompatActivity implements View.OnClickListener {
     private Button loginBut;
     private EditText user_input_email;
     private EditText user_input_password;
@@ -34,13 +34,13 @@ public class Log_inActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
+        setContentView(R.layout.activity_login);
         mAuth2=FirebaseAuth.getInstance();
         if(mAuth2.getCurrentUser()!= null){
             //go into to profile page
             finish();
 
-            startActivity(new Intent(getApplicationContext(), profileforuser.class));
+            startActivity(new Intent(getApplicationContext(), UserProfile.class));
         }
         progressDialog2= new ProgressDialog(this);
         user_input_email = (EditText) findViewById(R.id.user_enter_email);
@@ -71,7 +71,7 @@ public class Log_inActivity extends AppCompatActivity implements View.OnClickLis
                         //progressDialog2.dismiss();
                         if(task.isSuccessful()){
                             finish();
-                            startActivity(new Intent(getApplicationContext(), profileforuser.class));
+                            startActivity(new Intent(getApplicationContext(), UserProfile.class));
                         }else {
                             // If sign in fails, display a message to the user.
 
@@ -88,7 +88,7 @@ public class Log_inActivity extends AppCompatActivity implements View.OnClickLis
         }
         if(view ==loginText){
             finish();
-            startActivity(new Intent(this,SignupActivity.class));
+            startActivity(new Intent(this,SignUp.class));
         }
     }
 }

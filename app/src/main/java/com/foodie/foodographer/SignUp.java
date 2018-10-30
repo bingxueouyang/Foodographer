@@ -33,7 +33,7 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.HashMap;
 import java.util.Map;
-public class SignupActivity extends AppCompatActivity  implements View.OnClickListener {
+public class SignUp extends AppCompatActivity  implements View.OnClickListener {
     private Button registBut;
     private EditText getemail;
     private EditText getpassword;
@@ -59,7 +59,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
         signupText2.setOnClickListener(this);
         mySpinner = (Spinner) findViewById(R.id.ExpertiseSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(SignupActivity.this,
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(SignUp.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
         // Specify the layout to use when the list of choices appears
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -68,7 +68,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
 
         mySpinner2 = (Spinner) findViewById(R.id.FlavorSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(SignupActivity.this,
+        ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(SignUp.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
         // Specify the layout to use when the list of choices appears
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -99,17 +99,17 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if(task.isSuccessful()){
-                            Toast.makeText(SignupActivity.this,"Successfully",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUp.this,"Successfully",Toast.LENGTH_SHORT).show();
 
                             String user_id=mAuth.getCurrentUser().getUid();
                             DatabaseReference mDatabase=FirebaseDatabase.getInstance().getReference().child("users").child(user_id);
 
-                            Userinfo user_info = new Userinfo(infoEmail,infoExpertise,infoFlavor);
+                            UserInfo user_info = new UserInfo(infoEmail,infoExpertise,infoFlavor);
                             mDatabase.setValue(user_info);
                             finish();
-                            startActivity(new Intent(getApplicationContext(),profileforuser.class));
+                            startActivity(new Intent(getApplicationContext(),UserProfile.class));
                         }else{
-                            Toast.makeText(SignupActivity.this,"Failed",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUp.this,"Failed",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -130,7 +130,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
         }
         if(view==signupText2){
 
-            startActivity(new Intent(this,Log_inActivity.class));
+            startActivity(new Intent(this,LogIn.class));
         }
     }
 

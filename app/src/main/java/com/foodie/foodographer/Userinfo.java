@@ -1,11 +1,11 @@
 package com.foodie.foodographer;
 
-public class Userinfo {
+public class UserInfo {
     public String email, expertiseinfo, flavorinfo;
-    public Userinfo(){
+    public UserInfo(){
 
     }
-    public Userinfo(String email, String expertise,String flavor){
+    public UserInfo(String email, String expertise,String flavor){
         this.email=email;
         this.expertiseinfo=expertise;
         this.flavorinfo=flavor;

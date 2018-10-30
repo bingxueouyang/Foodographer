@@ -23,25 +23,25 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class profileforuser extends AppCompatActivity implements View.OnClickListener {
+public class UserProfile extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth mAuth3;
     private Button signout;
     private TextView userEmail_textview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profileforuser);
+        setContentView(R.layout.activity_user_profile);
 
         mAuth3=FirebaseAuth.getInstance();
         if(mAuth3.getCurrentUser()==null){
             finish();
-            startActivity(new Intent(this, Log_inActivity.class));
+            startActivity(new Intent(this, LogIn.class));
         }
         FirebaseUser firebaseUser=mAuth3.getCurrentUser();
-        userEmail_textview= (TextView) findViewById(R.id.textViewUseremail);
-        userEmail_textview.setText(firebaseUser.getEmail());
-        signout= (Button) findViewById(R.id.logoutButton);
-        signout.setOnClickListener(this);
+        //userEmail_textview= (TextView) findViewById(R.id.textViewUseremail);
+        //userEmail_textview.setText(firebaseUser.getEmail());
+        //signout= (Button) findViewById(R.id.logoutButton);
+        //signout.setOnClickListener(this);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class profileforuser extends AppCompatActivity implements View.OnClickLis
         if(view==signout){
             mAuth3.signOut();
             finish();
-            startActivity(new Intent(this, Log_inActivity.class));
+            startActivity(new Intent(this, LogIn.class));
         }
     }
 }
