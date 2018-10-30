@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RestaurantInfo">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="369dp"
+        android:layout_height="544dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:orientation="vertical">
+
+            <!--restaurant image-->
+            <ImageView
+                android:id="@+id/restaurant_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/avatars[0]" />
+
+
+            <!--restaurant name-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/rest_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:padding="1dp"
+                    android:text="Bettys Noodle"
+                    android:textSize="24sp" />
+
+
+            </LinearLayout>
+
+
+            <!--restaurant ratings and reviews-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="1dp">
+
+                <RatingBar
+                    android:id="@+id/rest_rating"
+                    style="?attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:max="5"
+                    android:rating="1"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="0dp" />
+
+                <TextView
+                    android:id="@+id/rest_reviews"
+                    android:layout_width="90dp"
+                    android:layout_height="25dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingLeft="5dp"
+                    android:text="15 Reviews"
+                    android:textAlignment="textStart" />
+
+                <Button
+                    android:id="@+id/likeButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="150dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/like_icon" />
+
+
+            </LinearLayout>
+
+            <!--restaurant tags, locations, times-->
+            <TextView
+                android:id="@+id/rest_tags"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:padding="1dp"
+                android:text="$$ • Chinese • Hot Pot • Spicy • WiFi"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/rest_location"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:padding="1dp"
+                android:text="LOCATION"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="close opening time" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/diviline"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="128dp" />
+
+
+            <!--write reviews for restaurant-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="353dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:clickable="true"
+                    android:text="Finish Review"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/diviline"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="128dp" />
+
+
+            <!--get directions and call-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:columnCount="4"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/get_direct"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/direction_icon"
+                    android:clickable="true" />
+
+                <TextView
+                    android:id="@+id/get_direction"
+                    android:layout_width="36dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:text="Get Direction" />
+
+                <Button
+                    android:id="@+id/call"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/call_icon"
+                    android:clickable="true" />
+
+                <TextView
+                    android:id="@+id/call_rest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:text="Call" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/diviline"
+                android:visibility="visible"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="128dp">
+
+            </View>
+
+            <!--Amentities-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AMENITIES"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/outdoor_seating_icon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="25dp"
+                        android:clickable="true"
+                        tools:srcCompat="@drawable/outdoor_seating_icon" />
+
+                    <TextView
+                        android:id="@+id/outdoor_seating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:clickable="true"
+                        android:paddingLeft="30dp"
+                        android:text="Outdoor Seating"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/casual_ambience_icon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="25dp"
+                        android:clickable="true"
+                        tools:srcCompat="@drawable/casual_ambience_icon" />
+
+                    <TextView
+                        android:id="@+id/casual_ambience"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:clickable="true"
+                        android:paddingLeft="30dp"
+                        android:text="Casual Ambience"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/moderate_noise_icon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="25dp"
+                        android:clickable="true"
+                        tools:srcCompat="@drawable/voice_icon" />
+
+                    <TextView
+                        android:id="@+id/moderate_noise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:clickable="true"
+                        android:paddingLeft="30dp"
+                        android:text="Moderate Noise"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/good_for_groups_icon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="25dp"
+                        android:clickable="true"
+                        tools:srcCompat="@drawable/people_icon" />
+
+                    <TextView
+                        android:id="@+id/good_for_groups"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:clickable="true"
+                        android:paddingLeft="30dp"
+                        android:text="Good For Groups"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/parking_icon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="25dp"
+                        android:clickable="true"
+                        tools:srcCompat="@drawable/parking_icon" />
+
+                    <TextView
+                        android:id="@+id/parking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:clickable="true"
+                        android:paddingLeft="30dp"
+                        android:text="Provide Parking Slot"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/wifi_icon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="25dp"
+                        android:clickable="true"
+                        tools:srcCompat="@drawable/wifi_icon" />
+
+                    <TextView
+                        android:id="@+id/wifi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:paddingLeft="30dp"
+                        android:text="Free WiFi"
+                        android:textSize="14sp"
+                        android:clickable="true" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

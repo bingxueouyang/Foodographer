@@ -25,7 +25,8 @@
         </activity>
         <activity android:name=".Homepage" />
         <activity android:name=".Log_inActivity" />
-        <activity android:name=".profileforuser"></activity>
+        <activity android:name=".profileforuser" />
+        <activity android:name=".RestaurantInfo"></activity>
     </application>
 
 </manifest>
