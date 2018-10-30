@@ -8,16 +8,7 @@ import java.util.List;
 
 import android.view.*;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
-import java.io.InputStream;
-import android.graphics.BitmapFactory;
-import android.util.Log;
-
-import com.yelp.fusion.client.models.Business;
-
 
 public class RecyclerArticleList extends RecyclerView.Adapter<RecyclerArticleList.MyViewHolder> {
     private List<Article> article_list;

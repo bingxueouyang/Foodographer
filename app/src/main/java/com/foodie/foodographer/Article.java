@@ -1,7 +1,5 @@
 package com.foodie.foodographer;
 
-import android.widget.ImageView;
-
 public class Article {
     private String title;
     private String IMGURL;
