@@ -2,50 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/diviline"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".SearchResult">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <SearchView
+        android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:queryHint="sushi, poki bowl, BBQ, etc.">
 
-        <SearchView
-            android:id="@+id/search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:queryHint="sushi, poki bowl, BBQ, etc.">
-
-        </SearchView>
-
-    </LinearLayout>
+    </SearchView>
 
     <RelativeLayout
+        android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"/>
-
+            android:layout_width="match_parent"
+            android:layout_marginBottom="60dp"/>
         <!-- navigation -->
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp"
+            android:layout_gravity="bottom"
             android:layout_alignParentBottom="true"
             android:background="?android:attr/windowBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:foreground="?attr/selectableItemBackground"
             app:menu="@menu/navigation"/>
+
     </RelativeLayout>
+
 
 </LinearLayout>

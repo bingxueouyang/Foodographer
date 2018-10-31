@@ -40,8 +40,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         FirebaseUser firebaseUser=mAuth3.getCurrentUser();
         //userEmail_textview= (TextView) findViewById(R.id.textViewUseremail);
         //userEmail_textview.setText(firebaseUser.getEmail());
-        //signout= (Button) findViewById(R.id.logoutButton);
-        //signout.setOnClickListener(this);
+        signout= (Button) findViewById(R.id.logoutButton);
+        signout.setOnClickListener(this);
     }
 
     @Override

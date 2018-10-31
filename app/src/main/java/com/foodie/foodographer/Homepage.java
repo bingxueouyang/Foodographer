@@ -26,11 +26,11 @@ public class Homepage extends AppCompatActivity {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
                     return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                case R.id.navigation_recommend:
+                    mTextMessage.setText(R.string.title_recommend);
                     return true;
-                case R.id.navigation_user:
-                    mTextMessage.setText(R.string.title_user);
+                case R.id.navigation_profile:
+                    mTextMessage.setText(R.string.title_profile);
                     return true;
             }
             return false;
@@ -79,6 +79,7 @@ public class Homepage extends AppCompatActivity {
     }
 
     public void gotoUser(MenuItem item){
+
         startActivity(new Intent(this, LogIn.class));
     }
 

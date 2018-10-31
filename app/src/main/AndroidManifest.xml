@@ -31,6 +31,7 @@
         <activity android:name=".Filter" />
         <activity android:name=".SearchBar" />
         <activity android:name=".ResetPassword"></activity>
+
     </application>
 
 </manifest>

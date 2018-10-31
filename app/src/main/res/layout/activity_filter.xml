@@ -99,7 +99,7 @@
 
     <Spinner
         android:id="@+id/distance_spinner"
-        android:layout_width="90dp"
+        android:layout_width="120dp"
         android:layout_height="24dp"
         android:layout_marginStart="70dp"
         android:layout_marginTop="80dp"

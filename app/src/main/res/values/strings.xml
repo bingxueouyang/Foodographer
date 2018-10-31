@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">Foodographer</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_user">User</string>
+    <string name="title_recommend">Recommend</string>
+    <string name="title_profile">Profile</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -51,5 +51,8 @@
     </string-array>
 
     <string name="apiKey">FDh3kNaLsxtSsKpiBilYUM62obma5MsPcKXWNNOvpEV10o5C6FISGbz_xqyeHOqnx5aqnjtZZEPep3pcoMq2sQ_myjp-LO0vTdobgO89944qZwu4wVXHrt_PIPrMW3Yx</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
 
