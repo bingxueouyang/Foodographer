@@ -16,7 +16,7 @@
         android:id="@+id/navigation_profile"
         android:icon="@drawable/user_icon"
         android:title="@string/title_profile"
-        android:onClick="gotoUser"
+        android:onClick="gotoProfile"
         app:showAsAction="ifRoom"/>
 
 </menu>

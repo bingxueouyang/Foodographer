@@ -81,7 +81,7 @@
                             android:layout_height="match_parent"
                             android:layout_margin="10dp"
                             android:layout_gravity="center"
-                            tools:srcCompat="@drawable/reviews_icon" />
+                            android:src="@drawable/reviews_icon" />
 
                         <TextView
                             android:id="@+id/review"
@@ -176,7 +176,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_gravity="center"
-                        tools:srcCompat="@drawable/favorite_icon" />
+                        android:src="@drawable/favorite_icon" />
 
                     <TextView
                         android:layout_width="240dp"
@@ -215,7 +215,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_gravity="center"
-                        tools:srcCompat="@drawable/recently_reviewed_icon" />
+                        android:src="@drawable/recently_reviewed_icon" />
 
                     <TextView
                         android:layout_width="240dp"
@@ -254,7 +254,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_gravity="center"
-                        tools:srcCompat="@drawable/flavor_icon" />
+                        android:src="@drawable/flavor_icon" />
 
                     <Button
                         android:id="@+id/flavor1"
@@ -298,7 +298,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_gravity="center"
-                        tools:srcCompat="@drawable/expertise_icon" />
+                        android:src="@drawable/expertise_icon" />
 
                     <Spinner
                         android:id="@+id/ExpertiseSpinner"
@@ -328,7 +328,7 @@
                     android:id="@+id/logoutButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layout_gravity="center"
                     android:text="LOG OUT" />
 
 
