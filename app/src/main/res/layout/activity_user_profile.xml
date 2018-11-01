@@ -31,7 +31,8 @@
             android:layout_gravity="center"
             android:text="UserName"
             android:textAlignment="textStart"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:ignore="RtlCompat" />
 
         <Button
             android:id="@+id/save"
@@ -91,7 +92,8 @@
                             android:layout_gravity="center"
                             android:text="Reviews"
                             android:textAlignment="textStart"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            tools:ignore="RtlCompat" />
 
                         <Button
                             android:layout_width="20dp"
@@ -117,7 +119,8 @@
                         android:text="FUCK THIS REST"
                         android:textAlignment="textStart"
                         android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:ignore="RtlCompat" />
 
                     <TextView
                         android:id="@+id/latestReview_content"
@@ -143,7 +146,8 @@
                         android:text="I LOVE SUSHI"
                         android:textAlignment="textStart"
                         android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:ignore="RtlCompat" />
 
                     <TextView
                         android:id="@+id/latestReview2_content"
@@ -185,7 +189,8 @@
                         android:layout_gravity="center"
                         android:text="Favorites"
                         android:textAlignment="textStart"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        tools:ignore="RtlCompat" />
 
                     <Button
                         android:layout_width="20dp"
@@ -224,7 +229,8 @@
                         android:layout_gravity="center"
                         android:text="Recently Viewd"
                         android:textAlignment="textStart"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        tools:ignore="RtlCompat" />
 
                     <Button
                         android:layout_width="20dp"
