@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.foodie.foodographer">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -23,10 +24,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Homepage" />
-        <activity android:name=".Log_inActivity" />
-        <activity android:name=".profileforuser" />
-        <activity android:name=".RestaurantInfo"></activity>
+        <activity android:name=".SearchResult" />
+        <activity android:name=".LogIn" />
+        <activity android:name=".UserProfile" />
+        <activity android:name=".SignUp" />
+        <activity android:name=".Filter" />
+        <activity android:name=".SearchBar" />
+        <activity android:name=".ResetPassword"></activity>
+
     </application>
 
 </manifest>

@@ -2,22 +2,13 @@ package com.foodie.foodographer;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.method.SingleLineTransformationMethod;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.hardware.biometrics.BiometricPrompt;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -31,16 +22,16 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import com.google.firebase.database.DatabaseReference;
 
-import java.util.HashMap;
-import java.util.Map;
-public class SignupActivity extends AppCompatActivity  implements View.OnClickListener {private Button registBut;
+
+public class SignUp extends AppCompatActivity  implements View.OnClickListener {
+    private Button registBut;
     private EditText getemail;
     private EditText getpassword;
-    private TextView signupText2;
+    private TextView signupText;
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
-    private Spinner mySpinner;
-    private Spinner mySpinner2;
+    private Spinner expertSpinner;
+    private Spinner interestSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,35 +44,34 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
         registBut = (Button) findViewById(R.id.checkingRegister);
         getemail= (EditText) findViewById(R.id.EmailAdress);
         getpassword=(EditText) findViewById(R.id.create_password);
-        signupText2=(TextView) findViewById(R.id.givinghint);
+        signupText=(TextView) findViewById(R.id.givinghint);
         registBut.setOnClickListener(this);
-        signupText2.setOnClickListener(this);
-        mySpinner = (Spinner) findViewById(R.id.ExpertiseSpinner);
+        signupText.setOnClickListener(this);
+        expertSpinner = (Spinner) findViewById(R.id.ExpertiseSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(SignupActivity.this,
+        ArrayAdapter<String> expertAdapter = new ArrayAdapter<String>( SignUp.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
         // Specify the layout to use when the list of choices appears
-        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        expertAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        mySpinner.setAdapter(myAdapter);
+        expertSpinner.setAdapter(expertAdapter);
 
-        mySpinner2 = (Spinner) findViewById(R.id.InterestSpinner);
+        interestSpinner = (Spinner) findViewById(R.id.InterestSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(SignupActivity.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.flavor_array));
+        ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>( SignUp.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
         // Specify the layout to use when the list of choices appears
-        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        interestAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        mySpinner2.setAdapter(myAdapter2);
+        interestSpinner.setAdapter(interestAdapter);
 
 
     }
 
     private void registerUser(){
-        final String infoEmail=getemail.getText().toString().trim();
+        String infoEmail=getemail.getText().toString().trim();
         String infoPassword=getpassword.getText().toString().trim();
-        final String infoExpertise=mySpinner.getSelectedItem().toString().trim();
-        final String infoFlavor=mySpinner2.getSelectedItem().toString().trim();
+
         if(TextUtils.isEmpty(infoEmail)){
             Toast.makeText(this,"Please enter an email !",Toast.LENGTH_SHORT).show();
             return;
@@ -98,17 +88,11 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if(task.isSuccessful()){
-                            Toast.makeText(SignupActivity.this,"Successfully",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(SignupActivity.this,"Successfully",Toast.LENGTH_SHORT).show();
+                            send_message_verifed_email();
 
-                            String user_id=mAuth.getCurrentUser().getUid();
-                            DatabaseReference mDatabase=FirebaseDatabase.getInstance().getReference().child("users").child(user_id);
-
-                            UserInfo user_info = new UserInfo(infoEmail,infoExpertise,infoFlavor);
-                            mDatabase.setValue(user_info);
-                            finish();
-                            startActivity(new Intent(getApplicationContext(),profileforuser.class));
                         }else{
-                            Toast.makeText(SignupActivity.this,"Failed",Toast.LENGTH_SHORT).show();
+                            Toast.makeText( SignUp.this,"Failed",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -121,15 +105,43 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
             //handle login user
         }
     }
+    private void send_message_verifed_email(){
+        final String infoEmail=getemail.getText().toString().trim();
+        final String infoExpertise=expertSpinner.getSelectedItem().toString().trim();
+        final String infoInterest=interestSpinner.getSelectedItem().toString().trim();
+        FirebaseUser usertemp=mAuth.getCurrentUser();
+        if(usertemp !=null){
+            usertemp.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText( SignUp.this,"Please verified your account",Toast.LENGTH_SHORT).show();
+                        String user_id=mAuth.getCurrentUser().getUid();
+                        DatabaseReference mDatabase=FirebaseDatabase.getInstance().getReference().child("users").child(user_id);
+
+                        UserInfo user_info = new UserInfo(infoEmail,infoExpertise,infoInterest);
+                        mDatabase.setValue(user_info);
+                        finish();
+                        startActivity(new Intent(getApplicationContext(),LogIn.class));
+                        mAuth.signOut();
+                    }else{
+                        String grab_message=task.getException().getMessage();
+                        Toast.makeText( SignUp.this,"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                        mAuth.signOut();
+                    }
+                }
+            });
+        }
+    }
 
     @Override
     public void onClick(View view){
         if(view==registBut){
             registerUser();
         }
-        if(view==signupText2){
+        if(view==signupText){
 
-            startActivity(new Intent(this,Log_inActivity.class));
+            startActivity(new Intent(this,LogIn.class));
         }
     }
 
