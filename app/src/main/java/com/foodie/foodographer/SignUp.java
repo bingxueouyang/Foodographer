@@ -53,7 +53,7 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
         setContentView(R.layout.activity_signup);
         mAuth = FirebaseAuth.getInstance();
 
-
+        getemail = (EditText) findViewById(R.id.EmailAdress);
         progressDialog= new ProgressDialog(this);
 
         registBut = (Button) findViewById(R.id.checkingRegister);
