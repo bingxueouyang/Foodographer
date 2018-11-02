@@ -8,138 +8,224 @@
     android:orientation="vertical"
     tools:context=".SignUp">
 
-    <!-- Username -->
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp">
-
-        <TextView
-            android:id="@+id/Username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:text="Username"
-            android:textSize="18sp"
-            android:textAlignment="textStart"
-            app:layout_constraintEnd_toStartOf="@+id/EmailAdress" />
-
-        <EditText
-            android:id="@+id/EmailAdress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="Enter email address"
-            android:inputType="text|textEmailAddress" />
-
-    </LinearLayout>
-
-    <!-- Password -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp">
-
-        <TextView
-            android:id="@+id/Password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:text="Password"
-            android:textSize="18sp"
-            android:textAlignment="textStart"
-            app:layout_constraintEnd_toStartOf="@+id/create_password" />
-
-        <EditText
-            android:id="@+id/create_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="Enter password"
-            android:inputType="textShortMessage" />
+        android:layout_height="match_parent">
 
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <!-- Expertise -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="45dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp">
+            <!-- Username -->
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp">
 
-        <TextView
-            android:id="@+id/Expertise"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:text="Expertise"
-            android:textSize="18sp"
-            android:textAlignment="textStart"
-            app:layout_constraintEnd_toStartOf="@+id/create_password" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:text="Username"
+                        android:textSize="18sp"
+                        android:textAlignment="textStart"
+                        app:layout_constraintEnd_toStartOf="@+id/EmailAdress" />
 
-        <Spinner
-            android:id="@+id/ExpertiseSpinner"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content" />
+                    <EditText
+                        android:id="@+id/EmailAdress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:autofillHints=""
+                        android:ems="10"
+                        android:hint="Enter email address"
+                        android:inputType="text|textEmailAddress" />
+
+                </LinearLayout>
+
+            <!-- Password -->
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:text="Password"
+                        android:textSize="18sp"
+                        android:textAlignment="textStart"
+                        app:layout_constraintEnd_toStartOf="@+id/create_password" />
+
+                    <EditText
+                        android:id="@+id/create_password"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:autofillHints=""
+                        android:ems="10"
+                        android:hint="Enter password"
+                        android:inputType="textShortMessage" />
 
 
-    </LinearLayout>
+                </LinearLayout>
 
-    <!-- Interest -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="55dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp">
+            <!-- Expertise -->
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp">
 
-        <TextView
-            android:id="@+id/Interest"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:text="Interest"
-            android:textSize="18sp"
-            android:textAlignment="textStart"
-            app:layout_constraintEnd_toStartOf="@+id/create_password" />
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:text="Expertise"
+                        android:layout_marginTop="5dp"
+                        android:textSize="18sp"
+                        android:textAlignment="textStart"
+                        app:layout_constraintEnd_toStartOf="@+id/create_password" />
 
-        <Spinner
-            android:id="@+id/InterestSpinner"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <Spinner
+                            android:id="@+id/ExpertiseSpinner"
+                            android:layout_width="220dp"
+                            android:layout_height="wrap_content"/>
 
 
-    </LinearLayout>
+                        <Spinner
+                            android:id="@+id/ExpertiseSpinner2"
+                            android:layout_width="220dp"
+                            android:layout_height="wrap_content"/>
 
-    <Button
-        android:id="@+id/checkingRegister"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:text="Register" />
 
-    <TextView
-        android:id="@+id/givinghint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="Go back to login"
-        android:textSize="14sp"
-        />
+                        <Spinner
+                            android:id="@+id/ExpertiseSpinner3"
+                            android:layout_width="220dp"
+                            android:layout_height="wrap_content"/>
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal">
+
+                            <ImageButton
+                                android:id="@+id/AddExpert"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:padding="2dp"
+                                app:srcCompat="@mipmap/add_more_icon" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            <!-- Interest -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="55dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="Interest"
+                    android:layout_marginTop="5dp"
+                    android:textSize="18sp"
+                    android:textAlignment="textStart"
+                    app:layout_constraintEnd_toStartOf="@+id/create_password" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Spinner
+                        android:id="@+id/InterestSpinner"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content" />
+
+                    <Spinner
+                        android:id="@+id/InterestSpinner2"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"/>
+
+                    <Spinner
+                        android:id="@+id/InterestSpinner3"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"/>
+
+                    <Spinner
+                        android:id="@+id/InterestSpinner4"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="5dp">
+
+                        <ImageButton
+                            android:id="@+id/AddInterest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:padding="2dp"
+                            app:srcCompat="@mipmap/add_more_icon" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/checkingRegister"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="50dp"
+                android:layout_gravity="center"
+                android:text="Register" />
+
+            <TextView
+                android:id="@+id/givinghint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Go back to login"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
 
 </LinearLayout>

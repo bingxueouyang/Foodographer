@@ -1,11 +1,14 @@
 package com.foodie.foodographer;
 
-public class UserInfo {
-    public String email, expertiseinfo, interestinfo;
+import java.util.ArrayList;
 
-    public UserInfo(String email, String expertise,String interest){
+public class UserInfo {
+    public String email;
+    public ArrayList<String> expertises, interests;
+
+    public UserInfo(String email, ArrayList<String> expertises, ArrayList<String> interests){
         this.email=email;
-        this.expertiseinfo=expertise;
-        this.interestinfo=interest;
+        this.expertises=expertises;
+        this.interests=interests;
     }
 }
