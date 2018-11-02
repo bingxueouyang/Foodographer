@@ -153,16 +153,14 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
     private void send_message_verifed_email(){
         final String infoEmail = getemail.getText().toString().trim();
 
-        final ArrayList<String> expertises = new ArrayList<String>(3);
-        expertises.add(expertSpinner.getSelectedItem().toString().trim());
-        expertises.add(expertSpinner2.getSelectedItem().toString().trim());
-        expertises.add(expertSpinner3.getSelectedItem().toString().trim());
+        final String expert1 = expertSpinner.getSelectedItem().toString().trim();
+        final String expert2 = expertSpinner2.getSelectedItem().toString().trim();
+        final String expert3 = expertSpinner3.getSelectedItem().toString().trim();
 
-        final ArrayList<String> interests = new ArrayList<String>(4);
-        interests.add(interestSpinner.getSelectedItem().toString().trim());
-        interests.add(interestSpinner2.getSelectedItem().toString().trim());
-        interests.add(interestSpinner3.getSelectedItem().toString().trim());
-        interests.add(interestSpinner4.getSelectedItem().toString().trim());
+        final String interest1 = interestSpinner.getSelectedItem().toString().trim();
+        final String interest2 = interestSpinner2.getSelectedItem().toString().trim();
+        final String interest3 = interestSpinner3.getSelectedItem().toString().trim();
+        final String interest4 = interestSpinner4.getSelectedItem().toString().trim();
 
 
         FirebaseUser usertemp = mAuth.getCurrentUser();
@@ -171,11 +169,12 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
+
                         Toast.makeText( SignUp.this,"Please verified your account",Toast.LENGTH_SHORT).show();
                         String user_id=mAuth.getCurrentUser().getUid();
                         DatabaseReference mDatabase=FirebaseDatabase.getInstance().getReference().child("users").child(user_id);
 
-                        UserInfo user_info = new UserInfo(infoEmail,expertises,interests);
+                        UserInfo user_info = new UserInfo(infoEmail,expert1,expert2,expert3,interest1,interest2,interest3,interest4);
                         mDatabase.setValue(user_info);
                         finish();
                         startActivity(new Intent(getApplicationContext(),LogIn.class));
