@@ -3,5 +3,6 @@
     <color name="colorPrimary">#9f0020</color>
     <color name="colorPrimaryDark">#9f0020</color>
     <color name="colorAccent">#d9ac2a</color>
-    <color name="diviline">#efefef</color>
+    <color name="diviline">#dedede</color>
+    <color name="white">#ffffff</color>
 </resources>
