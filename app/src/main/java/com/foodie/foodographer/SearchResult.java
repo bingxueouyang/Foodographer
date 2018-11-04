@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -33,7 +34,7 @@ public class SearchResult extends AppCompatActivity {
     String this_location;
     ArrayList<Business> businesses;
     ListView list;
-    private SearchView search_bar;
+    private LinearLayout search_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class SearchResult extends AppCompatActivity {
         setContentView(R.layout.activity_search_result);
         thread.start();
         search_bar = findViewById(R.id.search);
-        search_bar.setOnSearchClickListener(new SearchView.OnClickListener() {
+        search_bar.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {

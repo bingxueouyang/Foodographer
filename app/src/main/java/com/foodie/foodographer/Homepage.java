@@ -9,12 +9,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.SearchView;
 import java.util.ArrayList;
 
 public class Homepage extends AppCompatActivity {
-    private SearchView search_bar;
+    private LinearLayout search_bar;
     private TextView mTextMessage;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -46,8 +47,8 @@ public class Homepage extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        search_bar = findViewById(R.id.search);
-        search_bar.setOnSearchClickListener(new android.widget.SearchView.OnClickListener() {
+        search_bar = (LinearLayout)findViewById(R.id.search);
+        search_bar.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
