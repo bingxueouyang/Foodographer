@@ -52,7 +52,13 @@ public class SearchBar extends AppCompatActivity {
         Intent intent = new Intent(SearchBar.this, SearchResult.class);
         Bundle bundle = new Bundle();
         bundle.putString("name", rest_name);
-        bundle.putString("location", rest_location);
+        if(rest_location!=null) {
+            bundle.putString("location", rest_location);
+        }
+        /*else{
+            bundle.putString("latitude", String.valueOf(Homepage.getmLocation().getLatitude()));
+            bundle.putString("longitude", String.valueOf(Homepage.getmLocation().getLongitude()) );
+        }*/
         intent.putExtras(bundle);
         startActivity(intent);
     }

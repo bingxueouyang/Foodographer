@@ -31,6 +31,8 @@ public class SearchResult extends AppCompatActivity {
     YelpFusionApi yelpFusionApi;
     String this_name;
     String this_location;
+    String this_latitude;
+    String this_longitude;
     ArrayList<Business> businesses;
     ListView list;
     private SearchView search_bar;
@@ -64,10 +66,22 @@ public class SearchResult extends AppCompatActivity {
                     if(intent.hasExtra("location")){
                         this_location = bundle.getString("location", "location");
                     }
+                    else{
+                        this_latitude = String.valueOf(Homepage.getmLocation().getLatitude());
+                        this_longitude = String.valueOf(Homepage.getmLocation().getLongitude());
+                    }
                 }
                 Map<String, String> params = new HashMap<>();
                 params.put("term", this_name);
-                params.put("location", this_location);
+                if(intent.hasExtra("name")) {
+                    params.put("location", this_location);
+                }
+                else{
+                    params.put("latitude",this_latitude);
+                    params.put("longitude",this_longitude);
+                    Log.i("latitude",this_latitude);
+                    Log.i("longitude",this_longitude);
+                }
                 Call<SearchResponse> call = yelpFusionApi.getBusinessSearch(params);
                 call.enqueue(callback);
             } catch (Exception e) {
