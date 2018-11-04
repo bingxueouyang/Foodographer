@@ -30,8 +30,8 @@
         <activity android:name=".SignUp" />
         <activity android:name=".Filter" />
         <activity android:name=".SearchBar" />
-        <activity android:name=".ResetPassword"></activity>
-
+        <activity android:name=".ResetPassword" />
+        <activity android:name=".Review"></activity>
     </application>
 
 </manifest>
