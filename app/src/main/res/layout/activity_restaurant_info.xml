@@ -111,11 +111,28 @@
                 android:text="LOCATION"
                 android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/time"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="close opening time" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="1dp"
+                >
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:paddingTop="5dp"
+                    android:text="close opening time" />
+
+                <Button
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="210dp"
+                    android:background="@drawable/enter_icon" />
+
+            </LinearLayout>
 
 
             <View
@@ -385,6 +402,100 @@
                         android:text="Free WiFi"
                         android:textSize="14sp"
                         android:clickable="true" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/diviline"
+                    android:visibility="visible"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="128dp">
+
+                </View>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/user_image1"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            tools:srcCompat="@tools:sample/avatars[0]" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/user_name1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="25dp"
+                                android:layout_marginTop="10dp"
+                                android:text="Jeremy Hao"
+                                android:textSize="18sp" />
+
+                            <RatingBar
+                                android:id="@+id/review_rating"
+                                style="?attr/ratingBarStyleSmall"
+                                android:layout_width="100dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="6dp"
+                                android:max="5"
+                                android:rating="3"
+                                android:transformPivotX="0dp"
+                                android:transformPivotY="0dp" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/reviewed_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="41dp"
+                            android:text="3 months ago" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/user_image2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            tools:srcCompat="@tools:sample/avatars[0]" />
+
+                        <TextView
+                            android:id="@+id/user_name2"
+                            android:layout_width="79dp"
+                            android:layout_height="38dp"
+                            android:text="Jeremy"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+
+
+
 
 
                 </LinearLayout>
