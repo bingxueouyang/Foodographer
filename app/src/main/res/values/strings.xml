@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">Foodographer</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_recommend">Recommend</string>
+    <string name="title_profile">Profile</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -19,20 +19,38 @@
     </string>
 
     <string-array name="expertise_array">
-        <item>Chinese</item>
-        <item>Korean</item>
-        <item>Japanese</item>
-        <item>Italian</item>
-        <item>Vietnamese</item>
-        <item>Idian</item>
+        <item></item>
         <item>American</item>
+        <item>Chinese</item>
+        <item>French</item>
+        <item>Indian</item>
+        <item>Italian</item>
+        <item>Japanese</item>
+        <item>Korean</item>
+        <item>Vietnamese</item>
     </string-array>
 
-    <string-array name="flavor_array">
-        <item>Spicy</item>
-        <item>Sweet</item>
-        <item>Sour</item>
-        <item>Salty</item>
+    <string-array name="rating_array">
+        <item>Taste</item>
+        <item>Service</item>
+        <item>Overall</item>
     </string-array>
+
+    <string-array name="distance_array">
+        <item>1</item>
+        <item>3</item>
+        <item>10</item>
+        <item>20</item>
+    </string-array>
+
+    <string-array name="tag_array">
+        <item>Spicy</item>
+        <item>Vegetarian</item>
+    </string-array>
+
+    <string name="apiKey">FDh3kNaLsxtSsKpiBilYUM62obma5MsPcKXWNNOvpEV10o5C6FISGbz_xqyeHOqnx5aqnjtZZEPep3pcoMq2sQ_myjp-LO0vTdobgO89944qZwu4wVXHrt_PIPrMW3Yx</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
 

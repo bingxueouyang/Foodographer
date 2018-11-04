@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UserProfile">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:src="@drawable/profile"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:text="UserName"
+            android:textAlignment="textStart"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/setting"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="60dp"
+            android:text="Setting"
+            android:textAllCaps="false"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="1">
+
+            <!--Review Card-->
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/reviews_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/reviews_icon" />
+
+                        <TextView
+                            android:id="@+id/review"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:layout_gravity="center"
+                            android:text="Reviews"
+                            android:textAlignment="textStart"
+                            android:textSize="18sp" />
+
+                        <Button
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/enter_icon" />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/diviline" />
+
+                    <TextView
+                        android:id="@+id/latestReview_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:text="FUCK THIS REST"
+                        android:textAlignment="textStart"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/latestReview_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+
+                        android:text="it tastes like shit..."
+                        android:textAlignment="textStart"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/diviline" />
+
+                    <TextView
+                        android:id="@+id/latestReview2_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:text="I LOVE SUSHI"
+                        android:textAlignment="textStart"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/latestReview2_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="it tastes like heaven..."
+                        android:textAlignment="textStart"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <!--Favorites Card-->
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/favorites_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/favorite_icon" />
+
+                    <TextView
+                        android:layout_width="240dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="center"
+                        android:text="Favorites"
+                        android:textAlignment="textStart"
+                        android:textSize="18sp" />
+
+                    <Button
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/enter_icon" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Recently Viewed Card-->
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/recently_viewd_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/recently_reviewed_icon" />
+
+                    <TextView
+                        android:layout_width="240dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="center"
+                        android:text="Recently Viewd"
+                        android:textAlignment="textStart"
+                        android:textSize="18sp" />
+
+                    <Button
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/enter_icon" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Flavor Card-->
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/flavor_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/flavor_icon" />
+
+                    <Button
+                        android:id="@+id/flavor1"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+
+                        android:text="Spicy"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/flavor2"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:text="Vegan"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!--Expertise Card-->
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/expertise_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/expertise_icon" />
+
+                    <TextView
+                        android:id="@+id/perosonalExpertise"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp" />
+
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+            <!--Logout Card-->
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/logout_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
+
+
+                <Button
+                    android:id="@+id/logoutButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="LOG OUT" />
+
+
+            </android.support.v7.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/diviline"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="128dp" />
+
+        </GridLayout>
+
+    </ScrollView>
+
+</LinearLayout>

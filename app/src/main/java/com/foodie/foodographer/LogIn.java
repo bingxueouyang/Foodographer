@@ -24,31 +24,35 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 //import com.google.firebase.firsteverapp.auth.R;
 
-public class Log_inActivity extends AppCompatActivity implements View.OnClickListener {
+public class LogIn extends AppCompatActivity implements View.OnClickListener {
     private Button loginBut;
     private EditText user_input_email;
     private EditText user_input_password;
     private TextView loginText;
     private ProgressDialog progressDialog2;
     private FirebaseAuth mAuth2;
+    private TextView forgotpasswordLink;
+    private Boolean checkingEmail_true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
+        setContentView(R.layout.activity_login);
         mAuth2=FirebaseAuth.getInstance();
         if(mAuth2.getCurrentUser()!= null){
             //go into to profile page
             finish();
 
-            startActivity(new Intent(getApplicationContext(), profileforuser.class));
+            startActivity(new Intent(getApplicationContext(), UserProfile.class));
         }
         progressDialog2= new ProgressDialog(this);
         user_input_email = (EditText) findViewById(R.id.user_enter_email);
         user_input_password = (EditText) findViewById(R.id.user_enter_password);
         loginBut= (Button) findViewById(R.id.loginRegister);
         loginText=(TextView) findViewById(R.id.hint_signup);
+        forgotpasswordLink=(TextView) findViewById(R.id.forgot_password);
         loginBut.setOnClickListener(this);
         loginText.setOnClickListener(this);
+        forgotpasswordLink.setOnClickListener(this);
     }
 
     private void userLogin(){
@@ -70,16 +74,28 @@ public class Log_inActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //progressDialog2.dismiss();
                         if(task.isSuccessful()){
-                            finish();
-                            startActivity(new Intent(getApplicationContext(), profileforuser.class));
+                            email_verified();
                         }else {
                             // If sign in fails, display a message to the user.
-
+                            String grab_error=task.getException().getMessage();
+                            Toast.makeText(LogIn.this,"Error occur:"+grab_error,Toast.LENGTH_SHORT).show();
                         }
                         progressDialog2.dismiss();
 
                     }
                 });
+    }
+    private void email_verified(){
+        FirebaseUser user=mAuth2.getCurrentUser();
+        checkingEmail_true= user.isEmailVerified();
+        if(checkingEmail_true==true){
+            finish();
+            startActivity(new Intent(getApplicationContext(), UserProfile.class));
+            //finish();
+        }else{
+            Toast.makeText(LogIn.this,"Go verified your email please!",Toast.LENGTH_SHORT).show();
+            mAuth2.signOut();
+        }
     }
     @Override
     public void onClick(View view){
@@ -88,7 +104,11 @@ public class Log_inActivity extends AppCompatActivity implements View.OnClickLis
         }
         if(view ==loginText){
             finish();
-            startActivity(new Intent(this,SignupActivity.class));
+            startActivity(new Intent(this,SignUp.class));
+        }
+        if(view ==forgotpasswordLink){
+            finish();
+            startActivity(new Intent(this,ResetPassword.class));
         }
     }
 }

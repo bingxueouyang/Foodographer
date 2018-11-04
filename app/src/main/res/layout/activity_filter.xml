@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Filter">
+
+    <TextView
+        android:id="@+id/expert_text"
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="50dp"
+        android:text="Expert in"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/expert_spinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RatingBar
+        android:id="@+id/rating_rating_bar"
+        style="@android:style/Widget.Material.RatingBar.Indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:isIndicator="false"
+        android:max="5"
+        android:numStars="5"
+        android:stepSize=".5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rating_text"
+        app:layout_constraintTop_toBottomOf="@+id/rating_spinner" />
+
+    <TextView
+        android:id="@+id/rating_text"
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="80dp"
+        android:text="Rating"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/rating_spinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/expert_text" />
+
+    <TextView
+        android:id="@+id/distance_text"
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="80dp"
+        android:text="Distance"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/distance_spinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rating_text" />
+
+    <TextView
+        android:id="@+id/distance_text2"
+        android:layout_width="49dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="80dp"
+        android:text="miles"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/price_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/distance_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/rating_text" />
+
+    <TextView
+        android:id="@+id/price_text"
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="123dp"
+        android:text="Price"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/price_$_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/distance_text" />
+
+    <Spinner
+        android:id="@+id/expert_spinner"
+        android:layout_width="180dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/expert_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/distance_spinner"
+        android:layout_width="120dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/price_text"
+        app:layout_constraintEnd_toStartOf="@+id/distance_text2"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toEndOf="@+id/distance_text"
+        app:layout_constraintTop_toBottomOf="@+id/rating_text" />
+
+    <Spinner
+        android:id="@+id/rating_spinner"
+        android:layout_width="180dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rating_text"
+        app:layout_constraintTop_toBottomOf="@+id/expert_text" />
+
+    <Button
+        android:id="@+id/price_$_button"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="35dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="80dp"
+        android:text="$"
+        app:layout_constraintEnd_toStartOf="@+id/price_$$_button"
+        app:layout_constraintStart_toEndOf="@+id/price_text"
+        app:layout_constraintTop_toBottomOf="@+id/distance_text" />
+
+    <Button
+        android:id="@+id/price_$$_button"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="42dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="80dp"
+        android:text="$$"
+        app:layout_constraintEnd_toStartOf="@+id/price_$$$_button"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toEndOf="@+id/price_$_button"
+        app:layout_constraintTop_toBottomOf="@+id/distance_text" />
+
+    <Button
+        android:id="@+id/price_$$$_button"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="47dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="80dp"
+        android:text="$$$"
+        app:layout_constraintEnd_toStartOf="@+id/price_$$$$_button"
+        app:layout_constraintStart_toEndOf="@+id/price_$$_button"
+        app:layout_constraintTop_toBottomOf="@+id/distance_text" />
+
+    <Button
+        android:id="@+id/price_$$$$_button"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="56dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="32dp"
+        android:text="$$$$"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/price_$$$_button"
+        app:layout_constraintTop_toBottomOf="@+id/distance_text" />
+
+    <Button
+        android:id="@+id/complete_button"
+        style="@android:style/Widget.DeviceDefault.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="16dp"
+        android:text="Complete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/price_text" />
+
+</android.support.constraint.ConstraintLayout>
