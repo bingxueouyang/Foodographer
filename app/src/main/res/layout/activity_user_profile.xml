@@ -34,14 +34,16 @@
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/save"
+            android:id="@+id/setting"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginLeft="60dp"
-            android:text="SAVE"
-            android:textSize="12sp" />
+            android:text="Setting"
+            android:textAllCaps="false"
+            android:textSize="10sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -300,8 +302,8 @@
                         android:layout_gravity="center"
                         android:src="@drawable/expertise_icon" />
 
-                    <Spinner
-                        android:id="@+id/ExpertiseSpinner"
+                    <TextView
+                        android:id="@+id/perosonalExpertise"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

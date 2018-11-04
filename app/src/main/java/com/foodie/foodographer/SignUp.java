@@ -170,7 +170,7 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
 
-                        Toast.makeText( SignUp.this,"Please verified your account",Toast.LENGTH_SHORT).show();
+                        Toast.makeText( SignUp.this,"Please verified your account!",Toast.LENGTH_SHORT).show();
                         String user_id=mAuth.getCurrentUser().getUid();
                         DatabaseReference mDatabase=FirebaseDatabase.getInstance().getReference().child("users").child(user_id);
 
