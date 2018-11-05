@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.SearchView;
 import java.util.ArrayList;
+import android.view.View.OnClickListener;
+
 
 public class Homepage extends AppCompatActivity {
     private LinearLayout search_bar;
@@ -57,11 +59,11 @@ public class Homepage extends AppCompatActivity {
         });
 
         ArrayList<Article> articles = new ArrayList<Article>(10);
-        articles.add(new Article("Hello Hamburger","https://amp.businessinsider.com/images/5a7dc169d03072af008b4bf2-750-562.jpg"));
-        articles.add(new Article("Hello XLB","https://daily.jstor.org/wp-content/uploads/2017/11/dim_sum_dumplings_1050x700.jpg"));
-        articles.add(new Article("Hello JianBing","https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D400/sign=57ab32c9cfcec3fd8b3ea675e689d4b6/a50f4bfbfbedab64edf682c5fb36afc379311e2b.jpg"));
-        articles.add(new Article("Hello Red Bean","https://media-cdn.tripadvisor.com/media/daodao/photo-s/04/19/9e/1a/caption.jpg"));
-        articles.add(new Article("Hello Crab","https://cp1.douguo.com/upload/caiku/3/9/b/600x400_39fa22c44f4f02d73e5c1fd953c0171b.jpg"));
+        articles.add(new Article("Hello Hamburger","https://amp.businessinsider.com/images/5a7dc169d03072af008b4bf2-750-562.jpg","https://en.wikipedia.org/wiki/Hamburger"));
+        articles.add(new Article("Hello XLB","https://daily.jstor.org/wp-content/uploads/2017/11/dim_sum_dumplings_1050x700.jpg","https://en.wikipedia.org/wiki/Xiaolongbao"));
+        articles.add(new Article("Hello JianBing","https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D400/sign=57ab32c9cfcec3fd8b3ea675e689d4b6/a50f4bfbfbedab64edf682c5fb36afc379311e2b.jpg","https://en.wikipedia.org/wiki/Jianbing"));
+        articles.add(new Article("Hello Red Bean Double Skin Milk","https://media-cdn.tripadvisor.com/media/daodao/photo-s/04/19/9e/1a/caption.jpg","https://jinwensay.wordpress.com/2007/01/12/milk-cooking/"));
+        articles.add(new Article("Hello Crab","https://cp1.douguo.com/upload/caiku/3/9/b/600x400_39fa22c44f4f02d73e5c1fd953c0171b.jpg", "https://learnchinesefood.com/detail%3D9807"));
 
         // making articles recycle
         RecyclerArticleList adapter = new RecyclerArticleList(articles);
