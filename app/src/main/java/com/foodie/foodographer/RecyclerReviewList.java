@@ -34,7 +34,7 @@ public class RecyclerReviewList extends RecyclerView.Adapter<RecyclerReviewList.
         holder.restRating.setRating((float)review.getRating());
         holder.review_time.setText(review.getTime());
         holder.content.setText(review.getContent());
-        new DownloadImageTask(holder.userIMG).execute(review.getIMGURL());
+        new DownloadImageTask(holder.userIMG).execute(review.getUserIMGURL());
     }
 
 
