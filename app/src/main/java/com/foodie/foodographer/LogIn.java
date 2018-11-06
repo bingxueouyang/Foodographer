@@ -89,8 +89,9 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
         FirebaseUser user=mAuth2.getCurrentUser();
         checkingEmail_true= user.isEmailVerified();
         if(checkingEmail_true==true){
-            startActivity(new Intent(getApplicationContext(), UserProfile.class));
             finish();
+            startActivity(new Intent(getApplicationContext(), UserProfile.class));
+            //finish();
         }else{
             Toast.makeText(LogIn.this,"Go verified your email please!",Toast.LENGTH_SHORT).show();
             mAuth2.signOut();

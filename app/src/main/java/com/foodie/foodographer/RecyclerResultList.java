@@ -2,6 +2,8 @@
 
 package com.foodie.foodographer;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +18,14 @@ import com.yelp.fusion.client.models.Business;
 
 public class RecyclerResultList extends RecyclerView.Adapter<RecyclerResultList.MyViewHolder> {
     private List<Business> rest_list;
-
+    private Context context;
     public RecyclerResultList (ArrayList<Business> rest_list){
         this.rest_list = rest_list;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        context = parent.getContext();
         View listItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.result_card, parent, false);
 
         return new MyViewHolder(listItem);
@@ -32,8 +35,10 @@ public class RecyclerResultList extends RecyclerView.Adapter<RecyclerResultList.
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
         Business restaurant = rest_list.get(position);
-        holder.restName.setText(restaurant.getName());
-        holder.restRating.setRating((float)restaurant.getRating());
+        final String restName = restaurant.getName();
+        final String restURL = restaurant.getImageUrl();
+        final float restRating = (float)restaurant.getRating();
+
         String address;
         if(restaurant.getLocation().getAddress2() != "") {
             address = restaurant.getLocation().getAddress1() + ", " + restaurant.getLocation().getAddress2() + ", " + restaurant.getLocation().getCity();
@@ -44,8 +49,27 @@ public class RecyclerResultList extends RecyclerView.Adapter<RecyclerResultList.
         else {
             address = restaurant.getLocation().getAddress1() + ", " + restaurant.getLocation().getCity();
         }
-        holder.restLocation.setText(address);
-        new DownloadImageTask(holder.restIMG).execute(restaurant.getImageUrl());
+
+        final String restLocation = address;
+
+        // create Restaurant object for RestaurantInfo page
+        final Restaurant myRest = new Restaurant(restName, restURL, restRating, restLocation );
+
+
+        holder.restName.setText(restName);
+        holder.restRating.setRating(restRating);
+        holder.restLocation.setText(restLocation);
+        new DownloadImageTask(holder.restIMG).execute(restURL);
+
+        // go to RestaurantInfo page on click
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, RestaurantInfo.class);
+                intent.putExtra("myRest", myRest);
+                context.startActivity(intent);
+            }
+        });
     }
 
 

@@ -70,9 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:max="5"
-                    android:rating="3.5"
-                    android:transformPivotX="0dp"
-                    android:transformPivotY="0dp" />
+                    android:rating="3.5" />
 
                 <TextView
                     android:id="@+id/rest_reviews"
