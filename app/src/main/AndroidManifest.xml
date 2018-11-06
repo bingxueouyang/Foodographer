@@ -32,6 +32,7 @@
         <activity android:name=".Filter" />
         <activity android:name=".SearchBar" />
         <activity android:name=".ResetPassword" />
+        <activity android:name=".RestaurantInfo" />
         <activity android:name=".account_setting" />
         <activity android:name=".ArticlePage" />
     </application>
