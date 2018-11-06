@@ -34,7 +34,8 @@ public class RecyclerReviewList extends RecyclerView.Adapter<RecyclerReviewList.
         holder.restRating.setRating((float)review.getRating());
         holder.review_time.setText(review.getTime());
         holder.content.setText(review.getContent());
-        new DownloadImageTask(holder.userProfile).execute(review.getIMGURL());
+
+        new DownloadImageTask(holder.userIMG).execute(review.getIMGURL());
     }
 
 
@@ -45,14 +46,14 @@ public class RecyclerReviewList extends RecyclerView.Adapter<RecyclerReviewList.
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView username;
-        private ImageView userProfile;
+        private ImageView userIMG;
         private RatingBar restRating;
         private TextView review_time;
         private TextView content;
         public MyViewHolder(View itemView) {
             super(itemView);
             username = (TextView) itemView.findViewById(R.id.user_name);
-            userProfile = (ImageView) itemView.findViewById(R.id.user_profile);
+            userIMG = (ImageView) itemView.findViewById(R.id.user_IMG);
             restRating = (RatingBar) itemView.findViewById(R.id.review_rating);
             review_time = (TextView) itemView.findViewById(R.id.reviewed_time);
             content = (TextView) itemView.findViewById(R.id.review_content);
@@ -61,4 +62,3 @@ public class RecyclerReviewList extends RecyclerView.Adapter<RecyclerReviewList.
 
 
 }
-

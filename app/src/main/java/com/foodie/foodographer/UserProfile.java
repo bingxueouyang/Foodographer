@@ -27,6 +27,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     private FirebaseAuth mAuth3;
     private Button signout;
     private TextView userEmail_textview;
+    private Button settingBut;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +40,12 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
             startActivity(new Intent(this, LogIn.class));
         }
         FirebaseUser firebaseUser=mAuth3.getCurrentUser();
-        //userEmail_textview= (TextView) findViewById(R.id.textViewUseremail);
+        //userEmail_textview= (TextView) findViewById(R.id.username);
         //userEmail_textview.setText(firebaseUser.getEmail());
         signout= (Button) findViewById(R.id.logoutButton);
         signout.setOnClickListener(this);
+        settingBut=(Button) findViewById(R.id.setting);
+        settingBut.setOnClickListener(this);
     }
 
     @Override
@@ -50,6 +54,10 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
             mAuth3.signOut();
             finish();
             startActivity(new Intent(this, LogIn.class));
+        }
+        if(view==settingBut){
+            finish();
+            startActivity(new Intent(this, account_setting.class));
         }
     }
 }
