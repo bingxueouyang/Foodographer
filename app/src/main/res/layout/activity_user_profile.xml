@@ -181,19 +181,21 @@
                         android:src="@drawable/favorite_icon" />
 
                     <TextView
+                        android:id="@+id/favoriteRest"
                         android:layout_width="240dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
                         android:layout_gravity="center"
+                        android:layout_margin="10dp"
                         android:text="Favorites"
                         android:textAlignment="textStart"
                         android:textSize="18sp" />
 
                     <Button
+                        android:id="@+id/listFavor"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_margin="10dp"
                         android:layout_gravity="center"
+                        android:layout_margin="10dp"
                         android:background="@drawable/enter_icon" />
 
                 </LinearLayout>
@@ -220,19 +222,21 @@
                         android:src="@drawable/recently_reviewed_icon" />
 
                     <TextView
+                        android:id="@+id/recentViewRest"
                         android:layout_width="240dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
                         android:layout_gravity="center"
+                        android:layout_margin="10dp"
                         android:text="Recently Viewd"
                         android:textAlignment="textStart"
                         android:textSize="18sp" />
 
                     <Button
+                        android:id="@+id/listView"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_margin="10dp"
                         android:layout_gravity="center"
+                        android:layout_margin="10dp"
                         android:background="@drawable/enter_icon" />
 
                 </LinearLayout>

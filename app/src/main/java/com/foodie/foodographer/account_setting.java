@@ -33,8 +33,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.UploadTask;
 import de.hdodenhof.circleimageview.CircleImageView;
-import com.squareup.picasso.Picasso;
-import com.bumptech.glide.Glide;
 import java.util.HashMap;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

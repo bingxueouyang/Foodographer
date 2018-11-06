@@ -45,7 +45,7 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
     private Spinner interestSpinner2;
     private Spinner interestSpinner3;
     private Spinner interestSpinner4;
-
+    private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -172,7 +172,7 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
 
                         Toast.makeText( SignUp.this,"Please verified your account!",Toast.LENGTH_SHORT).show();
                         String user_id=mAuth.getCurrentUser().getUid();
-                        DatabaseReference mDatabase=FirebaseDatabase.getInstance().getReference().child("users").child(user_id);
+                        mDatabase=FirebaseDatabase.getInstance().getReference().child("users").child(user_id);
 
                         UserInfo user_info = new UserInfo(infoEmail,expert1,expert2,expert3,interest1,interest2,interest3,interest4);
                         mDatabase.setValue(user_info);
