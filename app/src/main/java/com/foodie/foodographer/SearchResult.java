@@ -98,6 +98,10 @@ public class SearchResult extends AppCompatActivity {
                 Log.i("yelp", "result business array is empty!!!");
             }
 
+            // write your filter algorithm here (sort and delete businesses objects)
+            // https://stackoverflow.com/questions/16856554/filtering-an-arraylist-using-an-objects-field
+            // https://stackoverflow.com/questions/23262445/sorting-and-filtering-listview-with-custom-array-adapter-with-two-textview
+
             RecyclerResultList adapter = new RecyclerResultList(businesses);
             RecyclerView myView =  (RecyclerView)findViewById(R.id.recyclerview);
             myView.setHasFixedSize(true);
