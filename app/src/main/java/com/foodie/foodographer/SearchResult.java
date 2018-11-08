@@ -64,19 +64,23 @@ public class SearchResult extends AppCompatActivity {
                         this_name = bundle.getString("name", "No info");
                     }
                     if(intent.hasExtra("location")){
+                        Log.i("locatioin",this_location);
                         this_location = bundle.getString("location", "location");
                     }
                     else{
-                        this_latitude = String.valueOf(Homepage.getmLocation().getLatitude());
-                        this_longitude = String.valueOf(Homepage.getmLocation().getLongitude());
+                        Log.i("mmmmm","here");
+                        this_latitude = String.valueOf(SearchBar.getmLocation().getLatitude());
+                        this_longitude = String.valueOf(SearchBar.getmLocation().getLongitude());
                     }
                 }
                 Map<String, String> params = new HashMap<>();
                 params.put("term", this_name);
-                if(intent.hasExtra("name")) {
+                if(intent.hasExtra("location")) {
                     params.put("location", this_location);
                 }
                 else{
+
+                    Log.i("hhhh","here???");
                     params.put("latitude",this_latitude);
                     params.put("longitude",this_longitude);
                     Log.i("latitude",this_latitude);
@@ -124,6 +128,7 @@ public class SearchResult extends AppCompatActivity {
         @Override
         public void onFailure(Call<SearchResponse> call, Throwable t) {
             // HTTP error happened, do something to handle it.
+            Log.i("failure!!","wtf");
         }
     };
 
