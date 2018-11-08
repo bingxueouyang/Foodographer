@@ -32,6 +32,8 @@ public class SearchResult extends AppCompatActivity {
     YelpFusionApi yelpFusionApi;
     String this_name;
     String this_location;
+    String this_latitude;
+    String this_longitude;
     ArrayList<Business> businesses;
     ListView list;
     private LinearLayout search_bar;
@@ -63,12 +65,28 @@ public class SearchResult extends AppCompatActivity {
                         this_name = bundle.getString("name", "No info");
                     }
                     if(intent.hasExtra("location")){
+                        Log.i("locatioin",this_location);
                         this_location = bundle.getString("location", "location");
+                    }
+                    else{
+                        Log.i("mmmmm","here");
+                        this_latitude = String.valueOf(SearchBar.getmLocation().getLatitude());
+                        this_longitude = String.valueOf(SearchBar.getmLocation().getLongitude());
                     }
                 }
                 Map<String, String> params = new HashMap<>();
                 params.put("term", this_name);
-                params.put("location", this_location);
+                if(intent.hasExtra("location")) {
+                    params.put("location", this_location);
+                }
+                else{
+
+                    Log.i("hhhh","here???");
+                    params.put("latitude",this_latitude);
+                    params.put("longitude",this_longitude);
+                    Log.i("latitude",this_latitude);
+                    Log.i("longitude",this_longitude);
+                }
                 Call<SearchResponse> call = yelpFusionApi.getBusinessSearch(params);
                 call.enqueue(callback);
             } catch (Exception e) {
@@ -115,6 +133,7 @@ public class SearchResult extends AppCompatActivity {
         @Override
         public void onFailure(Call<SearchResponse> call, Throwable t) {
             // HTTP error happened, do something to handle it.
+            Log.i("failure!!","wtf");
         }
     };
 
