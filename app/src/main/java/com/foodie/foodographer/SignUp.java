@@ -174,8 +174,8 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
                         String user_id=mAuth.getCurrentUser().getUid();
                         DatabaseReference mDatabase=FirebaseDatabase.getInstance().getReference().child("users").child(user_id);
 
-                        UserInfo user_info = new UserInfo(infoEmail,expert1,expert2,expert3,interest1,interest2,interest3,interest4);
-                        mDatabase.setValue(user_info);
+                      //  UserInfo user_info = new UserInfo(infoEmail,expert1,expert2,expert3,interest1,interest2,interest3,interest4);
+                       // mDatabase.setValue(user_info);
                         finish();
                         startActivity(new Intent(getApplicationContext(),LogIn.class));
                         mAuth.signOut();
