@@ -65,8 +65,9 @@ public class SearchResult extends AppCompatActivity {
                         this_name = bundle.getString("name", "No info");
                     }
                     if(intent.hasExtra("location")){
-                        Log.i("locatioin",this_location);
+
                         this_location = bundle.getString("location", "location");
+                        Log.i("locatioin",this_location);
                     }
                     else{
                         Log.i("mmmmm","here");
@@ -81,7 +82,7 @@ public class SearchResult extends AppCompatActivity {
                 }
                 else{
 
-                    Log.i("hhhh","here???");
+                    //Log.i("hhhh","here???");
                     params.put("latitude",this_latitude);
                     params.put("longitude",this_longitude);
                     Log.i("latitude",this_latitude);

@@ -86,8 +86,8 @@ public class SearchBar extends AppCompatActivity {
         Intent intent = new Intent(SearchBar.this, SearchResult.class);
         Bundle bundle = new Bundle();
         bundle.putString("name", rest_name);
-        if(rest_location!=null) {
-            Log.i("nulla","its not null");
+        if(rest_location!=null&&!rest_location.equals("")) {
+            Log.i("nulla","its not null"+rest_location);
             bundle.putString("location", rest_location);
         }
         else{
@@ -159,7 +159,7 @@ public class SearchBar extends AppCompatActivity {
                             onLocationChanged(location);
                             mLocation = location;
                             //Log.i("lat",String.valueOf(location.getLatitude()));
-                          //  Log.i("long",String.valueOf(location.getLongitude()));
+                            //Log.i("long",String.valueOf(location.getLongitude()));
                         }
                     }
                 })
@@ -173,6 +173,8 @@ public class SearchBar extends AppCompatActivity {
     }
 
     public static Location getmLocation(){
+        Log.i("longitude",String.valueOf(mLocation.getLongitude()));
+
         return mLocation;
     }
 }

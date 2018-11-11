@@ -40,9 +40,9 @@ public class RecyclerResultList extends RecyclerView.Adapter<RecyclerResultList.
         final float restRating = (float)restaurant.getRating();
 
         String address;
-        if(restaurant.getLocation().getAddress2() != "") {
+        if(restaurant.getLocation().getAddress2()!=null&&restaurant.getLocation().getAddress2()!="") {
             address = restaurant.getLocation().getAddress1() + ", " + restaurant.getLocation().getAddress2() + ", " + restaurant.getLocation().getCity();
-            if (restaurant.getLocation().getAddress3() != "") {
+            if (restaurant.getLocation().getAddress3()!=null&&restaurant.getLocation().getAddress3()!="") {
                 address = restaurant.getLocation().getAddress1() + ", " + restaurant.getLocation().getAddress2() + ", " + restaurant.getLocation().getAddress3() + ", " + restaurant.getLocation().getCity();
             }
         }
