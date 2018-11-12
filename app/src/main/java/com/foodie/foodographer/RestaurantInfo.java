@@ -176,7 +176,9 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
     }
 
     private void saveReviewToDB(String userReview){
-        Review testReview = new Review("https://upload.wikimedia.org/wikipedia/en/2/21/Web_of_Spider-Man_Vol_1_129-1.png","Michael Zhang", (float) 3.0, "3 months ago", userReview);
+        String email = mAuthSetting.getCurrentUser().getEmail();
+        String emailUserName = email.substring(0,email.indexOf('@'));
+        Review testReview = new Review("https://upload.wikimedia.org/wikipedia/en/2/21/Web_of_Spider-Man_Vol_1_129-1.png",emailUserName, (float) 3.0, "3 months ago", userReview);
         HashMap<String, Object> restaurantParams = new HashMap<>();
         restaurantParams.put(currentUserID, testReview);
         commentRef.updateChildren(restaurantParams);

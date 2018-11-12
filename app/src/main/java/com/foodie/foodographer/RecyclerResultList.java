@@ -30,7 +30,7 @@ public class RecyclerResultList extends RecyclerView.Adapter<RecyclerResultList.
         this.rest_list = rest_list;
     }
     private DatabaseReference businessRef = FirebaseDatabase.getInstance().getReference("Restaurants");
-    private boolean[] restaurantIsInDB;
+    //private DatabaseReference quickBusinessRef = FirebaseDatabase.getInstance().getReference("Quick Restaurants References");
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -74,26 +74,25 @@ public class RecyclerResultList extends RecyclerView.Adapter<RecyclerResultList.
         holder.restDistance.setText(restDistance);
 
         new DownloadImageTask(holder.restIMG).execute(restURL);
-
         // go to RestaurantInfo page on click
         //TODO: example of RecyclerView onClick
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
 //                save the restaurant into our database whenever the user click on it
-                businessRef.child(restaurant.getId()).addValueEventListener(new ValueEventListener() {
+                businessRef.child(restaurant.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
-                            Log.i("database info", "gotoRestaurant is called!");
+                            Log.i("database info", "Restaurant existed! gotoRestaurant is called!");
                             gotoRestaurantInfo(myRest,restaurant);
-                            return;
                         }
                         else {
                             //the restaurant is not created yet; create it first
+                            //quickBusinessRef.child(restaurant.getId()).setValue("true");
                             businessRef.child(restaurant.getId()).setValue(restaurant);
+                            Log.i("database info", "Restaurant did not exist; is created. goto is called");
                             gotoRestaurantInfo(myRest, restaurant);
-                            return;
                         }
 
                     }
