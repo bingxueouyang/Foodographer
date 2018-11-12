@@ -60,33 +60,30 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         currentUserID=mAuth3.getCurrentUser().getUid();
         profileRefer=FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
         FirebaseUser firebaseUser=mAuth3.getCurrentUser();
-        //userEmail_textview= (TextView) findViewById(R.id.username);
-        //userEmail_textview.setText(firebaseUser.getEmail());
+        userEmail_textview= (TextView) findViewById(R.id.username);
+        userEmail_textview.setText(firebaseUser.getEmail());
         signout= (Button) findViewById(R.id.logoutButton);
         signout.setOnClickListener(this);
         settingBut=(Button) findViewById(R.id.setting);
         settingBut.setOnClickListener(this);
         userImageView =(CircleImageView) findViewById(R.id.profile_image);
         expertiseText=(TextView) findViewById(R.id.perosonalExpertise);
-        String check="betty noddle";
-        HashMap addNewItemForUser = new HashMap();
-        //addNewItemForUser.put("email",firebaseUser.getEmail());
-        addNewItemForUser.put("recentViews","");
-        addNewItemForUser.put("profileImageUrl","");
-        addNewItemForUser.put("favoriteRestaurants","");
-        profileRefer.updateChildren(addNewItemForUser);
+
         profileRefer.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange( DataSnapshot dataSnapshot) {
                 String imageOfUser=dataSnapshot.child("profileImageUrl").getValue().toString();
-                String firstExpertise=dataSnapshot.child("expert1").getValue().toString();
-                String secondExpertise=dataSnapshot.child("expert2").getValue().toString();
-                String thirdExpertise=dataSnapshot.child("expert3").getValue().toString();
+                String firstExpertise=dataSnapshot.child("Expert").child("Expert1").getValue().toString();
+                String secondExpertise=dataSnapshot.child("Expert").child("Expert2").getValue().toString();
+                String thirdExpertise=dataSnapshot.child("Expert").child("Expert3").getValue().toString();
                 totalExpertise=firstExpertise+", "+secondExpertise+", "+thirdExpertise;
-                if(imageOfUser != ""){
+                //Log.d("check",imageOfUser+" checking right");
+                if(imageOfUser != "nothing"){
                     Picasso.with(UserProfile.this).load(imageOfUser).into(userImageView);
+                }else{
+
                 }
-                //Picasso.with(UserProfile.this).load(imageOfUser).into(userImageView);
+
                 expertiseText.setText(totalExpertise);
             }
 

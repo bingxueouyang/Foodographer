@@ -25,7 +25,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 import com.google.firebase.database.DatabaseReference;
-
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ArrayList;
 
 
@@ -174,8 +175,30 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
                         String user_id=mAuth.getCurrentUser().getUid();
                         mDatabase=FirebaseDatabase.getInstance().getReference().child("users").child(user_id);
 
-                        UserInfo user_info = new UserInfo(infoEmail,expert1,expert2,expert3,interest1,interest2,interest3,interest4);
+
+                        HashMap user_info= new HashMap();
+                        user_info.put("Email",infoEmail);
+                        user_info.put("Favorite","");
+                        user_info.put("Expert","");
+                        user_info.put("Interest","");
+                        user_info.put("RecentView","");
+                        user_info.put("Comment","");
+                        user_info.put("profileImageUrl","nothing");
                         mDatabase.setValue(user_info);
+                        DatabaseReference createExpert=mDatabase.child("Expert");
+                        HashMap userExpert= new HashMap();
+                        userExpert.put("Expert1",expert1);
+                        userExpert.put("Expert2",expert2);
+                        userExpert.put("Expert3",expert3);
+                        createExpert.setValue(userExpert);
+                        DatabaseReference createInterest=mDatabase.child("Interest");
+                        HashMap userInterest= new HashMap();
+                        userInterest.put("Interest1",interest1);
+                        userInterest.put("Interest2",interest2);
+                        userInterest.put("Interest3",interest3);
+                        userInterest.put("Interest4",interest4);
+                        createInterest.setValue(userInterest);
+
                         finish();
                         startActivity(new Intent(getApplicationContext(),LogIn.class));
                         mAuth.signOut();

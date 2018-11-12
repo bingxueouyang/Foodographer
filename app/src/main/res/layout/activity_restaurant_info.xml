@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RestaurantInfo"
+    tools:ignore="MissingDefaultResource">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--restaurant image, name, rating, tags, location-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="5dp">
+
+                    <ImageView
+                        android:id="@+id/rest_IMG"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/food" />
+
+                    <TextView
+                        android:id="@+id/rest_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Bettys Noodle"
+                        android:layout_marginTop="10dp"
+                        android:textSize="24sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RatingBar
+                            android:id="@+id/rest_rating"
+                            style="?attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:max="5"
+                            android:rating="1" />
+
+                        <TextView
+                            android:id="@+id/rest_reviews"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="15 Reviews"
+                            android:textAlignment="textStart" />
+
+                        <Button
+                            android:id="@+id/likeButton"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="150dp"
+                            android:background="@drawable/like_icon" />
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/rest_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Location"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <!--restaurant open time-->
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp">
+
+                    <TextView
+                        android:id="@+id/openTime"
+                        android:layout_width="260dp"
+                        android:layout_height="wrap_content"
+                        android:text="close opening time today" />
+
+                    <Button
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/enter_icon" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <!--write reviews for restaurant-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RatingBar
+                        android:id="@+id/user_rating"
+                        style="@style/Widget.AppCompat.RatingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:max="5" />
+
+                    <TextView
+                        android:id="@+id/saveRating_Btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_gravity="center"
+                        android:clickable="true"
+                        android:text="Write Review"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <!--get directions and call-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:columnCount="4"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/get_direct"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/direction_icon"
+                        android:clickable="true" />
+
+                    <TextView
+                        android:id="@+id/get_direction"
+                        android:layout_width="36dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:text="Get Direction" />
+
+                    <Button
+                        android:id="@+id/call"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/call_icon"
+                        android:clickable="true" />
+
+                    <TextView
+                        android:id="@+id/call_rest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:text="Call" />
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Amentities-->
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/openTag"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AMENITIES"
+                        android:textSize="14dp"
+                        android:layout_marginTop="10dp" />
+
+                    <LinearLayout
+                        android:id="@+id/rest_tags"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="5dp">
+
+                        <!--outdoor seating-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp">
+
+                            <android.support.v7.widget.AppCompatImageView
+                                android:id="@+id/outdoor_seating_icon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/outdoor_seating_icon" />
+
+                            <TextView
+                                android:id="@+id/outdoor_seating"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:paddingLeft="30dp"
+                                android:text="Outdoor Seating"
+                                android:textSize="14sp" />
+
+
+                        </LinearLayout>
+
+                        <!--casual ambience-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp">
+
+                            <android.support.v7.widget.AppCompatImageView
+                                android:id="@+id/casual_ambience_icon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:clickable="true"
+                                android:src="@drawable/casual_ambience_icon" />
+
+                            <TextView
+                                android:id="@+id/casual_ambience"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:paddingLeft="30dp"
+                                android:text="Casual Ambience"
+                                android:textSize="14sp" />
+
+
+                        </LinearLayout>
+
+                        <!--noise-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp">
+
+                            <android.support.v7.widget.AppCompatImageView
+                                android:id="@+id/moderate_noise_icon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:clickable="true"
+                                android:src="@drawable/voice_icon" />
+
+                            <TextView
+                                android:id="@+id/moderate_noise"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:paddingLeft="30dp"
+                                android:text="Moderate Noise"
+                                android:textSize="14sp" />
+
+
+                        </LinearLayout>
+
+                        <!--people-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp">
+
+                            <android.support.v7.widget.AppCompatImageView
+                                android:id="@+id/good_for_groups_icon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:clickable="true"
+                                android:src="@drawable/people_icon" />
+
+                            <TextView
+                                android:id="@+id/good_for_groups"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:paddingLeft="30dp"
+                                android:text="Good For Groups"
+                                android:textSize="14sp" />
+
+
+                        </LinearLayout>
+
+                        <!--parking-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp">
+
+                            <android.support.v7.widget.AppCompatImageView
+                                android:id="@+id/parking_icon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:clickable="true"
+                                android:src="@drawable/parking_icon" />
+
+                            <TextView
+                                android:id="@+id/parking"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:paddingLeft="30dp"
+                                android:text="Provide Parking Slot"
+                                android:textSize="14sp" />
+
+
+                        </LinearLayout>
+
+                        <!--WiFi-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp">
+
+                            <android.support.v7.widget.AppCompatImageView
+                                android:id="@+id/wifi_icon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:clickable="true"
+                                android:src="@drawable/wifi_icon" />
+
+                            <TextView
+                                android:id="@+id/wifi"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="30dp"
+                                android:text="Free WiFi"
+                                android:textSize="14sp"
+                                android:clickable="true" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Reviews-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="60dp"/>
+            </android.support.v7.widget.CardView>
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

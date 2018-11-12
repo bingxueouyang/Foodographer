@@ -33,6 +33,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.UploadTask;
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import java.util.Date;
 import java.util.HashMap;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -58,6 +60,7 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
     final static int galleryPic=1;
     private StorageReference storeUserImage;
     private Uri resultUri;
+    private String grab_message;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,26 +136,43 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
         final String interest4 = changeInterestSpinner4.getSelectedItem().toString().trim();
 
 
-
+        DatabaseReference tempRefExpert=profileRefer.child("Expert");
         HashMap usermap= new HashMap();
-        usermap.put("expert1",expert1);
-        usermap.put("expert2",expert2);
-        usermap.put("expert3",expert3);
-        usermap.put("interest1", interest1);
-        usermap.put("interest2", interest2);
-        usermap.put("interest3", interest3);
-        usermap.put("interest4", interest4);
-        profileRefer.updateChildren(usermap).addOnCompleteListener(new OnCompleteListener() {
+        usermap.put("Expert1",expert1);
+        usermap.put("Expert2",expert2);
+        usermap.put("Expert3",expert3);
+
+        tempRefExpert.updateChildren(usermap).addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
                     if(task.isSuccessful()){
-                        Toast.makeText( account_setting.this,"Update account information successfully",Toast.LENGTH_SHORT).show();
+                        Toast.makeText( account_setting.this,"Update  expert successfully",Toast.LENGTH_SHORT).show();
                         finish();
                         startActivity(new Intent(getApplicationContext(),UserProfile.class));
                     }else{
-                        String grab_message=task.getException().getMessage();
+                        grab_message=task.getException().getMessage();
                         Toast.makeText( account_setting.this,"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
                     }
+
+            }
+        });
+        DatabaseReference tempRefInterest=profileRefer.child("Interest");
+        HashMap userMapInterest= new HashMap();
+        userMapInterest.put("Interest1", interest1);
+        userMapInterest.put("Interest2", interest2);
+        userMapInterest.put("Interest3", interest3);
+        userMapInterest.put("Interest4", interest4);
+        tempRefInterest.updateChildren(userMapInterest).addOnCompleteListener(new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                if(task.isSuccessful()){
+                    Toast.makeText( account_setting.this,"Update account successfully",Toast.LENGTH_SHORT).show();
+                    finish();
+                    startActivity(new Intent(getApplicationContext(),UserProfile.class));
+                }else{
+                    grab_message=task.getException().getMessage();
+                    Toast.makeText( account_setting.this,"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
