@@ -15,6 +15,7 @@ public class Restaurant implements Parcelable{
         this.location = location;
     }
     public Restaurant(Parcel in){
+        //TODO change string length and add parameters
         String[] data = new String[4];
         in.readStringArray(data);
         this.name=data[0];
@@ -41,7 +42,7 @@ public class Restaurant implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         // TODO Auto-generated method stub
-
+        //TODO add more parameters
         dest.writeStringArray(new String[]{this.name,this.IMGURL,String.valueOf(this.rating), this.location});
     }
 

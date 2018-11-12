@@ -149,6 +149,7 @@
                         android:layout_marginLeft="50dp"
                         android:layout_gravity="center"
                         android:clickable="true"
+                        android:onClick="postReview"
                         android:text="Write Review"
                         android:textSize="14sp" />
 

@@ -10,6 +10,8 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.yelp.fusion.client.connection.YelpFusionApi;
 import com.yelp.fusion.client.connection.YelpFusionApiFactory;
 import com.yelp.fusion.client.models.Business;
@@ -94,9 +96,11 @@ public class SearchResult extends AppCompatActivity {
             //generate an array list of result restaurants(businesses)
             businesses = searchResponse.getBusinesses();
 
+
             if (businesses.isEmpty()) {
                 Log.i("yelp", "result business array is empty!!!");
             }
+
 
             RecyclerResultList adapter = new RecyclerResultList(businesses);
             RecyclerView myView =  (RecyclerView)findViewById(R.id.recyclerview);

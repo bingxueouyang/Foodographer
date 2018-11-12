@@ -9,11 +9,14 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.ImageView;
 
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class RecyclerReviewList extends RecyclerView.Adapter<RecyclerReviewList.MyViewHolder> {
     private List<Review> review_list;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
 
     public RecyclerReviewList (ArrayList<Review> review_list){
         this.review_list = review_list;
@@ -22,17 +25,22 @@ public class RecyclerReviewList extends RecyclerView.Adapter<RecyclerReviewList.
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View listItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.review_card, parent, false);
-
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
         return new MyViewHolder(listItem);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
+        holder.setIsRecyclable(false);
+        if(firebaseAuth != null){
+            firebaseDatabase.getReference();
+        }
         Review review = review_list.get(position);
         holder.username.setText(review.getUsername());
         holder.restRating.setRating((float)review.getRating());
-        holder.review_time.setText(review.getTime());
+        holder.review_time.setText((CharSequence) review.getTime());
         holder.content.setText(review.getContent());
         new DownloadImageTask(holder.userIMG).execute(review.getIMGURL());
     }
