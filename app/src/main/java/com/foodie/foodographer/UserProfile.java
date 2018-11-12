@@ -29,6 +29,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.bumptech.glide.Glide;
+import android.util.Log;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -38,6 +40,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     private TextView userEmail_textview;
     private Button settingBut;
     private DatabaseReference profileRefer;
+    private DatabaseReference profileRefer2;
+    private DatabaseReference profileRefer3;
     private String currentUserID;
     private CircleImageView userImageView;
     private String totalExpertise;
@@ -55,7 +59,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         }
         currentUserID=mAuth3.getCurrentUser().getUid();
         profileRefer=FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
-        //FirebaseUser firebaseUser=mAuth3.getCurrentUser();
+        FirebaseUser firebaseUser=mAuth3.getCurrentUser();
         //userEmail_textview= (TextView) findViewById(R.id.username);
         //userEmail_textview.setText(firebaseUser.getEmail());
         signout= (Button) findViewById(R.id.logoutButton);
@@ -65,9 +69,12 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         userImageView =(CircleImageView) findViewById(R.id.profile_image);
         expertiseText=(TextView) findViewById(R.id.perosonalExpertise);
         String check="betty noddle";
-        HashMap addRecentView = new HashMap();
-        addRecentView.put("recentViews", check);
-        profileRefer.updateChildren(addRecentView);
+        HashMap addNewItemForUser = new HashMap();
+        //addNewItemForUser.put("email",firebaseUser.getEmail());
+        addNewItemForUser.put("recentViews","");
+        addNewItemForUser.put("profileImageUrl","");
+        addNewItemForUser.put("favoriteRestaurants","");
+        profileRefer.updateChildren(addNewItemForUser);
         profileRefer.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange( DataSnapshot dataSnapshot) {
@@ -76,7 +83,10 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
                 String secondExpertise=dataSnapshot.child("expert2").getValue().toString();
                 String thirdExpertise=dataSnapshot.child("expert3").getValue().toString();
                 totalExpertise=firstExpertise+", "+secondExpertise+", "+thirdExpertise;
-                Picasso.with(UserProfile.this).load(imageOfUser).into(userImageView);
+                if(imageOfUser != ""){
+                    Picasso.with(UserProfile.this).load(imageOfUser).into(userImageView);
+                }
+                //Picasso.with(UserProfile.this).load(imageOfUser).into(userImageView);
                 expertiseText.setText(totalExpertise);
             }
 
@@ -85,6 +95,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
             }
         });
+
+
     }
 
     @Override

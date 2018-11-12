@@ -81,7 +81,7 @@ public class Homepage extends AppCompatActivity {
 
     public void gotoProfile(MenuItem item){
 
-        startActivity(new Intent(this, UserProfile.class));
+        startActivity(new Intent(this, LogIn.class));
     }
 
 }
