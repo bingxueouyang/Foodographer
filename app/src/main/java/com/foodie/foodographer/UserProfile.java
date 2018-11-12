@@ -76,13 +76,18 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
                 String firstExpertise=dataSnapshot.child("Expert").child("Expert1").getValue().toString();
                 String secondExpertise=dataSnapshot.child("Expert").child("Expert2").getValue().toString();
                 String thirdExpertise=dataSnapshot.child("Expert").child("Expert3").getValue().toString();
+                String empty="";
                 totalExpertise=firstExpertise+", "+secondExpertise+", "+thirdExpertise;
                 //Log.d("check",imageOfUser+" checking right");
-                if(imageOfUser != "nothing"){
-                    Picasso.with(UserProfile.this).load(imageOfUser).into(userImageView);
-                }else{
-
+                if(imageOfUser == "nothing"){
+                    Picasso.with(UserProfile.this).load(imageOfUser).placeholder(R.drawable.profile).error(R.drawable.profile).into(userImageView);
                 }
+
+                if(imageOfUser != "nothing"){
+                    Picasso.with(UserProfile.this).load(imageOfUser).placeholder(R.drawable.profile).error(R.drawable.profile).into(userImageView);
+                }
+
+
 
                 expertiseText.setText(totalExpertise);
             }
