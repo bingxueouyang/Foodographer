@@ -26,13 +26,16 @@ import retrofit2.Response;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.LinearLayoutManager;
 
-public class SearchResult extends AppCompatActivity {
+import java.io.Serializable;
+
+public class SearchResult extends AppCompatActivity implements Serializable{
 
     YelpFusionApiFactory yelpFusionApiFactory;
     YelpFusionApi yelpFusionApi;
     String this_name;
     String this_location;
     ArrayList<Business> businesses;
+    ArrayList<Restaurant> restaurants;
     ListView list;
     private LinearLayout search_bar;
 
@@ -91,14 +94,32 @@ public class SearchResult extends AppCompatActivity {
             if (totalNumberOfResult == 0) {
                 Toast.makeText(SearchResult.this, "Sorry, no result was found.", Toast.LENGTH_SHORT).show();
             }
-            //generate an array list of result restaurants(businesses)
             businesses = searchResponse.getBusinesses();
+            //generate an array list of result restaurants(businesses)
 
             if (businesses.isEmpty()) {
                 Log.i("yelp", "result business array is empty!!!");
             }
 
-            RecyclerResultList adapter = new RecyclerResultList(businesses);
+            restaurants = new ArrayList<Restaurant>(businesses.size());
+            for(int i=0; i< businesses.size(); i++){
+                restaurants.add(new Restaurant(businesses.get(i)));
+            }
+
+
+
+            // write your filter algorithm here (sort and delete businesses objects)
+            // https://stackoverflow.com/questions/16856554/filtering-an-arraylist-using-an-objects-field
+            // https://stackoverflow.com/questions/23262445/sorting-and-filtering-listview-with-custom-array-adapter-with-two-textview
+
+            String expert = getIntent().getStringExtra("expert");
+            String tasteORservice = getIntent().getStringExtra("tasteORservice");
+            String rating = getIntent().getStringExtra("rating");
+            String price = getIntent().getStringExtra("price");
+            String distance = getIntent().getStringExtra("distance");
+
+
+            RecyclerResultList adapter = new RecyclerResultList(restaurants);
             RecyclerView myView =  (RecyclerView)findViewById(R.id.recyclerview);
             myView.setHasFixedSize(true);
             myView.setAdapter(adapter);
