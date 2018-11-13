@@ -69,7 +69,6 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
 
         mAuthSetting = FirebaseAuth.getInstance();
 
-        //Rest_ID = getIntent().getStringExtra("myRest");
         Restaurant myRest = getIntent().getParcelableExtra("myRest");
 
         restName = findViewById(R.id.rest_name);
@@ -175,18 +174,33 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
     }
 
     private void saveReviewToDB(String userReview){
+        final String review = userReview;
         currentUserID=mAuthSetting.getCurrentUser().getUid();
+
         userRef = FirebaseDatabase.getInstance().getReference("users").child(currentUserID).child("comments").child(Rest_ID);
-        String uid = currentUserID;
-        String email = mAuthSetting.getCurrentUser().getEmail();
-        String emailUserName = email.substring(0,email.indexOf('@'));
-        Review testReview = new Review(emailUserName,"https://upload.wikimedia.org/wikipedia/en/2/21/Web_of_Spider-Man_Vol_1_129-1.png", (float) 3.0, "3 months ago", userReview);
-        HashMap<String, Object> restaurantParams = new HashMap<>();
-        restaurantParams.put(uid, testReview);
-        commentRef.updateChildren(restaurantParams);
-        HashMap<String, Object> userParams = new HashMap<>();
-        userParams.put("content", userReview);
-        userRef.updateChildren(userParams);
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // Log.i("snapshot", "Inside onDataChange!!!");
+                String email = mAuthSetting.getCurrentUser().getEmail();
+                String emailUserName = email.substring(0,email.indexOf('@'));
+                String userIMGURL = dataSnapshot.child("profileImageUrl").getValue().toString();
+                Review testReview = new Review(emailUserName, userIMGURL, (float) 3.0, "3 months ago", review);
+                HashMap<String, Object> restaurantParams = new HashMap<>();
+                restaurantParams.put(currentUserID, testReview);
+                commentRef.updateChildren(restaurantParams);
+                HashMap<String, Object> userParams = new HashMap<>();
+                userParams.put("content", review);
+                userRef.updateChildren(userParams);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
 }
