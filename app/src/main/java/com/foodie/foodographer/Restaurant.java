@@ -11,6 +11,15 @@ public class Restaurant implements Parcelable{
     private String IMGURL;
     private float distance;
     private float rating;
+    private float chineseRating;
+    private float americanRating;
+    private float italianRating;
+    private float frenchRating;
+    private float indianRating;
+    private float japaneseRating;
+    private float koreanRating;
+    private float vietnameseRating;
+    //private float expertRating; // rating from user expert in this type of rest if we're running out of time
     private String location;
     //private ArrayList<Review> reviews;
 
@@ -52,6 +61,68 @@ public class Restaurant implements Parcelable{
     }
     public float getRating(){
         return this.rating;
+    }
+
+
+
+    public float getChineseRating() {
+        return chineseRating;
+    }
+    public float getAmericanRating() {
+        return americanRating;
+    }
+    public float getItalianRating(){
+        return italianRating;
+    }
+
+    public float getJapaneseRating() {
+        return japaneseRating;
+    }
+
+    public float getKoreanRating() {
+        return koreanRating;
+    }
+
+    public float getFrenchRating() {
+        return frenchRating;
+    }
+
+    public float getIndianRating() {
+        return indianRating;
+    }
+
+    public float getVietnameseRating() {
+        return vietnameseRating;
+    }
+
+    public void setChineseRating(float chineseRating){this.chineseRating = chineseRating;}
+
+    public void setAmericanRating(float americanRating) {
+        this.americanRating = americanRating;
+    }
+
+    public void setFrenchRating(float frenchRating) {
+        this.frenchRating = frenchRating;
+    }
+
+    public void setIndianRating(float indianRating) {
+        this.indianRating = indianRating;
+    }
+
+    public void setItalianRating(float italianRating) {
+        this.italianRating = italianRating;
+    }
+
+    public void setJapaneseRating(float japaneseRating) {
+        this.japaneseRating = japaneseRating;
+    }
+
+    public void setKoreanRating(float koreanRating) {
+        this.koreanRating = koreanRating;
+    }
+
+    public void setVietnameseRating(float vietnameseRating) {
+        this.vietnameseRating = vietnameseRating;
     }
 
     public String getLocation() {

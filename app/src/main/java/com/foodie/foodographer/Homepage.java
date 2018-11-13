@@ -15,6 +15,8 @@ import android.widget.SearchView;
 import java.util.ArrayList;
 import android.view.View.OnClickListener;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class Homepage extends AppCompatActivity {
     private LinearLayout search_bar;
@@ -42,6 +44,7 @@ public class Homepage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 

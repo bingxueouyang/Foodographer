@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.LinearLayout;
 
+import com.foodie.foodographer.PostReviewActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -49,27 +50,45 @@ import android.widget.RatingBar;
 import android.widget.ImageView;
 import android.support.v7.widget.CardView;
 
-public class RestaurantInfo extends AppCompatActivity implements View.OnClickListener {
+public class RestaurantInfo extends AppCompatActivity implements View.OnClickListener{
+
     private CardView amenties;
     private TextView restName;
     private LinearLayout restTags;
+    private Button favoriteButton;
+    private FirebaseAuth mAuthSetting;
     private DatabaseReference commentRef;
     private DatabaseReference userRef;
-    private FirebaseAuth mAuthSetting;
     private String currentUserID;
-    private RecyclerView myView;
+    private DatabaseReference restReference;
+    private int sizeCounter;
+    private Restaurant myRest;
+    private DatabaseReference userRef2;
     private ArrayList<Review> reviewArrayList;
+    private RecyclerView myView;
     String Rest_ID;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_info);
+        mAuthSetting= FirebaseAuth.getInstance();
 
-        mAuthSetting = FirebaseAuth.getInstance();
+        restTags = findViewById(R.id.rest_tags);
+        restTags.setVisibility(View.GONE);
 
-        Restaurant myRest = getIntent().getParcelableExtra("myRest");
+        amenties = findViewById(R.id.openTag);
+        amenties.setOnClickListener(this);
+        myRest = getIntent().getParcelableExtra("myRest");
+        favoriteButton =(Button) findViewById(R.id.likeButton);
+
+        if(mAuthSetting.getCurrentUser()!=null) {
+            currentUserID = mAuthSetting.getCurrentUser().getUid();
+            userRef = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
+            favoriteButton.setOnClickListener(this);
+        }
+        Rest_ID = myRest.getId();
+
+
 
         restName = findViewById(R.id.rest_name);
         restName.setText(myRest.getName());
@@ -82,11 +101,7 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
 
         ImageView restIMG = findViewById(R.id.rest_IMG);
         new DownloadImageTask(restIMG).execute(myRest.getIMGURL());
-
-        Rest_ID = myRest.getId();
-
         commentRef = FirebaseDatabase.getInstance().getReference("Restaurants").child(Rest_ID).child("comments");
-
         myView = (RecyclerView) findViewById(R.id.recyclerview);
         reviewArrayList = new ArrayList<>();
 
@@ -110,13 +125,6 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        restTags = findViewById(R.id.rest_tags);
-        restTags.setVisibility(View.GONE);
-
-        amenties = findViewById(R.id.openTag);
-        amenties.setOnClickListener(this);
-
-
 //
 //        ArrayList<Review> reviews = new ArrayList<Review>();
 //
@@ -137,28 +145,12 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
         myView.setLayoutManager(llm);
     }
 
-    @Override
-    public void onClick(View view) {
-        if (view == amenties) {
-            if (restTags.getVisibility() != View.VISIBLE) {
-                restTags.setVisibility(View.VISIBLE);
-            } else {
-                restTags.setVisibility(View.GONE);
-            }
-        }
-    }
 
     @Override
     protected void onStart() {
         super.onStart();
 
     }
-
-    /**
-     * Go to Post Review Page and wait for user's input
-     *
-     * @param view
-     */
     public void postReview(View view) {
         Intent intent = new Intent(RestaurantInfo.this, PostReviewActivity.class);
         startActivityForResult(intent, 21);
@@ -172,13 +164,12 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
             saveReviewToDB(userReview);
         }
     }
-
     private void saveReviewToDB(String userReview){
         final String review = userReview;
-        currentUserID=mAuthSetting.getCurrentUser().getUid();
-
-        userRef = FirebaseDatabase.getInstance().getReference("users").child(currentUserID).child("comments").child(Rest_ID);
-        userRef.addValueEventListener(new ValueEventListener() {
+        //currentUserID=mAuthSetting.getCurrentUser().getUid();
+        // userRef = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
+        userRef2=userRef.child("comments").child(Rest_ID);
+        userRef2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Log.i("snapshot", "Inside onDataChange!!!");
@@ -191,7 +182,7 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
                 commentRef.updateChildren(restaurantParams);
                 HashMap<String, Object> userParams = new HashMap<>();
                 userParams.put("content", review);
-                userRef.updateChildren(userParams);
+                userRef2.updateChildren(userParams);
             }
 
             @Override
@@ -202,5 +193,46 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
 
 
     }
+    private void updateUserFavResteraurant(){
+
+        restReference = userRef.child("Favorite");
+        final String grabUserFavoriteRest= myRest.getName();
+        HashMap temp =new HashMap();
+
+        temp.put(myRest.getId(),grabUserFavoriteRest);
+        //sizeCounter++;
+        restReference.updateChildren(temp).addOnCompleteListener(new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                if(task.isSuccessful()){
+                    Toast.makeText( RestaurantInfo.this,"Update your favorite restaurant successfully",Toast.LENGTH_SHORT).show();
+                }else{
+                    String grab_message=task.getException().getMessage();
+                    Toast.makeText( RestaurantInfo.this,"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
+
+    }
+    @Override
+    public void onClick(View view) {
+        if (view == amenties) {
+            if (restTags.getVisibility() != View.VISIBLE) {
+                restTags.setVisibility(View.VISIBLE);
+            }
+            else{
+                restTags.setVisibility(View.GONE);
+            }
+        }
+        if(view == favoriteButton){
+
+            updateUserFavResteraurant();
+        }
+
+    }
+
 
 }
