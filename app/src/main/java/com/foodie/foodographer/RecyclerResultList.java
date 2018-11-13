@@ -38,6 +38,7 @@ public class RecyclerResultList extends RecyclerView.Adapter<RecyclerResultList.
         final String restName = restaurant.getName();
         final String restURL = restaurant.getImageUrl();
         final float restRating = (float)restaurant.getRating();
+        final String restDistance = String.format("%.2f",(restaurant.getDistance()*0.00062137))+"mi";
 
         String address;
         if(restaurant.getLocation().getAddress2()!=null&&restaurant.getLocation().getAddress2()!="") {
@@ -59,6 +60,7 @@ public class RecyclerResultList extends RecyclerView.Adapter<RecyclerResultList.
         holder.restName.setText(restName);
         holder.restRating.setRating(restRating);
         holder.restLocation.setText(restLocation);
+        holder.restDistance.setText(restDistance);
         new DownloadImageTask(holder.restIMG).execute(restURL);
 
         // go to RestaurantInfo page on click
@@ -83,12 +85,14 @@ public class RecyclerResultList extends RecyclerView.Adapter<RecyclerResultList.
         private RatingBar restRating;
         private TextView restLocation;
         private ImageView restIMG;
+        private TextView restDistance;
         public MyViewHolder(View itemView) {
             super(itemView);
             restName = (TextView) itemView.findViewById(R.id.rest_name);
             restRating = (RatingBar) itemView.findViewById(R.id.rest_rating);
             restLocation = (TextView) itemView.findViewById(R.id.rest_location);
             restIMG = (ImageView) itemView.findViewById(R.id.rest_IMG);
+            restDistance = (TextView)itemView.findViewById(R.id.rest_distance);
         }
     }
 }

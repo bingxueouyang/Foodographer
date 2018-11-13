@@ -147,4 +147,14 @@ public class SearchResult extends AppCompatActivity {
 
         startActivity(new Intent(this,SearchBar.class));
     }
+
+    public void filterList(){
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        ArrayList<Business> newList = new ArrayList<Business>();
+        if(intent.hasExtra("expert")){
+            String ex = bundle.getString("expert");
+
+        }
+    }
 }
