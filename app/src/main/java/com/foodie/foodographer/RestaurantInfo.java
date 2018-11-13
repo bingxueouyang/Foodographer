@@ -169,13 +169,14 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
         //currentUserID=mAuthSetting.getCurrentUser().getUid();
         // userRef = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
         userRef2=userRef.child("comments").child(Rest_ID);
-        userRef2.addValueEventListener(new ValueEventListener() {
+        userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Log.i("snapshot", "Inside onDataChange!!!");
                 String email = mAuthSetting.getCurrentUser().getEmail();
                 String emailUserName = email.substring(0,email.indexOf('@'));
                 String userIMGURL = dataSnapshot.child("profileImageUrl").getValue().toString();
+                Log.i("database", "image Url is:" + userIMGURL);
                 Review testReview = new Review(emailUserName, userIMGURL, (float) 3.0, "3 months ago", review);
                 HashMap<String, Object> restaurantParams = new HashMap<>();
                 restaurantParams.put(currentUserID, testReview);
@@ -198,9 +199,10 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
         restReference = userRef.child("Favorite");
         final String grabUserFavoriteRest= myRest.getName();
         HashMap temp =new HashMap();
+        //String temp2=restReference.push().getKey();
+        //restReference.child(temp2).setValue(myRest);
 
         temp.put(myRest.getId(),grabUserFavoriteRest);
-        //sizeCounter++;
         restReference.updateChildren(temp).addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
@@ -213,6 +215,9 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
 
             }
         });
+
+        //sizeCounter++;
+
 
 
 
