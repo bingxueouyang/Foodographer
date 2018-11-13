@@ -1,5 +1,7 @@
 package com.foodie.foodographer;
 
+import java.util.Date;
+
 public class Review {
     private String username;
     private String userIMGURL;
@@ -7,9 +9,10 @@ public class Review {
     private String time;
     private String content;
 
-    public Review(String userIMGURL, String username, Float rating, String time, String content) {
-        this.userIMGURL = userIMGURL;
+    public Review(){}
+    public Review(String username, String userIMGURL, Float rating, String time, String content) {
         this.username = username;
+        this.userIMGURL = userIMGURL;
         this.rating = rating;
         this.time = time;
         this.content = content;

@@ -40,13 +40,14 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     private TextView userEmail_textview;
     private Button settingBut;
     private DatabaseReference profileRefer;
-    private DatabaseReference profileRefer2;
-    private DatabaseReference profileRefer3;
     private String currentUserID;
     private CircleImageView userImageView;
     private String totalExpertise;
     private TextView expertiseText;
-
+    private TextView mostFavRest;
+    private DatabaseReference profileRestRefer;
+    private int checkSize=0;
+    private  String userFavRest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,27 +69,28 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         settingBut.setOnClickListener(this);
         userImageView =(CircleImageView) findViewById(R.id.profile_image);
         expertiseText=(TextView) findViewById(R.id.perosonalExpertise);
+        mostFavRest=(TextView) findViewById(R.id.favoriteRest);
 
         profileRefer.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange( DataSnapshot dataSnapshot) {
+
                 String imageOfUser=dataSnapshot.child("profileImageUrl").getValue().toString();
+                Log.d("checking",dataSnapshot.child("profileImageUrl").getValue().toString()+"checking id");
                 String firstExpertise=dataSnapshot.child("Expert").child("Expert1").getValue().toString();
                 String secondExpertise=dataSnapshot.child("Expert").child("Expert2").getValue().toString();
                 String thirdExpertise=dataSnapshot.child("Expert").child("Expert3").getValue().toString();
-                String empty="";
+
                 totalExpertise=firstExpertise+", "+secondExpertise+", "+thirdExpertise;
                 //Log.d("check",imageOfUser+" checking right");
-                if(imageOfUser == "nothing"){
-                    Picasso.with(UserProfile.this).load(imageOfUser).placeholder(R.drawable.profile).error(R.drawable.profile).into(userImageView);
-                }
+                //if(imageOfUser == "nothing"){
+                    //Picasso.with(UserProfile.this).load(imageOfUser).placeholder(R.drawable.profile).error(R.drawable.profile).into(userImageView);
+                //}
 
-                if(imageOfUser != "nothing"){
-                    Picasso.with(UserProfile.this).load(imageOfUser).placeholder(R.drawable.profile).error(R.drawable.profile).into(userImageView);
-                }
-
-
-
+                //if(imageOfUser != "nothing"){
+                    //Picasso.with(UserProfile.this).load(imageOfUser).placeholder(R.drawable.profile).error(R.drawable.profile).into(userImageView);
+                //}
+                Picasso.with(UserProfile.this).load(imageOfUser).into(userImageView);
                 expertiseText.setText(totalExpertise);
             }
 
@@ -97,6 +99,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
             }
         });
+
 
 
     }

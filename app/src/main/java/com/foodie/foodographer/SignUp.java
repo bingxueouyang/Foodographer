@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.LinearLayout;
-
+import android.net.Uri;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -183,7 +183,8 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
                         user_info.put("Interest","");
                         user_info.put("RecentView","");
                         user_info.put("Comment","");
-                        user_info.put("profileImageUrl","nothing");
+                        //Uri hold = "http://img.icons8.com/color/1600/circled-user-male-skin-type-1-2.png";
+                        user_info.put("profileImageUrl","http://img.icons8.com/color/1600/circled-user-male-skin-type-1-2.png");
                         mDatabase.setValue(user_info);
                         DatabaseReference createExpert=mDatabase.child("Expert");
                         HashMap userExpert= new HashMap();

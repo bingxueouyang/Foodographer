@@ -38,12 +38,12 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mAuth2=FirebaseAuth.getInstance();
-        //if(mAuth2.getCurrentUser()!= null){
+        if(mAuth2.getCurrentUser()!= null){
             //go into to profile page
-            //finish();
+            finish();
 
-            //startActivity(new Intent(getApplicationContext(), UserProfile.class));
-        //}
+            startActivity(new Intent(getApplicationContext(), UserProfile.class));
+        }
         progressDialog2= new ProgressDialog(this);
         user_input_email = (EditText) findViewById(R.id.user_enter_email);
         user_input_password = (EditText) findViewById(R.id.user_enter_password);
