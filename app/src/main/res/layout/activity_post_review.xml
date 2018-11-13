@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PostReviewActivity">
+
+    <EditText
+        android:id="@+id/ReviewText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="top|left"
+        android:hint="Write your review here"
+        android:inputType="textMultiLine"
+        android:scrollbars="vertical"
+        android:lines="10"
+        android:scrollHorizontally="false"
+        android:overScrollMode="always"
+        android:singleLine="false" />
+
+    <Button
+        android:id="@+id/postButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="submitReview"
+        android:text="Post" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="cancelReview"
+        android:text="Cancel" />
+</LinearLayout>

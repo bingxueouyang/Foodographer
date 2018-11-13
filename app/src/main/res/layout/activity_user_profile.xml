@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -22,23 +22,26 @@
                 android:id="@+id/profile_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
                 android:src="@drawable/profile"
                 app:civ_border_color="#FF000000"
                 app:civ_border_width="2dp" />
 
             <TextView
                 android:id="@+id/username"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
                 android:text="UserName"
                 android:textAlignment="textStart"
                 android:textSize="18sp"
                 tools:ignore="RtlCompat" />
         </LinearLayout>
+
 
         <Button
             android:id="@+id/setting"
@@ -46,7 +49,6 @@
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="170dp"
             android:text="Setting"
             android:textAllCaps="false"
             android:textSize="10sp"
@@ -191,20 +193,22 @@
                         android:src="@drawable/favorite_icon" />
 
                     <TextView
+                        android:id="@+id/favoriteRest"
                         android:layout_width="240dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
                         android:layout_gravity="center"
+                        android:layout_margin="10dp"
                         android:text="Favorites"
                         android:textAlignment="textStart"
                         android:textSize="18sp"
                         tools:ignore="RtlCompat" />
 
                     <Button
+                        android:id="@+id/listFavor"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_margin="10dp"
                         android:layout_gravity="center"
+                        android:layout_margin="10dp"
                         android:background="@drawable/enter_icon" />
 
                 </LinearLayout>
@@ -231,20 +235,22 @@
                         android:src="@drawable/recently_reviewed_icon" />
 
                     <TextView
+                        android:id="@+id/recentViewRest"
                         android:layout_width="240dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
                         android:layout_gravity="center"
+                        android:layout_margin="10dp"
                         android:text="Recently Viewd"
                         android:textAlignment="textStart"
                         android:textSize="18sp"
                         tools:ignore="RtlCompat" />
 
                     <Button
+                        android:id="@+id/listView"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_margin="10dp"
                         android:layout_gravity="center"
+                        android:layout_margin="10dp"
                         android:background="@drawable/enter_icon" />
 
                 </LinearLayout>
