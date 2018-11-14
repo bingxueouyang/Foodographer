@@ -14,7 +14,7 @@ import com.yelp.fusion.client.models.Hour;
 
  Description:
  Restaurant.java is used to store our custom Restaurant obj in Firebase and display in RecyclerResultList
- The storing action is triggered by the first time it's clicked from SearchResult
+ The storing action is triggered by the first time it's searched by user
  but reading Restaurant obj is not from here, you should read from Firebase by onDataChange
  Then use the methods inside this class
  */
