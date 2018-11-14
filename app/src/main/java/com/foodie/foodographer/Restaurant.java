@@ -49,6 +49,7 @@ public class Restaurant implements Parcelable{
         this.phone = p.getPhone();
         this.displayPhone = p.getDisplayPhone();
         this.price = p.getPrice();
+        expertCount = new HashMap<>();
         expertCount.put("chinese", 0);
         expertCount.put("american", 0);
         expertCount.put("italian", 0);
@@ -58,6 +59,7 @@ public class Restaurant implements Parcelable{
         expertCount.put("korean", 0);
         expertCount.put("vietnamese", 0);
 
+        expertRating = new HashMap<>();
         expertRating.put("chinese", 0.0f);
         expertRating.put("american", 0.0f);
         expertRating.put("italian", 0.0f);
