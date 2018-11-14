@@ -15,7 +15,6 @@ import android.graphics.Color;
 public class Filter extends AppCompatActivity implements View.OnClickListener{
     private Button compBut;
     private Spinner expertSpinner;
-    private Spinner ratingSpinner;
     private RatingBar ratingBar;
     private Spinner distanceSpinner;
     private Button price_$;
@@ -52,12 +51,6 @@ public class Filter extends AppCompatActivity implements View.OnClickListener{
         expertAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         expertSpinner.setAdapter(expertAdapter);
 
-        ratingSpinner = (Spinner) findViewById(R.id.rating_spinner);
-        ArrayAdapter<String> ratingAdapter = new ArrayAdapter<String>(Filter.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.rating_array));
-        ratingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ratingSpinner.setAdapter(ratingAdapter);
-
         distanceSpinner = (Spinner) findViewById(R.id.distance_spinner);
         ArrayAdapter<String> distanceAdapter = new ArrayAdapter<String>(Filter.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.distance_array));
@@ -74,14 +67,12 @@ public class Filter extends AppCompatActivity implements View.OnClickListener{
 
     private void complete(){
         final String expert = expertSpinner.getSelectedItem().toString().trim();
-        final String tasteORservice = ratingSpinner.getSelectedItem().toString().trim();
         final String distance = distanceSpinner.getSelectedItem().toString().trim();
         final String rating = Float.toString(ratingBar.getRating());
         final String price = priceSelect;
 
         Intent searchResult = new Intent(this, SearchResult.class);
         searchResult.putExtra("expert", expert);
-        searchResult.putExtra("tasteORservice", tasteORservice);
         searchResult.putExtra("rating", rating);
         searchResult.putExtra("price", price);
         searchResult.putExtra("distance",distance);

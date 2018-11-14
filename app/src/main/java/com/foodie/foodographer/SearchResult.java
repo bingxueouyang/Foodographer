@@ -113,7 +113,6 @@ public class SearchResult extends AppCompatActivity implements Serializable{
             // https://stackoverflow.com/questions/23262445/sorting-and-filtering-listview-with-custom-array-adapter-with-two-textview
 
             String expert = getIntent().getStringExtra("expert");
-            String tasteORservice = getIntent().getStringExtra("tasteORservice");
             String rating = getIntent().getStringExtra("rating");
             String price = getIntent().getStringExtra("price");
             String distance = getIntent().getStringExtra("distance");
