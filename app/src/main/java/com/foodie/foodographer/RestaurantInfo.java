@@ -169,20 +169,32 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
         //currentUserID=mAuthSetting.getCurrentUser().getUid();
         // userRef = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
         userRef2=userRef.child("comments").child(Rest_ID);
-        userRef2.addValueEventListener(new ValueEventListener() {
+        userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Log.i("snapshot", "Inside onDataChange!!!");
                 String email = mAuthSetting.getCurrentUser().getEmail();
                 String emailUserName = email.substring(0,email.indexOf('@'));
                 String userIMGURL = dataSnapshot.child("profileImageUrl").getValue().toString();
+                Log.i("database","image Url is"+ userIMGURL);
                 Review testReview = new Review(emailUserName, userIMGURL, (float) 3.0, "3 months ago", review);
                 HashMap<String, Object> restaurantParams = new HashMap<>();
                 restaurantParams.put(currentUserID, testReview);
                 commentRef.updateChildren(restaurantParams);
                 HashMap<String, Object> userParams = new HashMap<>();
                 userParams.put("content", review);
-                userRef2.updateChildren(userParams);
+                userRef2.updateChildren(userParams).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(RestaurantInfo.this, "Update your favorite restaurant successfully", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            String grab_message = task.getException().getMessage();
+                            Toast.makeText(RestaurantInfo.this, "Error occurred:"+grab_message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
 
             @Override
