@@ -1,6 +1,7 @@
 package com.foodie.foodographer;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,11 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.yelp.fusion.client.connection.YelpFusionApi;
 import com.yelp.fusion.client.connection.YelpFusionApiFactory;
 import com.yelp.fusion.client.models.Business;
@@ -38,6 +44,7 @@ public class SearchResult extends AppCompatActivity implements Serializable{
     ArrayList<Restaurant> restaurants;
     ListView list;
     private LinearLayout search_bar;
+    private DatabaseReference restRef = FirebaseDatabase.getInstance().getReference("Restaurants");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +110,26 @@ public class SearchResult extends AppCompatActivity implements Serializable{
 
             restaurants = new ArrayList<Restaurant>(businesses.size());
             for(int i=0; i< businesses.size(); i++){
-                restaurants.add(new Restaurant(businesses.get(i)));
+                final Restaurant myRest = new Restaurant(businesses.get(i));
+                restaurants.add(myRest);
+                // save the restaurant into our database whenever the user search it
+                restRef.child(myRest.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            Log.i("database info", "gotoRestaurant is called!");
+                            return;
+                        }
+                        else {
+                            //the restaurant is not created yet; create it first
+                            restRef.child(myRest.getId()).setValue(myRest);
+                            return;
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
             }
 
 

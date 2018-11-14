@@ -28,7 +28,6 @@ import com.yelp.fusion.client.models.Business;
 public class RecyclerResultList extends RecyclerView.Adapter<RecyclerResultList.MyViewHolder> {
     private ArrayList<Restaurant> rest_list;
     private Context context;
-    private DatabaseReference restRef = FirebaseDatabase.getInstance().getReference("Restaurants");
     private boolean[] restaurantIsInDB;
 
     public RecyclerResultList (ArrayList<Restaurant> rest_list){
@@ -61,26 +60,7 @@ public class RecyclerResultList extends RecyclerView.Adapter<RecyclerResultList.
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                // save the restaurant into our database whenever the user click on it
-                restRef.child(myRest.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
-                            Log.i("database info", "gotoRestaurant is called!");
-                            gotoRestaurantInfo(myRest);
-                            return;
-                        }
-                        else {
-                            //the restaurant is not created yet; create it first
-                            restRef.child(myRest.getId()).setValue(myRest);
-                            gotoRestaurantInfo(myRest);
-                            return;
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
+                gotoRestaurantInfo(myRest);
             }
         });
     }
