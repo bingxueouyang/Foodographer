@@ -45,10 +45,12 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     private String totalExpertise;
     private TextView expertiseText;
     private TextView mostFavRest;
-    private DatabaseReference profileRestRefer;
+    private DatabaseReference profileReviewRefer;
     private FirebaseUser currentUser;
     private int checkSize=0;
     private  String userFavRest;
+    private Button favListBut;
+    private Button recentViewListBut;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,13 +80,17 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
             userImageView = (CircleImageView) findViewById(R.id.profile_image);
             expertiseText = (TextView) findViewById(R.id.perosonalExpertise);
             mostFavRest = (TextView) findViewById(R.id.favoriteRest);
-
+            favListBut =(Button) findViewById(R.id.listFavor);
+            favListBut.setOnClickListener(this);
+            recentViewListBut=(Button) findViewById(R.id.listView);
+            recentViewListBut.setOnClickListener(this);
             profileRefer.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
                     String imageOfUser = dataSnapshot.child("profileImageUrl").getValue().toString();
                     Log.d("checking", imageOfUser + "checking id");
+
                     String firstExpertise = dataSnapshot.child("Expert").child("Expert1").getValue().toString();
                     String secondExpertise = dataSnapshot.child("Expert").child("Expert2").getValue().toString();
                     String thirdExpertise = dataSnapshot.child("Expert").child("Expert3").getValue().toString();
@@ -109,7 +115,22 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
                 }
             });
+            profileReviewRefer=profileRefer.child("comments");
+            profileReviewRefer.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange( DataSnapshot dataSnapshot) {
+                    for(DataSnapshot ds : dataSnapshot.getChildren()){
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
+
 
 
 
@@ -120,11 +141,19 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         if(view==signout){
             mAuth3.signOut();
             finish();
-            startActivity(new Intent(this, LogIn.class));
+            startActivity(new Intent(UserProfile.this, LogIn.class));
         }
         if(view==settingBut){
             finish();
-            startActivity(new Intent(this, account_setting.class));
+            startActivity(new Intent(UserProfile.this, account_setting.class));
+        }
+        if(view==favListBut){
+            finish();
+            startActivity(new Intent(UserProfile.this, UserFavoriteRestaurants.class));
+        }
+        if(view==recentViewListBut){
+            finish();
+            startActivity(new Intent(UserProfile.this, UserRecentViewRestaurants.class));
         }
     }
 }

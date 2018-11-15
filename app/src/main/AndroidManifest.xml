@@ -16,10 +16,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity
-            android:name=".SignupActivity"
+            android:name=".Homepage"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,9 +37,10 @@
         <activity android:name=".RestaurantInfo" />
         <activity android:name=".account_setting" />
         <activity android:name=".ArticlePage" />
-        <activity android:name=".PostReviewActivity"></activity>
+        <activity android:name=".PostReviewActivity" />
+        <activity android:name=".favoriteRestList" />
+        <activity android:name=".UserFavoriteRestaurants" />
+        <activity android:name=".UserRecentViewRestaurants"></activity>
     </application>
-
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
 
 </manifest>

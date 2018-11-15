@@ -17,6 +17,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,13 +25,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.yelp.fusion.client.models.Business;
 
-
+import android.util.Log;
 public class RecyclerResultList extends RecyclerView.Adapter<RecyclerResultList.MyViewHolder> {
     private ArrayList<Restaurant> rest_list;
     private Context context;
-    private DatabaseReference restRef = FirebaseDatabase.getInstance().getReference("Restaurants");
     private boolean[] restaurantIsInDB;
-
+    private FirebaseAuth mAuthSetting;
+    private String currentUserID;
+    private DatabaseReference profileReferRecent;
+    private boolean checkuser;
     public RecyclerResultList (ArrayList<Restaurant> rest_list){
         this.rest_list = rest_list;
     }
@@ -57,30 +60,28 @@ public class RecyclerResultList extends RecyclerView.Adapter<RecyclerResultList.
 
         new DownloadImageTask(holder.restIMG).execute(myRest.getIMGURL());
 
+        mAuthSetting = FirebaseAuth.getInstance();
+        if(mAuthSetting.getCurrentUser()!=null) {
+            checkuser = true;
+            currentUserID = mAuthSetting.getCurrentUser().getUid();
+            profileReferRecent = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID).child("RecentView");
+        }
+
+        if(mAuthSetting.getCurrentUser()==null){
+            checkuser=false;
+        }
+        final HashMap recentUserView =new HashMap();
+
+        recentUserView.put(myRest.getId(),myRest.getName());
         // go to RestaurantInfo page on click
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                // save the restaurant into our database whenever the user click on it
-                restRef.child(myRest.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
-                            Log.i("database info", "gotoRestaurant is called!");
-                            gotoRestaurantInfo(myRest);
-                            return;
-                        }
-                        else {
-                            //the restaurant is not created yet; create it first
-                            restRef.child(myRest.getId()).setValue(myRest);
-                            gotoRestaurantInfo(myRest);
-                            return;
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
+                if(checkuser==true) {
+                    Log.d("checkuser","checking user exist:"+checkuser);
+                    profileReferRecent.updateChildren(recentUserView);
+                }
+                gotoRestaurantInfo(myRest);
             }
         });
     }

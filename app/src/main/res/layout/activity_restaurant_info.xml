@@ -172,6 +172,7 @@
                         android:layout_marginLeft="50dp"
                         android:layout_gravity="center"
                         android:clickable="true"
+                        android:onClick="postReview"
                         android:text="Write Review"
                         android:textSize="14sp" />
 
@@ -213,28 +214,28 @@
 
                     </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/call"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/call_icon"
-                        android:clickable="true" />
-
-                    <TextView
-                        android:layout_width="140dp"
+                    <LinearLayout
+                        android:id="@+id/call"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"
-                        android:clickable="true"
-                        android:text="Call" />
+                        android:orientation="horizontal">
 
-                </LinearLayout>
+                        <Button
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/call_icon"
+                            android:clickable="true" />
+
+                        <TextView
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:text="Call" />
+
+                    </LinearLayout>
 
 
                 </LinearLayout>
@@ -446,7 +447,6 @@
                     android:layout_width="match_parent"
                     android:layout_marginBottom="60dp"/>
             </android.support.v7.widget.CardView>
-
 
 
         </LinearLayout>

@@ -55,6 +55,8 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
     private Spinner changeInterestSpinner4;
     private FirebaseAuth mAuthSetting;
     private DatabaseReference profileRefer;
+    private DatabaseReference profileReferExpert;
+    private DatabaseReference profileReferInterest;
     private String currentUserID;
     private CircleImageView image;
     final static int galleryPic=1;
@@ -135,16 +137,12 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
         final String interest4 = changeInterestSpinner4.getSelectedItem().toString().trim();
 
 
-
+        profileReferExpert=profileRefer.child("Expert");
         HashMap usermap= new HashMap();
-        usermap.put("expert1",expert1);
-        usermap.put("expert2",expert2);
-        usermap.put("expert3",expert3);
-        usermap.put("interest1", interest1);
-        usermap.put("interest2", interest2);
-        usermap.put("interest3", interest3);
-        usermap.put("interest4", interest4);
-        profileRefer.updateChildren(usermap).addOnCompleteListener(new OnCompleteListener() {
+        usermap.put("Expert1",expert1);
+        usermap.put("Expert2",expert2);
+        usermap.put("Expert3",expert3);
+        profileReferExpert.updateChildren(usermap).addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
                     if(task.isSuccessful()){
@@ -155,6 +153,26 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
                         String grab_message=task.getException().getMessage();
                         Toast.makeText( account_setting.this,"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
                     }
+
+            }
+        });
+        profileReferInterest=profileRefer.child("Interest");
+        HashMap usermap2= new HashMap();
+        usermap2.put("Interest1",interest1);
+        usermap2.put("Interest2",interest2);
+        usermap2.put("Interest3",interest3);
+        usermap2.put("Interest4",interest4);
+        profileReferInterest.updateChildren(usermap2).addOnCompleteListener(new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                if(task.isSuccessful()){
+                    Toast.makeText( account_setting.this,"Update account information successfully",Toast.LENGTH_SHORT).show();
+                    finish();
+                    startActivity(new Intent(getApplicationContext(),UserProfile.class));
+                }else{
+                    String grab_message=task.getException().getMessage();
+                    Toast.makeText( account_setting.this,"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                }
 
             }
         });

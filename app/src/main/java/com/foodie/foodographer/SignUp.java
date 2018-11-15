@@ -182,7 +182,7 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
                         user_info.put("Expert","");
                         user_info.put("Interest","");
                         user_info.put("RecentView","");
-                        user_info.put("Comment","");
+                        user_info.put("comments","");
                         //Uri hold = "http://img.icons8.com/color/1600/circled-user-male-skin-type-1-2.png";
                         user_info.put("profileImageUrl","http://img.icons8.com/color/1600/circled-user-male-skin-type-1-2.png");
                         mDatabase.setValue(user_info);
