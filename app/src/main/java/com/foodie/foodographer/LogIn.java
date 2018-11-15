@@ -23,7 +23,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 //import com.google.firebase.firsteverapp.auth.R;
-
+import android.util.Log;
 public class LogIn extends AppCompatActivity implements View.OnClickListener {
     private Button loginBut;
     private EditText user_input_email;
@@ -88,8 +88,15 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
     private void email_verified(){
         FirebaseUser user=mAuth2.getCurrentUser();
         checkingEmail_true= user.isEmailVerified();
+        String savedExtra = getIntent().getStringExtra("Value");
+        Log.d("checkingUser","Check"+savedExtra);
+
         if(checkingEmail_true==true){
+            if(savedExtra==null){
+                onBackPressed();
+            }
             finish();
+
             startActivity(new Intent(getApplicationContext(), UserProfile.class));
             //finish();
         }else{
@@ -101,6 +108,7 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view){
         if(view==loginBut){
             userLogin();
+
         }
         if(view ==loginText){
             finish();

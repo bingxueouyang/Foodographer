@@ -38,7 +38,9 @@
         <activity android:name=".account_setting" />
         <activity android:name=".ArticlePage" />
         <activity android:name=".PostReviewActivity" />
-        <activity android:name=".favoriteRestList"></activity>
+        <activity android:name=".favoriteRestList" />
+        <activity android:name=".UserFavoriteRestaurants" />
+        <activity android:name=".UserRecentViewRestaurants"></activity>
     </application>
 
 </manifest>
