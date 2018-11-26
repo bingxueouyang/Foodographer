@@ -40,7 +40,8 @@
         <activity android:name=".PostReviewActivity" />
         <activity android:name=".favoriteRestList" />
         <activity android:name=".UserFavoriteRestaurants" />
-        <activity android:name=".UserRecentViewRestaurants"></activity>
+        <activity android:name=".UserRecentViewRestaurants" />
+        <activity android:name=".UserCommentRestaurant"></activity>
     </application>
 
 </manifest>

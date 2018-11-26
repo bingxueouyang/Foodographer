@@ -156,4 +156,5 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
             startActivity(new Intent(UserProfile.this, UserRecentViewRestaurants.class));
         }
     }
+
 }
