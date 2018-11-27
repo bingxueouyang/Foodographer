@@ -1,5 +1,5 @@
 package com.foodie.foodographer;
-
+// import everything needed for this java class
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso;
 import android.util.Log;
 import de.hdodenhof.circleimageview.CircleImageView;
 public class UserProfile extends AppCompatActivity implements View.OnClickListener {
+    // initialize firebase authentication, button, textview, circleimageview of user image and datebase reference.
     private FirebaseAuth mAuth3;
     private Button signout;
     private TextView userEmail_textview;
@@ -37,17 +38,18 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-
+        // connect to firebase authentication
         mAuth3=FirebaseAuth.getInstance();
+        // grab the current user from firebase authentication
         currentUser=mAuth3.getCurrentUser();
-
+        // check user exist
         if(currentUser==null){
             finish();
             startActivity(new Intent(this, LogIn.class));
         }
         else {
 
-
+        
             currentUserID = currentUser.getUid();
             profileRefer = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
 
@@ -66,6 +68,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
             favListBut.setOnClickListener(this);
             recentViewListBut=(Button) findViewById(R.id.listView);
             recentViewListBut.setOnClickListener(this);
+            // grab user info from the database and display in the userinfo page
             profileRefer.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -78,17 +81,9 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
                     String thirdExpertise = dataSnapshot.child("Expert").child("Expert3").getValue().toString();
 
                     totalExpertise = firstExpertise +" | "+ secondExpertise +" | "+ thirdExpertise;
-
-                    //Log.d("check",imageOfUser+" checking right");
-                    //if(imageOfUser == "nothing"){
-                    //Picasso.with(UserProfile.this).load(imageOfUser).placeholder(R.drawable.profile).error(R.drawable.profile).into(userImageView);
-                    //}
-
-                    //if(imageOfUser != "nothing"){
-                    //Picasso.with(UserProfile.this).load(imageOfUser).placeholder(R.drawable.profile).error(R.drawable.profile).into(userImageView);
-                    //}
+                    //showing user image
                     Picasso.with(UserProfile.this).load(imageOfUser).into(userImageView);
-                    //new DownloadImageTask(userImageView).execute(imageOfUser);
+                    //showing user expertise choice
                     expertiseText.setText(totalExpertise);
                 }
 
