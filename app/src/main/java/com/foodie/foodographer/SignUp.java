@@ -1,5 +1,5 @@
 package com.foodie.foodographer;
-
+//import every thing needed for this java
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -47,8 +47,9 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        //connect to firebase
         mAuth = FirebaseAuth.getInstance();
-
+        // evoking the button and edittext from signup.xml
         getemail = (EditText) findViewById(R.id.EmailAdress);
         progressDialog= new ProgressDialog(this);
 
@@ -59,7 +60,7 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
 
         addExpert = (ImageButton) findViewById(R.id.AddExpert);
         addInterest = (ImageButton) findViewById(R.id.AddInterest);
-
+        //making the button and edittext clickable.
         registBut.setOnClickListener(this);
         signupText.setOnClickListener(this);
         addExpert.setOnClickListener(this);
@@ -85,10 +86,11 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
         expertSpinner3.setVisibility(View.GONE);
 
 
-
+        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>( SignUp.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
+        // Specify the layout to use when the list of choices appears
         interestAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
+        // Apply the adapter to the spinner
         interestSpinner = (Spinner) findViewById(R.id.InterestSpinner);
         interestSpinner.setAdapter(interestAdapter);
 
@@ -108,21 +110,23 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
 
 
     }
-
+    //register user function
     private void registerUser(){
         String infoEmail = getemail.getText().toString().trim();
         String infoPassword = getpassword.getText().toString().trim();
-
+        //if the user doesnot enter email
         if(TextUtils.isEmpty(infoEmail)){
             Toast.makeText(this,"Please enter an email !",Toast.LENGTH_SHORT).show();
             return;
         }
+        // if the user does not enter password
         if(TextUtils.isEmpty(infoPassword)){
             Toast.makeText(this,"Please enter password !",Toast.LENGTH_SHORT).show();
             return;
         }
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
+        //calling create user in firebase 
         mAuth.createUserWithEmailAndPassword(infoEmail,infoPassword)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -146,6 +150,7 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
             //handle login user
         }
     }
+    // send the verified email 
     private void send_message_verifed_email(){
         final String infoEmail = getemail.getText().toString().trim();
 
@@ -170,7 +175,7 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
                         String user_id=mAuth.getCurrentUser().getUid();
                         mDatabase=FirebaseDatabase.getInstance().getReference().child("users").child(user_id);
 
-
+                        //updating the user basic info into datebase
                         HashMap user_info= new HashMap();
                         user_info.put("Email",infoEmail);
                         user_info.put("Favorite","");
@@ -178,7 +183,7 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
                         user_info.put("Interest","");
                         user_info.put("RecentView","");
                         user_info.put("comments","");
-                        //Uri hold = "http://img.icons8.com/color/1600/circled-user-male-skin-type-1-2.png";
+                        
                         user_info.put("profileImageUrl","http://img.icons8.com/color/1600/circled-user-male-skin-type-1-2.png");
                         mDatabase.setValue(user_info);
                         DatabaseReference createExpert=mDatabase.child("Expert");
@@ -207,7 +212,7 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
             });
         }
     }
-
+    //onclick to jump from one activity to another activity
     @Override
     public void onClick(View view) {
         if(view == registBut){
