@@ -7,6 +7,7 @@
     tools:context=".RestaurantInfo"
     tools:ignore="MissingDefaultResource">
 
+    <!--All information is put into ScrollView to make sure we can load as much info as we want-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,12 +18,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
+        <!--All information is constrained as LinearLayout-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!--restaurant image, name, rating, tags, location-->
+            <!--restaurant image, name, rating, tags, location, and Bookmark
+                These are loaded from Firebase-->
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -99,8 +102,7 @@
             </android.support.v7.widget.CardView>
 
 
-            <!--restaurant open time-->
-
+            <!--This card contains restaurant opening and closing time-->
             <android.support.v7.widget.CardView
                 android:id="@+id/openTime"
                 android:layout_width="match_parent"
@@ -127,6 +129,7 @@
                             android:layout_height="wrap_content"
                             android:text="close opening time today" />
 
+                        <!--More button to see the details of opening and closing time-->
                         <Button
                             android:layout_width="20dp"
                             android:layout_height="20dp"
@@ -197,6 +200,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
+                        <!--Get direction to restaurant-->
                         <Button
                             android:layout_width="30dp"
                             android:layout_height="30dp"
@@ -220,6 +225,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
+                        <!--Call restaurant-->
                         <Button
                             android:layout_width="30dp"
                             android:layout_height="30dp"
@@ -242,7 +248,6 @@
             </android.support.v7.widget.CardView>
 
             <!--Amentities-->
-
             <android.support.v7.widget.CardView
                 android:id="@+id/openTag"
                 android:layout_width="match_parent"
@@ -435,7 +440,7 @@
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
-            <!--Reviews-->
+            <!--Review card lists 10 reviews of this restaurant-->
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
