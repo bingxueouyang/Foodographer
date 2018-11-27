@@ -1,5 +1,5 @@
 package com.foodie.foodographer;
-
+//import eveything need for this java class
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
