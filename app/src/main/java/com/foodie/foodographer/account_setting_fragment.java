@@ -54,6 +54,7 @@ public class account_setting_fragment extends Fragment implements View.OnClickLi
     private String mParam2;
 
     private Button savingBut;
+    
     private Spinner changeExpertSpinner;
     private Spinner changeExpertSpinner2;
     private Spinner changeExpertSpinner3;
@@ -61,10 +62,12 @@ public class account_setting_fragment extends Fragment implements View.OnClickLi
     private Spinner changeInterestSpinner2;
     private Spinner changeInterestSpinner3;
     private Spinner changeInterestSpinner4;
+    
     private FirebaseAuth mAuthSetting;
     private DatabaseReference profileRefer;
     private DatabaseReference profileReferExpert;
     private DatabaseReference profileReferInterest;
+    
     private String currentUserID;
     private CircleImageView image;
     final static int galleryPic=1;
@@ -120,12 +123,10 @@ public class account_setting_fragment extends Fragment implements View.OnClickLi
         ArrayAdapter<String> expertAdapter = new ArrayAdapter<String>( getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
         // Specify the layout to use when the list of choices appears
         expertAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+       
         // Apply the adapter to the spinner
-
         changeExpertSpinner = (Spinner) view.findViewById(R.id.expertiseChange1);
         changeExpertSpinner.setAdapter(expertAdapter);
-
-
 
         changeExpertSpinner2 = (Spinner) view.findViewById(R.id.expertiseChange2);
         changeExpertSpinner2.setAdapter(expertAdapter);
@@ -137,12 +138,12 @@ public class account_setting_fragment extends Fragment implements View.OnClickLi
 
 
 
-        ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>( getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
+        ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>( getContext(), android.R.layout.simple_list_item_1, getResources().
+                                                                        getStringArray(R.array.expertise_array));
         interestAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
+        //get the user input for expert in and 
         changeInterestSpinner = (Spinner) view.findViewById(R.id.InterestChange1);
         changeInterestSpinner.setAdapter(interestAdapter);
-
 
         changeInterestSpinner2 = (Spinner) view.findViewById(R.id.InterestChange2);
         changeInterestSpinner2.setAdapter(interestAdapter);
@@ -175,7 +176,8 @@ public class account_setting_fragment extends Fragment implements View.OnClickLi
             mListener.onFragmentInteraction(uri);
         }
     }
-
+    
+    //update the new user information. (experties, interest and profile picture)
     private void updateInformation(){
         final String expert1 = changeExpertSpinner.getSelectedItem().toString().trim();
         final String expert2 = changeExpertSpinner2.getSelectedItem().toString().trim();
@@ -186,7 +188,7 @@ public class account_setting_fragment extends Fragment implements View.OnClickLi
         final String interest3 = changeInterestSpinner3.getSelectedItem().toString().trim();
         final String interest4 = changeInterestSpinner4.getSelectedItem().toString().trim();
 
-
+        //experties
         profileReferExpert=profileRefer.child("Expert");
         HashMap usermap= new HashMap();
         usermap.put("Expert1",expert1);
@@ -205,6 +207,8 @@ public class account_setting_fragment extends Fragment implements View.OnClickLi
 
             }
         });
+        
+        //interest
         profileReferInterest=profileRefer.child("Interest");
         HashMap usermap2= new HashMap();
         usermap2.put("Interest1",interest1);
@@ -224,6 +228,8 @@ public class account_setting_fragment extends Fragment implements View.OnClickLi
 
             }
         });
+        
+        //upload user profile picture
         if(resultUri!= null){
             final StorageReference filePath = storeUserImage.child(currentUserID);
             Bitmap bitmap=null;
