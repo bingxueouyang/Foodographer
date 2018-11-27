@@ -112,14 +112,13 @@ public class user_profile_fragment extends Fragment implements View.OnClickListe
         //declare firebase auth
         mAuth3=FirebaseAuth.getInstance();
         currentUser=mAuth3.getCurrentUser();
-
+        
+        //go back to login if this user is not exist
         if(currentUser==null){
-            //getActivity().finish();
             getFragmentManager().beginTransaction().replace(R.id.userProfile, new LoginFragment()).commit();
         }
+        //save user's information, set signout, setting, favList, recent view and comment buttons.
         else {
-
-
             currentUserID = currentUser.getUid();
             profileRefer = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
 
@@ -127,42 +126,43 @@ public class user_profile_fragment extends Fragment implements View.OnClickListe
             String email = currentUser.getEmail();
             String emailUserName = email.substring(0,email.indexOf('@'));
             userEmail_textview.setText(emailUserName);
+            
             signout = (Button) view.findViewById(R.id.logoutButton);
             signout.setOnClickListener(this);
+            
             settingBut = (Button) view.findViewById(R.id.setting);
             settingBut.setOnClickListener(this);
+            
             userImageView = (CircleImageView) view.findViewById(R.id.profile_image);
             expertiseText = (TextView) view.findViewById(R.id.perosonalExpertise);
             mostFavRest = (TextView) view.findViewById(R.id.favoriteRest);
+            
             favListBut =(Button) view.findViewById(R.id.listFavor);
             favListBut.setOnClickListener(this);
+            
             recentViewListBut=(Button) view.findViewById(R.id.listView);
             recentViewListBut.setOnClickListener(this);
+            
             commentBut=(Button) view.findViewById(R.id.reviewList);
             commentBut.setOnClickListener(this);
-
+            
+            //give user the ability to change or add expert in.
             profileRefer.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
                     String imageOfUser = dataSnapshot.child("profileImageUrl").getValue().toString();
                     Log.d("checking", imageOfUser + "checking id");
-                    String firstExpertise = dataSnapshot.child("Expert").child("Expert1").getValue().toString();
-                    String secondExpertise = dataSnapshot.child("Expert").child("Expert2").getValue().toString();
-                    String thirdExpertise = dataSnapshot.child("Expert").child("Expert3").getValue().toString();
+                    String firstExpertise = dataSnapshot.child("Expert").child("Expert1").
+                        getValue().toString();
+                    String secondExpertise = dataSnapshot.child("Expert").child("Expert2").
+                        getValue().toString();
+                    String thirdExpertise = dataSnapshot.child("Expert").child("Expert3").
+                        getValue().toString();
 
                     totalExpertise = firstExpertise +" | "+ secondExpertise +" | "+ thirdExpertise;
-
-                    //Log.d("check",imageOfUser+" checking right");
-                    //if(imageOfUser == "nothing"){
-                    //Picasso.with(UserProfile.this).load(imageOfUser).placeholder(R.drawable.profile).error(R.drawable.profile).into(userImageView);
-                    //}
-
-                    //if(imageOfUser != "nothing"){
-                    //Picasso.with(UserProfile.this).load(imageOfUser).placeholder(R.drawable.profile).error(R.drawable.profile).into(userImageView);
-                    //}
+                    
                     Picasso.with(getActivity()).load(imageOfUser).into(userImageView);
-                    //new DownloadImageTask(userImageView).execute(imageOfUser);
                     expertiseText.setText(totalExpertise);
                 }
 
@@ -203,21 +203,27 @@ public class user_profile_fragment extends Fragment implements View.OnClickListe
     }
 
     @Override
-    // If click signout, signout and go to login. If click setting, go to setting page
     public void onClick(View v) {
+        // If clicked signout, signout and go to login page
         if(v == signout){
             mAuth3.signOut();
-            getFragmentManager().beginTransaction().replace(R.id.userProfile, new LoginFragment()).addToBackStack(null).commit();
+            getFragmentManager().beginTransaction().replace(R.id.userProfile, new LoginFragment()).
+                addToBackStack(null).commit();
         }
+        //go to account setting page is clicked setting button
         if(v == settingBut){
-            getFragmentManager().beginTransaction().replace(R.id.userProfile, new account_setting_fragment()).addToBackStack(null).commit();
+            getFragmentManager().beginTransaction().replace(R.id.userProfile, new account_setting_fragment()).
+                addToBackStack(null).commit();
         }
+        //go to favorite restaurant page if clicked favlist button
         if(v==favListBut){
             startActivity(new Intent(getActivity(), UserFavoriteRestaurants.class));
         }
+        //go to recent view page if clicked recentview button
         if(v==recentViewListBut){
             startActivity(new Intent(getActivity(), UserRecentViewRestaurants.class));
         }
+        //go to comment page if clicked comment button
         if(v==commentBut){
             startActivity(new Intent(getActivity(), UserCommentRestaurant.class));
         }
