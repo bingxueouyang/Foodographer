@@ -116,7 +116,7 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
 
     }
 
-
+    //update user choice and sync stored into firebase datebase
     private void updateInformation(){
         final String expert1 = changeExpertSpinner.getSelectedItem().toString().trim();
         final String expert2 = changeExpertSpinner2.getSelectedItem().toString().trim();
@@ -133,14 +133,17 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
         usermap.put("Expert1",expert1);
         usermap.put("Expert2",expert2);
         usermap.put("Expert3",expert3);
+        //update the user choice at expert in firebase datebase
         profileReferExpert.updateChildren(usermap).addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
+                    //checking the task is success then send a message
                     if(task.isSuccessful()){
                         Toast.makeText( account_setting.this,"Update account information successfully",Toast.LENGTH_SHORT).show();
                         finish();
                         startActivity(new Intent(getApplicationContext(),UserProfile.class));
                     }else{
+                        // not success and send the error message
                         String grab_message=task.getException().getMessage();
                         Toast.makeText( account_setting.this,"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
                     }
@@ -153,20 +156,24 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
         usermap2.put("Interest2",interest2);
         usermap2.put("Interest3",interest3);
         usermap2.put("Interest4",interest4);
+        //update the user choice at interest in firebase datebase
         profileReferInterest.updateChildren(usermap2).addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
+                //checking the task is success then send a message
                 if(task.isSuccessful()){
                     Toast.makeText( account_setting.this,"Update account information successfully",Toast.LENGTH_SHORT).show();
                     finish();
                     startActivity(new Intent(getApplicationContext(),UserProfile.class));
                 }else{
+                    // not success and send the error message
                     String grab_message=task.getException().getMessage();
                     Toast.makeText( account_setting.this,"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
+        //update user image into firebase databse with firebase storage for picture
         if(resultUri!= null){
             final StorageReference filePath = storeUserImage.child(currentUserID);
             Bitmap bitmap=null;
@@ -175,6 +182,7 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            //using bit to compress the picture
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
             byte[] data = baos.toByteArray();
@@ -187,7 +195,7 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
                     return;
                 }
             });
-
+            //upload the picture
             filePath.putFile(resultUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -200,6 +208,7 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if(task.isSuccessful()){
+                        //if the task is success, then the send successful message
                         Toast.makeText(account_setting.this, "Profile Image stored successfully to Firebase storage...", Toast.LENGTH_SHORT).show();
 
                         Uri uriAddress=task.getResult();
@@ -216,6 +225,7 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
 
 
     }
+    //grab the result that user pick for his/her picure
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
