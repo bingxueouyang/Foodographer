@@ -106,7 +106,6 @@ public class SearchBar_fragment extends Fragment {
                 args.putString("location", location);
                 search_result.setArguments(args);
                 getFragmentManager().beginTransaction().replace(R.id.search_result_container, search_result).commit();
-                //gotoSearch(name, location);
                 return true;
             }
 
