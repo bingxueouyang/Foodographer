@@ -1,6 +1,6 @@
 package com.foodie.foodographer;
 
-
+// import everything needed in this java
 import android.net.Uri;
 
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +33,7 @@ import java.util.Map;
 import android.provider.MediaStore;
 import com.google.android.gms.tasks.OnFailureListener;
 public class account_setting extends AppCompatActivity implements View.OnClickListener{
+    // initialized saving button, four choice of interest and expert for user to pick.
     private Button savingBut;
     private Spinner changeExpertSpinner;
     private Spinner changeExpertSpinner2;
@@ -54,9 +55,12 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_setting);
+        //connect to firebase
         mAuthSetting = FirebaseAuth.getInstance();
+        // connect to firebase with unique user id
         currentUserID=mAuthSetting.getCurrentUser().getUid();
         profileRefer=FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
+        //connect to firebase storage
         storeUserImage=FirebaseStorage.getInstance().getReference().child("Profile Images");
 
         savingBut = (Button) findViewById(R.id.savingInformation);
@@ -80,8 +84,7 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
         changeExpertSpinner3.setAdapter(expertAdapter);
         changeExpertSpinner3.setVisibility(View.VISIBLE);
 
-
-
+        // store interests that user pick into arraylist for spinner
         ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>( account_setting.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
         interestAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -100,7 +103,7 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
         changeInterestSpinner4 = (Spinner) findViewById(R.id.InterestChange4);
         changeInterestSpinner4.setAdapter(interestAdapter);
         changeInterestSpinner4.setVisibility(View.VISIBLE);
-
+        // change the profile picture once the pic is picked
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -225,6 +228,7 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
 
 
     }
+    // on click function
     public void onClick(View view) {
         if(view == savingBut){
             updateInformation();
