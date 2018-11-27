@@ -51,7 +51,7 @@ public class RecyclerResultList extends RecyclerView.Adapter<RecyclerResultList.
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        // set view content with article object value
+        // set view content with restaurant object value
         Restaurant restaurant = rest_list.get(position);
         final Restaurant myRest = restaurant;
         final String restDistance = String
