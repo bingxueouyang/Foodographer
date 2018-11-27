@@ -8,17 +8,9 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.SearchView;
-import java.util.ArrayList;
-import android.view.View.OnClickListener;
-
-import com.google.firebase.auth.FirebaseAuth;
 
 
 public class Homepage extends AppCompatActivity

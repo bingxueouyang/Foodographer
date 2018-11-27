@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.util.Log;
 import android.view.*;
 import android.widget.RatingBar;
 import android.widget.TextView;

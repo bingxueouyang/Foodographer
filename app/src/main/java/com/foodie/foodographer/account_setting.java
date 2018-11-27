@@ -8,42 +8,30 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 
 import android.widget.Spinner;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import android.widget.LinearLayout;
 
 import android.graphics.Bitmap;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.UploadTask;
 import de.hdodenhof.circleimageview.CircleImageView;
-import com.squareup.picasso.Picasso;
-import com.bumptech.glide.Glide;
 import java.util.HashMap;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 import android.provider.MediaStore;
 import com.google.android.gms.tasks.OnFailureListener;
-import java.util.Map;
 public class account_setting extends AppCompatActivity implements View.OnClickListener{
     private Button savingBut;
     private Spinner changeExpertSpinner;
