@@ -24,10 +24,15 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RecyclerResultList extends RecyclerView.Adapter<RecyclerResultList.MyViewHolder> {
     private ArrayList<Restaurant> rest_list;
     private Context context;
+    // boolean for checking if restaurant is in database
     private boolean[] restaurantIsInDB;
+    // firebase authorize object
     private FirebaseAuth mAuthSetting;
+    // save current user id
     private String currentUserID;
+    // user profile referece in database
     private DatabaseReference profileReferRecent;
+    // boolean for checking if current user is guest
     private boolean checkuser;
     
     public RecyclerResultList (ArrayList<Restaurant> rest_list){
