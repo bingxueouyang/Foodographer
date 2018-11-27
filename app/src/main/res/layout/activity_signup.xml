@@ -125,6 +125,7 @@
                             android:layout_margin="5dp"
                             android:orientation="horizontal">
 
+                            <!--button to add more expertise-->
                             <ImageButton
                                 android:id="@+id/AddExpert"
                                 android:layout_width="wrap_content"
@@ -191,6 +192,7 @@
                         android:orientation="horizontal"
                         android:layout_margin="5dp">
 
+                        <!--button to add more interestes-->
                         <ImageButton
                             android:id="@+id/AddInterest"
                             android:layout_width="wrap_content"
@@ -205,6 +207,7 @@
             </LinearLayout>
 
 
+            <!--Register Button-->
             <Button
                 android:id="@+id/checkingRegister"
                 style="@style/Widget.AppCompat.Button.Colored"
@@ -214,6 +217,7 @@
                 android:layout_gravity="center"
                 android:text="Register" />
 
+            <!--Quit register page and go back to login page-->
             <TextView
                 android:id="@+id/givinghint"
                 android:layout_width="wrap_content"
