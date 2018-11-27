@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".PostReviewActivity">
 
+    <!--Place to write reviews for restaurant-->
     <EditText
         android:id="@+id/ReviewText"
         android:layout_width="match_parent"
@@ -21,13 +22,15 @@
         android:overScrollMode="always"
         android:singleLine="false" />
 
+    <!--Button to submit written reviews-->
     <Button
         android:id="@+id/postButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="submitReview"
         android:text="Post" />
-
+    
+    <!--Button to cancels written reviews and finishes the activity-->
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="match_parent"
