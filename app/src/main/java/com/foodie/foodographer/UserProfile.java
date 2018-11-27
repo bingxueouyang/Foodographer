@@ -49,10 +49,11 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         }
         else {
 
-        
+            //grab current user id
             currentUserID = currentUser.getUid();
+            //going to database with user id to read the user info
             profileRefer = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
-
+            
             userEmail_textview = (TextView) findViewById(R.id.username);
             String email = currentUser.getEmail();
             String emailUserName = email.substring(0,email.indexOf('@'));
@@ -112,7 +113,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
 
     }
-
+    // onclick that help jump from activity to another but dynamic page will be better
     @Override
     public void onClick(View view){
         if(view==signout){
