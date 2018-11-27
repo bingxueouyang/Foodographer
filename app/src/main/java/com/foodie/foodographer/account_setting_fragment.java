@@ -1,39 +1,58 @@
 package com.foodie.foodographer;
 
-// import everything needed in this java
-import android.net.Uri;
-
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.ArrayAdapter;
-
-import android.widget.Spinner;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-import android.graphics.Bitmap;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.UploadTask;
-import de.hdodenhof.circleimageview.CircleImageView;
-import java.util.HashMap;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
-import android.provider.MediaStore;
-import com.google.android.gms.tasks.OnFailureListener;
-public class account_setting extends AppCompatActivity implements View.OnClickListener{
-    // initialized saving button, four choice of interest and expert for user to pick.
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link account_setting_fragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link account_setting_fragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class account_setting_fragment extends Fragment implements View.OnClickListener{
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
     private Button savingBut;
     private Spinner changeExpertSpinner;
     private Spinner changeExpertSpinner2;
@@ -51,59 +70,92 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
     final static int galleryPic=1;
     private StorageReference storeUserImage;
     private Uri resultUri;
+
+    private OnFragmentInteractionListener mListener;
+
+    public account_setting_fragment() {
+        // Required empty public constructor
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment account_setting_fragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static account_setting_fragment newInstance(String param1, String param2) {
+        account_setting_fragment fragment = new account_setting_fragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_setting);
-        //connect to firebase
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_account_setting_fragment, container, false);
         mAuthSetting = FirebaseAuth.getInstance();
-        // connect to firebase with unique user id
         currentUserID=mAuthSetting.getCurrentUser().getUid();
         profileRefer=FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
-        //connect to firebase storage
         storeUserImage=FirebaseStorage.getInstance().getReference().child("Profile Images");
 
-        savingBut = (Button) findViewById(R.id.savingInformation);
+        savingBut = (Button) view.findViewById(R.id.savingInformation);
         savingBut.setOnClickListener(this);
-        image =(CircleImageView) findViewById(R.id.profileSettingImage);
-        ArrayAdapter<String> expertAdapter = new ArrayAdapter<String>( account_setting.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
+        image =(CircleImageView) view.findViewById(R.id.profileSettingImage);
+        ArrayAdapter<String> expertAdapter = new ArrayAdapter<String>( getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
         // Specify the layout to use when the list of choices appears
         expertAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
 
-        changeExpertSpinner = (Spinner) findViewById(R.id.expertiseChange1);
+        changeExpertSpinner = (Spinner) view.findViewById(R.id.expertiseChange1);
         changeExpertSpinner.setAdapter(expertAdapter);
 
 
 
-        changeExpertSpinner2 = (Spinner) findViewById(R.id.expertiseChange2);
+        changeExpertSpinner2 = (Spinner) view.findViewById(R.id.expertiseChange2);
         changeExpertSpinner2.setAdapter(expertAdapter);
         changeExpertSpinner2.setVisibility(View.VISIBLE);
 
-        changeExpertSpinner3 = (Spinner) findViewById(R.id.expertiseChange3);
+        changeExpertSpinner3 = (Spinner) view.findViewById(R.id.expertiseChange3);
         changeExpertSpinner3.setAdapter(expertAdapter);
         changeExpertSpinner3.setVisibility(View.VISIBLE);
 
-        // store interests that user pick into arraylist for spinner
-        ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>( account_setting.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
+
+
+        ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>( getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
         interestAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        changeInterestSpinner = (Spinner) findViewById(R.id.InterestChange1);
+        changeInterestSpinner = (Spinner) view.findViewById(R.id.InterestChange1);
         changeInterestSpinner.setAdapter(interestAdapter);
 
 
-        changeInterestSpinner2 = (Spinner) findViewById(R.id.InterestChange2);
+        changeInterestSpinner2 = (Spinner) view.findViewById(R.id.InterestChange2);
         changeInterestSpinner2.setAdapter(interestAdapter);
         changeInterestSpinner2.setVisibility(View.VISIBLE);
 
-        changeInterestSpinner3 = (Spinner) findViewById(R.id.InterestChange3);
+        changeInterestSpinner3 = (Spinner) view.findViewById(R.id.InterestChange3);
         changeInterestSpinner3.setAdapter(interestAdapter);
         changeInterestSpinner3.setVisibility(View.VISIBLE);
 
-        changeInterestSpinner4 = (Spinner) findViewById(R.id.InterestChange4);
+        changeInterestSpinner4 = (Spinner) view.findViewById(R.id.InterestChange4);
         changeInterestSpinner4.setAdapter(interestAdapter);
         changeInterestSpinner4.setVisibility(View.VISIBLE);
-        // change the profile picture once the pic is picked
+
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,9 +166,16 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
             }
         });
 
+        return view;
     }
 
-    //update user choice and sync stored into firebase datebase
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
     private void updateInformation(){
         final String expert1 = changeExpertSpinner.getSelectedItem().toString().trim();
         final String expert2 = changeExpertSpinner2.getSelectedItem().toString().trim();
@@ -133,21 +192,16 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
         usermap.put("Expert1",expert1);
         usermap.put("Expert2",expert2);
         usermap.put("Expert3",expert3);
-
-        //update the user choice at expert in firebase datebase
         profileReferExpert.updateChildren(usermap).addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
-                    //checking the task is success then send a message
-                    if(task.isSuccessful()){
-                        Toast.makeText( account_setting.this,"Update account information successfully",Toast.LENGTH_SHORT).show();
-                        finish();
-                        startActivity(new Intent(getApplicationContext(),UserProfile.class));
-                    }else{
-                        // not success and send the error message
-                        String grab_message=task.getException().getMessage();
-                        Toast.makeText( account_setting.this,"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
-                    }
+                if(task.isSuccessful()){
+                    Toast.makeText( getContext(),"Update account information successfully",Toast.LENGTH_SHORT).show();
+                    getFragmentManager().beginTransaction().replace(getId(), new user_profile_fragment()).commit();
+                }else{
+                    String grab_message=task.getException().getMessage();
+                    Toast.makeText( getContext(),"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -157,35 +211,27 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
         usermap2.put("Interest2",interest2);
         usermap2.put("Interest3",interest3);
         usermap2.put("Interest4",interest4);
-
-        //update the user choice at interest in firebase datebase
         profileReferInterest.updateChildren(usermap2).addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
-                //checking the task is success then send a message
                 if(task.isSuccessful()){
-                    Toast.makeText( account_setting.this,"Update account information successfully",Toast.LENGTH_SHORT).show();
-                    finish();
-                    startActivity(new Intent(getApplicationContext(),UserProfile.class));
+                    Toast.makeText( getContext(),"Update account information successfully",Toast.LENGTH_SHORT).show();
+                    getFragmentManager().beginTransaction().replace(getId(), new user_profile_fragment()).commit();
                 }else{
-                    // not success and send the error message
                     String grab_message=task.getException().getMessage();
-                    Toast.makeText( account_setting.this,"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                    Toast.makeText( getContext(),"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
-
-        //update user image into firebase databse with firebase storage for picture
         if(resultUri!= null){
             final StorageReference filePath = storeUserImage.child(currentUserID);
             Bitmap bitmap=null;
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getApplication().getContentResolver(), resultUri);
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getApplication().getContentResolver(), resultUri);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //using bit to compress the picture
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
             byte[] data = baos.toByteArray();
@@ -194,11 +240,11 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    finish();
+
                     return;
                 }
             });
-            //upload the picture
+
             filePath.putFile(resultUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -211,8 +257,7 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if(task.isSuccessful()){
-                        //if the task is success, then the send successful message
-                        Toast.makeText(account_setting.this, "Profile Image stored successfully to Firebase storage...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Profile Image stored successfully to Firebase storage...", Toast.LENGTH_SHORT).show();
 
                         Uri uriAddress=task.getResult();
                         Map newImage = new HashMap();
@@ -228,26 +273,43 @@ public class account_setting extends AppCompatActivity implements View.OnClickLi
 
 
     }
-    //grab the result that user pick for his/her picure
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==galleryPic&& resultCode==RESULT_OK )
-        {
-            final Uri ImageUri = data.getData();
-            resultUri=ImageUri;
-            image.setImageURI(resultUri);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
         }
-
-
     }
-    // on click function
-    public void onClick(View view) {
-        if(view == savingBut){
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == savingBut){
             updateInformation();
-
         }
-
     }
 
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
 }

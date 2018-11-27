@@ -7,23 +7,7 @@
     android:orientation="vertical"
     android:background="@color/white">
 
-    <LinearLayout
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/search_icon"
-            android:layout_gravity="start"
-            android:padding="10dp"/>
 
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/diviline" />
 
     <RelativeLayout
         android:id="@+id/frame_container"
@@ -31,11 +15,7 @@
         android:layout_height="match_parent"
         android:background="@color/diviline">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="60dp"/>
+
         <!-- navigation -->
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/navigation"

@@ -1,6 +1,5 @@
 package com.foodie.foodographer;
 
-import java.util.ArrayList;
 
 class UserInfo {
     public String email, expert1, expert2, expert3, interest1, interest2, interest3, interest4;

@@ -14,7 +14,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import android.widget.Button;
+=======
+>>>>>>> haofan1
 /**
  * This Activity displays all of user's favorite restaurant in a scrollable list, sorted by time
  * THe RecyclerView's adaptor is directly inherited from "RecyclerResultList", therefore the

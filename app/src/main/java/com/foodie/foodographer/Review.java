@@ -1,6 +1,5 @@
 package com.foodie.foodographer;
 
-import java.util.Date;
 
 public class Review {
     private String username;

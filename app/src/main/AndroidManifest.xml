@@ -40,7 +40,7 @@
         <activity android:name=".PostReviewActivity" />
         <activity android:name=".favoriteRestList" />
         <activity android:name=".UserFavoriteRestaurants" />
-        <activity android:name=".UserRecentViewRestaurants"></activity>
+        <activity android:name=".UserRecentViewRestaurants" />
     </application>
 
     <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
