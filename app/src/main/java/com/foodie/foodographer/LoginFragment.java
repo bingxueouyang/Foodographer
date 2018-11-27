@@ -41,9 +41,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     private EditText user_input_email;
     private EditText user_input_password;
     private TextView loginText;
+    private TextView forgotpasswordLink;
     private ProgressDialog progressDialog2;
     private FirebaseAuth mAuth2;
-    private TextView forgotpasswordLink;
     private Boolean checkingEmail_true;
 
 
@@ -90,18 +90,20 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         mAuth2=FirebaseAuth.getInstance();
+        
+        //if the user exist, go to user profile page
         if(mAuth2.getCurrentUser()!= null){
-            //go into to profile page
-            //getActivity().finish();
-
             getFragmentManager().beginTransaction().replace(R.id.LoginPage, new user_profile_fragment()).commit();
         }
+        
         progressDialog2= new ProgressDialog(getContext());
+        
         user_input_email = (EditText) view.findViewById(R.id.user_enter_email);
         user_input_password = (EditText) view.findViewById(R.id.user_enter_password);
         loginBut= (Button) view.findViewById(R.id.loginRegister);
         loginText=(TextView) view.findViewById(R.id.hint_signup);
         forgotpasswordLink=(TextView) view.findViewById(R.id.forgot_password);
+        
         loginBut.setOnClickListener(this);
         loginText.setOnClickListener(this);
         forgotpasswordLink.setOnClickListener(this);
@@ -110,23 +112,31 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     }
 
     private void userLogin(){
+        //get user email
         String email2=user_input_email.getText().toString().trim();
+        
+        //get user password
         String password2=user_input_password.getText().toString().trim();
+        
+        //warn them if the user didn't enter their email
         if(TextUtils.isEmpty(email2)){
             Toast.makeText(getActivity(),"Please enter an email !",Toast.LENGTH_SHORT).show();
             return;
         }
+        
+        //warn them if the user didn't enter their password 
         if(TextUtils.isEmpty(password2)){
             Toast.makeText(getActivity(),"Please enter password !",Toast.LENGTH_SHORT).show();
             return;
         }
+        
+        //show message
         progressDialog2.setMessage("Login Account...");
         progressDialog2.show();
         mAuth2.signInWithEmailAndPassword(email2,password2)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        //progressDialog2.dismiss();
                         if(task.isSuccessful()){
                             email_verified();
                         }else {
@@ -139,20 +149,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                     }
                 });
     }
-
+    
+    //verify email
     private void email_verified(){
         FirebaseUser user=mAuth2.getCurrentUser();
         checkingEmail_true= user.isEmailVerified();
-        //String savedExtra = getActivity().getIntent().getStringExtra("Value");
-        //Log.d("checkingUser","Check"+savedExtra);
 
         if(checkingEmail_true==true){
-      //      if(savedExtra==null){
-       //         getActivity().onBackPressed();
-         //   }
-//            getActivity().finish();
             getFragmentManager().beginTransaction().replace(getId(), new user_profile_fragment()).commit();
-            //finish();
         }else{
             Toast.makeText(getActivity(),"Go verified your email please!",Toast.LENGTH_SHORT).show();
             mAuth2.signOut();
