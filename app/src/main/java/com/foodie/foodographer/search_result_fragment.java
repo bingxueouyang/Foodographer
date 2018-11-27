@@ -57,11 +57,15 @@ public class search_result_fragment extends Fragment implements View.OnClickList
 
     YelpFusionApiFactory yelpFusionApiFactory;
     YelpFusionApi yelpFusionApi;
+    
     String this_name;
     String this_location;
+    
     ArrayList<Business> businesses;
     ArrayList<Restaurant> restaurants;
+    
     ListView list;
+    
     private LinearLayout search_bar;
     private DatabaseReference restRef = FirebaseDatabase.getInstance().getReference("Restaurants");
     private RecyclerView res_recycler;
@@ -102,10 +106,12 @@ public class search_result_fragment extends Fragment implements View.OnClickList
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_result_fragment, container, false);
+        // start the thread to search for the correct restaruant with given information
         thread.start();
         search_bar = view.findViewById(R.id.search);
         return view;
     }
+    //thread to search for the correct restaruant with given information
     Thread thread = new Thread(new Runnable() {
         @Override
         public void run() {
@@ -182,7 +188,7 @@ public class search_result_fragment extends Fragment implements View.OnClickList
             String distance = getIntent().getStringExtra("distance");
             */
 
-
+            //get the restaruants and make it a list
             RecyclerResultList adapter = new RecyclerResultList(restaurants);
             res_recycler =  (RecyclerView)getView().findViewById(R.id.recyclerview);
             res_recycler.setHasFixedSize(true);
@@ -224,6 +230,7 @@ public class search_result_fragment extends Fragment implements View.OnClickList
     }
 
     @Override
+    //go to search result when clicked search bar
     public void onClick(View v) {
         if(v == search_bar){
             FragmentTransaction fr = getFragmentManager().beginTransaction();
