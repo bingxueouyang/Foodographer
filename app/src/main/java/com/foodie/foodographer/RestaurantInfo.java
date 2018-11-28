@@ -2,7 +2,10 @@ package com.foodie.foodographer;
 
 
 import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +18,7 @@ import java.util.HashMap;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.LinearLayout;
@@ -33,14 +37,17 @@ import android.widget.RatingBar;
 import android.widget.ImageView;
 import android.support.v7.widget.CardView;
 
+import org.w3c.dom.Text;
+
 public class RestaurantInfo extends AppCompatActivity implements View.OnClickListener{
 
+    //declare variavles
     private CardView amenties;
     private TextView restName;
     private LinearLayout restTags;
-    private Button favoriteButton;
+    private ImageButton favoriteButton;
     private FirebaseAuth mAuthSetting;
-    private DatabaseReference commentRef;
+    private DatabaseReference restRef;
     private DatabaseReference userRef;
     private String currentUserID;
     private DatabaseReference restReference;
@@ -50,22 +57,54 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
     private ArrayList<Review> reviewArrayList;
     private RecyclerView myView;
     String Rest_ID;
-    private Button reviewButton;
-    private Boolean checkUserExixt=true;
+    private TextView reviewButton;
+    private Boolean checkUserExixt=false;
+    private LinearLayout getDirection;
+    private LinearLayout Call;
+    private CardView openTime;
+    private TextView time_info;
+    String phoneNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_info);
-        mAuthSetting= FirebaseAuth.getInstance();
 
-        restTags = findViewById(R.id.rest_tags);
-        restTags.setVisibility(View.GONE);
-
-        amenties = findViewById(R.id.openTag);
-        amenties.setOnClickListener(this);
+        //restaurant that we are looking at
         myRest = getIntent().getParcelableExtra("myRest");
-        favoriteButton =(Button) findViewById(R.id.likeButton);
-        reviewButton=(Button) findViewById(R.id.saveRating_Btn);
+
+        //restaurant category
+        restTags = findViewById(R.id.rest_tags);
+        restTags.setVisibility(View.GONE);  //initially set tags to be invisible
+
+        //restaurant name
+        restName = findViewById(R.id.rest_name);
+        restName.setText(myRest.getName());
+
+        //Load image of restaurant
+        ImageView restIMG = findViewById(R.id.rest_IMG);
+        new DownloadImageTask(restIMG).execute(myRest.getIMGURL());
+
+        //expandable time info
+        openTime = findViewById(R.id.openTime);
+        openTime.setOnClickListener(this);
+
+        time_info = (TextView) findViewById(R.id.time_info);
+        time_info.setVisibility(View.GONE);
+
+        //amenties
+        amenties = findViewById(R.id.openTag);
+
+        //bookmark favorite restaurant
+        favoriteButton =(ImageButton) findViewById(R.id.likeButton);
+        favoriteButton.setOnClickListener(this);
+
+        //review button (write reviews and post it)
+        reviewButton=(TextView) findViewById(R.id.saveRating_Btn);
+        reviewButton.setOnClickListener(this);
+
+        //mAuthSetting checks if user logged in
+        mAuthSetting= FirebaseAuth.getInstance();
         if(mAuthSetting.getCurrentUser()!=null) {
             checkUserExixt=true;
             currentUserID = mAuthSetting.getCurrentUser().getUid();
@@ -77,33 +116,39 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
             Log.d("wassup","it is null");
             checkUserExixt=false;
         }
-        favoriteButton.setOnClickListener(this);
-        reviewButton.setOnClickListener(this);
 
-        restName = findViewById(R.id.rest_name);
-        restName.setText(myRest.getName());
+        final RatingBar restRating = findViewById(R.id.rest_rating);
+        final TextView restLocation = findViewById(R.id.rest_location);
 
-        RatingBar restRating = findViewById(R.id.rest_rating);
-        restRating.setRating(myRest.getRating());
-
-        TextView restLocation = findViewById(R.id.rest_location);
-        restLocation.setText(myRest.getLocation());
-
-        ImageView restIMG = findViewById(R.id.rest_IMG);
-        new DownloadImageTask(restIMG).execute(myRest.getIMGURL());
-        commentRef = FirebaseDatabase.getInstance().getReference("Restaurants").child(Rest_ID).child("comments");
+        // Yelp rating
+        //restRating.setRating(myRest.getRating());
+        restRef = FirebaseDatabase.getInstance().getReference("Restaurants").child(Rest_ID);
         myView = (RecyclerView) findViewById(R.id.recyclerview);
         reviewArrayList = new ArrayList<>();
 
-        commentRef.addValueEventListener(new ValueEventListener() {
+        restRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Log.i("snapshot", "Inside onDataChange!!!");
                 reviewArrayList.clear();
-                for(DataSnapshot reviewSnapshot: dataSnapshot.getChildren()){
-                    Log.i("database info", "Check: " + reviewSnapshot.getValue());
-                    Review thisReview = reviewSnapshot.getValue(Review.class);
+                for(DataSnapshot restSnapshot: dataSnapshot.getChildren()){
+                    Log.i("database info", "Check: " + restSnapshot.getValue());
+                    //get reviews of restaurant from firebase
+                    Review thisReview = restSnapshot.child("comments").getValue(Review.class);
                     reviewArrayList.add(thisReview);
+
+                    //get ratings of restaurant
+                    float rating = (Float)restSnapshot.child("rating").getValue();
+                    restRating.setRating(rating);
+
+                    //get phone number of restaurant
+                    String phone = (String) restSnapshot.child("phone").getValue();
+
+
+                    //get location of restaurant
+                    String location = (String) restSnapshot.child("location").getValue();
+                    restLocation.setText(location);
+
                 }
                 RecyclerReviewList adapter = new RecyclerReviewList(reviewArrayList);
                 myView.setAdapter(adapter);
@@ -115,20 +160,8 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-//
-//        ArrayList<Review> reviews = new ArrayList<Review>();
-//
-//        reviews.add(new Review("https://upload.wikimedia.org/wikipedia/en/2/21/Web_of_Spider-Man_Vol_1_129-1.png", "Haofan", (float) 3.0, "3 months ago", "Had a wonderful Sunday breakfast with good friends. My buddy had the Eggs Benedict and said it was the best he even had. I wanted a bite but it disappeared off his play too fast. Both the mushroom and western omelettes are very good. To top it off excellent delightful service. Thank you Kay!"));
-//        reviews.add(new Review("https://upload.wikimedia.org/wikipedia/en/2/21/Web_of_Spider-Man_Vol_1_129-1.png", "Haofan", (float) 3.0, "3 months ago", "content"));
-//        reviews.add(new Review("https://upload.wikimedia.org/wikipedia/en/2/21/Web_of_Spider-Man_Vol_1_129-1.png", "Haofan", (float) 3.0, "3 months ago", "content"));
-//        reviews.add(new Review("https://upload.wikimedia.org/wikipedia/en/2/21/Web_of_Spider-Man_Vol_1_129-1.png", "Haofan", (float) 3.0, "3 months ago", "content"));
-//        reviews.add(new Review("https://upload.wikimedia.org/wikipedia/en/2/21/Web_of_Spider-Man_Vol_1_129-1.png", "Haofan", (float) 3.0, "3 months ago", "content"));
 
-        // making articles recycle
-//        RecyclerReviewList adapter = new RecyclerReviewList(reviews);
         myView.setHasFixedSize(true);
-//        myView.setAdapter(adapter);
-//        RecyclerView myView = (RecyclerView) findViewById(R.id.recyclerview);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -141,6 +174,8 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
         super.onStart();
 
     }
+
+    //post button goes to PostReviewActivity to write review and post/cancel
     public void postReview(View view) {
         Intent intent = new Intent(RestaurantInfo.this, PostReviewActivity.class);
         startActivityForResult(intent, 21);
@@ -154,6 +189,8 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
             saveReviewToDB(userReview);
         }
     }
+
+    //save updated reviews to Firebase
     private void saveReviewToDB(String userReview){
         final String review = userReview;
         currentUserID=mAuthSetting.getCurrentUser().getUid();
@@ -170,7 +207,9 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
                 Review testReview = new Review(emailUserName, userIMGURL, (float) 3.0, "3 months ago", review);
                 HashMap<String, Object> restaurantParams = new HashMap<>();
                 restaurantParams.put(currentUserID, testReview);
-                commentRef.updateChildren(restaurantParams);
+
+                restRef.child("comments").updateChildren(restaurantParams);
+
                 HashMap<String, Object> userParams = new HashMap<>();
                 userParams.put("content", review);
                 userRef2.updateChildren(userParams).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -194,6 +233,8 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
 
 
     }
+
+    //bookmark the restaurant to make it become the favorite
     private void updateUserFavResteraurant(){
         currentUserID=mAuthSetting.getCurrentUser().getUid();
         restReference = userRef.child("Favorite");
@@ -217,13 +258,12 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
         });
 
         //sizeCounter++;
-
-
-
-
     }
+
+
     @Override
     public void onClick(View view) {
+        //Set amenties to be invisible. Make it visible when click it
         if (view == amenties) {
             if (restTags.getVisibility() != View.VISIBLE) {
                 restTags.setVisibility(View.VISIBLE);
@@ -232,12 +272,38 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
                 restTags.setVisibility(View.GONE);
             }
         }
+
+        //Opentime button loads time details of restaurant
+        if(view==openTime){
+            if (time_info.getVisibility() != View.VISIBLE) {
+                time_info.setVisibility(View.VISIBLE);
+            }
+            else{
+                time_info.setVisibility(View.GONE);
+            }
+        }
+
+        //get direction to restaurant
+        if(view==getDirection){
+
+        }
+
+        //call restaurant
+        if(view==Call) {
+            phoneNumber = myRest.getPhone();
+            Intent callIntent = new Intent(Intent.ACTION_CALL);
+            callIntent.setData(Uri.parse(phoneNumber));
+            startActivity(callIntent);
+        }
+
+        //bookmark favorite restaurant if user logged in
         if(view == favoriteButton && checkUserExixt==true){
 
             updateUserFavResteraurant();
 
         }
 
+        //show message if user wants to bookmark restaurant without logging in
         if(view==favoriteButton && checkUserExixt== false){
             Toast.makeText( RestaurantInfo.this,"User only",Toast.LENGTH_SHORT).show();
             //Intent goingToLogin= new Intent(RestaurantInfo.this,LogIn.class);
@@ -245,9 +311,13 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
             //goingToLogin.putExtra("Value",checkUserExixt);
             //startActivity(goingToLogin);
         }
+
+        //user can add review if logged in
         if(view==reviewButton && checkUserExixt==true){
             postReview(view);
         }
+
+        //show message if user wants to add review without logging in 
         if(view==reviewButton && checkUserExixt== false){
             Toast.makeText( RestaurantInfo.this,"User only",Toast.LENGTH_SHORT).show();
         }
