@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!--Circle profile image-->
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/profile_image"
                 android:layout_width="100dp"
@@ -56,6 +57,7 @@
 
     </LinearLayout>
 
+    <!--View contains all information of the user-->
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
@@ -69,7 +71,6 @@
             android:columnCount="1">
 
             <!--Review Card-->
-
             <android.support.v7.widget.CardView
                 android:id="@+id/reviews_card"
                 android:layout_width="match_parent"
@@ -104,6 +105,7 @@
                             android:textAlignment="textStart"
                             android:textSize="18sp" />
 
+                        <!--see more reviews-->
                         <Button
                             android:layout_width="20dp"
                             android:layout_height="20dp"
@@ -170,7 +172,6 @@
 
 
             <!--Favorites Card-->
-
             <android.support.v7.widget.CardView
                 android:id="@+id/favorites_card"
                 android:layout_width="match_parent"
@@ -210,8 +211,8 @@
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
-            <!--Recently Viewed Card-->
 
+            <!--Recently Viewed Card-->
             <android.support.v7.widget.CardView
                 android:id="@+id/recently_viewd_card"
                 android:layout_width="match_parent"
@@ -251,8 +252,8 @@
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
-            <!--Flavor Card-->
 
+            <!--Flavor Card-->
             <android.support.v7.widget.CardView
                 android:id="@+id/flavor_card"
                 android:layout_width="match_parent"
@@ -295,8 +296,8 @@
 
             </android.support.v7.widget.CardView>
 
-            <!--Expertise Card-->
 
+            <!--Expertise Card-->
             <android.support.v7.widget.CardView
                 android:id="@+id/expertise_card"
                 android:layout_width="match_parent"
@@ -330,7 +331,6 @@
 
 
             <!--Logout Card-->
-
             <android.support.v7.widget.CardView
                 android:id="@+id/logout_card"
                 android:layout_width="match_parent"
@@ -345,7 +345,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="LOG OUT" />
-
 
             </android.support.v7.widget.CardView>
 
