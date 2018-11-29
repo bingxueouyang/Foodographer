@@ -1,30 +1,24 @@
 package com.foodie.foodographer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.widget.LinearLayout;
-
-import java.util.ArrayList;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Home_fragment.OnFragmentInteractionListener} interface
+ * {@link SearchBarFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Home_fragment#newInstance} factory method to
+ * Use the {@link SearchBarFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Home_fragment extends Fragment implements View.OnClickListener{
+public class SearchBarFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -36,10 +30,14 @@ public class Home_fragment extends Fragment implements View.OnClickListener{
 
     private OnFragmentInteractionListener mListener;
 
-    private RecyclerView res_recycler;
-    private LinearLayout search_bar;
+    String name;
+    String location;
+    android.widget.SearchView nameSearch;
+    android.widget.SearchView locationSearch;
 
-    public Home_fragment() {
+    SearchResultFragment search_result = new SearchResultFragment();
+
+    public SearchBarFragment() {
         // Required empty public constructor
     }
 
@@ -49,11 +47,11 @@ public class Home_fragment extends Fragment implements View.OnClickListener{
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Home_fragment.
+     * @return A new instance of fragment SearchBarFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Home_fragment newInstance(String param1, String param2) {
-        Home_fragment fragment = new Home_fragment();
+    public static SearchBarFragment newInstance(String param1, String param2) {
+        SearchBarFragment fragment = new SearchBarFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -73,29 +71,50 @@ public class Home_fragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        //put restraunts information into an arraylist of size 10
-        ArrayList<Article> articles = new ArrayList<Article>(10);
-        articles.add(new Article("Hello Hamburger","https://amp.businessinsider.com/images/5a7dc169d03072af008b4bf2-750-562.jpg","https://en.m.wikipedia.org/w/index.php?title=Hamburger&mobileaction=toggle_view_mobile"));
-        articles.add(new Article("Hello XLB","https://daily.jstor.org/wp-content/uploads/2017/11/dim_sum_dumplings_1050x700.jpg","https://en.m.wikipedia.org/wiki/Xiaolongbao"));
-        articles.add(new Article("Hello JianBing","https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D400/sign=57ab32c9cfcec3fd8b3ea675e689d4b6/a50f4bfbfbedab64edf682c5fb36afc379311e2b.jpg","https://en.m.wikipedia.org/wiki/Jianbing"));
-        articles.add(new Article("Hello Red Bean Double Skin Milk","https://media-cdn.tripadvisor.com/media/daodao/photo-s/04/19/9e/1a/caption.jpg","https://en.m.wikipedia.org/wiki/Double_skin_milk"));
-        articles.add(new Article("Hello Crab","https://cp1.douguo.com/upload/caiku/3/9/b/600x400_39fa22c44f4f02d73e5c1fd953c0171b.jpg", "https://learnchinesefood.com/detail%3D9807"));
-
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_search_bar_fragment, container, false);
+        
+        //save the name and location of the restruant if the searchbar for name exist
+        nameSearch = view.findViewById(R.id.name_search);
+        nameSearch.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
 
-        search_bar = view.findViewById(R.id.search);
-        search_bar.setOnClickListener(this);
+                Bundle args = new Bundle();
+                args.putString("name", name);
+                args.putString("location", location);
+                search_result.setArguments(args);
+                getFragmentManager().beginTransaction().replace(R.id.search_result_container, search_result).commit();
+                //gotoSearch(name, location);
+                return true;
+            }
 
-        //recyclerview for restrauant list
-        res_recycler = (RecyclerView) view.findViewById(R.id.res_recycler);
-        res_recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //declare the RecyclerArticle adapter
-        RecyclerArticleList adapter = new RecyclerArticleList(articles);
-        res_recycler.setAdapter(adapter);
-        res_recycler.setItemAnimator(new DefaultItemAnimator());
-        //return this layout
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                name = nameSearch.getQuery().toString();
+                return true;
+            }
+        });
+        
+        //save the name and location of the restruant if the searchbar for location exist
+        locationSearch = view.findViewById(R.id.location_search);
+        locationSearch.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Bundle args = new Bundle();
+                args.putString("name", name);
+                args.putString("location", location);
+                search_result.setArguments(args);
+                getFragmentManager().beginTransaction().replace(R.id.search_result_container, search_result).commit();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                location = locationSearch.getQuery().toString();
+                return true;
+            }
+        });
         return view;
     }
 
@@ -123,15 +142,6 @@ public class Home_fragment extends Fragment implements View.OnClickListener{
         mListener = null;
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v == search_bar){
-            FragmentTransaction fr = getFragmentManager().beginTransaction();
-            fr.replace(R.id.frame_container, new SearchBar_fragment());
-            fr.commit();
-        }
-    }
-
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -145,5 +155,16 @@ public class Home_fragment extends Fragment implements View.OnClickListener{
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    //go to search result page with name and location of the restruant
+    public void gotoSearch(String rest_name, String rest_location) {
+
+        Intent intent = new Intent(getActivity(), SearchResult.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("name", rest_name);
+        bundle.putString("location", rest_location);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

@@ -38,12 +38,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link account_setting_fragment.OnFragmentInteractionListener} interface
+ * {@link AccountSettingFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link account_setting_fragment#newInstance} factory method to
+ * Use the {@link AccountSettingFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class account_setting_fragment extends Fragment implements View.OnClickListener{
+public class AccountSettingFragment extends Fragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -76,7 +76,7 @@ public class account_setting_fragment extends Fragment implements View.OnClickLi
 
     private OnFragmentInteractionListener mListener;
 
-    public account_setting_fragment() {
+    public AccountSettingFragment() {
         // Required empty public constructor
     }
 
@@ -86,11 +86,11 @@ public class account_setting_fragment extends Fragment implements View.OnClickLi
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment account_setting_fragment.
+     * @return A new instance of fragment AccountSettingFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static account_setting_fragment newInstance(String param1, String param2) {
-        account_setting_fragment fragment = new account_setting_fragment();
+    public static AccountSettingFragment newInstance(String param1, String param2) {
+        AccountSettingFragment fragment = new AccountSettingFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -199,7 +199,7 @@ public class account_setting_fragment extends Fragment implements View.OnClickLi
             public void onComplete(@NonNull Task task) {
                 if(task.isSuccessful()){
                     Toast.makeText( getContext(),"Update account information successfully",Toast.LENGTH_SHORT).show();
-                    getFragmentManager().beginTransaction().replace(getId(), new user_profile_fragment()).commit();
+                    getFragmentManager().beginTransaction().replace(getId(), new UserProfileFragment()).commit();
                 }else{
                     String grab_message=task.getException().getMessage();
                     Toast.makeText( getContext(),"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
@@ -220,7 +220,7 @@ public class account_setting_fragment extends Fragment implements View.OnClickLi
             public void onComplete(@NonNull Task task) {
                 if(task.isSuccessful()){
                     Toast.makeText( getContext(),"Update account information successfully",Toast.LENGTH_SHORT).show();
-                    getFragmentManager().beginTransaction().replace(getId(), new user_profile_fragment()).commit();
+                    getFragmentManager().beginTransaction().replace(getId(), new UserProfileFragment()).commit();
                 }else{
                     String grab_message=task.getException().getMessage();
                     Toast.makeText( getContext(),"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();

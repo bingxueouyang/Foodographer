@@ -35,10 +35,10 @@
         <activity android:name=".SearchBar" />
         <activity android:name=".ResetPassword" />
         <activity android:name=".RestaurantInfo" />
-        <activity android:name=".account_setting" />
+        <activity android:name=".AccountSetting" />
         <activity android:name=".ArticlePage" />
         <activity android:name=".PostReviewActivity" />
-        <activity android:name=".favoriteRestList" />
+        <activity android:name=".FavoriteRestList" />
         <activity android:name=".UserFavoriteRestaurants" />
         <activity android:name=".UserRecentViewRestaurants" />
         <activity android:name=".UserCommentRestaurant"></activity>

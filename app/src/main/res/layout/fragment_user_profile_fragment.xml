@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:id="@+id/userProfile"
     android:background="@color/white"
-    tools:context=".user_profile_fragment">
+    tools:context=".UserProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout

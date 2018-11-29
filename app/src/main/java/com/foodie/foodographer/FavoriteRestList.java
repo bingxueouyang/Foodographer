@@ -3,7 +3,7 @@ package com.foodie.foodographer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class favoriteRestList extends AppCompatActivity {
+public class FavoriteRestList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

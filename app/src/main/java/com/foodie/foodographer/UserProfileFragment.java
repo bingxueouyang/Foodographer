@@ -27,12 +27,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link user_profile_fragment.OnFragmentInteractionListener} interface
+ * {@link UserProfileFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link user_profile_fragment#newInstance} factory method to
+ * Use the {@link UserProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class user_profile_fragment extends Fragment implements View.OnClickListener{
+public class UserProfileFragment extends Fragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -64,7 +64,7 @@ public class user_profile_fragment extends Fragment implements View.OnClickListe
     private Button commentBut;
 
 
-    public user_profile_fragment() {
+    public UserProfileFragment() {
         // Required empty public constructor
     }
 
@@ -74,11 +74,11 @@ public class user_profile_fragment extends Fragment implements View.OnClickListe
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment user_profile_fragment.
+     * @return A new instance of fragment UserProfileFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static user_profile_fragment newInstance(String param1, String param2) {
-        user_profile_fragment fragment = new user_profile_fragment();
+    public static UserProfileFragment newInstance(String param1, String param2) {
+        UserProfileFragment fragment = new UserProfileFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -212,7 +212,7 @@ public class user_profile_fragment extends Fragment implements View.OnClickListe
         }
         //go to account setting page is clicked setting button
         if(v == settingBut){
-            getFragmentManager().beginTransaction().replace(R.id.userProfile, new account_setting_fragment()).
+            getFragmentManager().beginTransaction().replace(R.id.userProfile, new AccountSettingFragment()).
                 addToBackStack(null).commit();
         }
         //go to favorite restaurant page if clicked favlist button

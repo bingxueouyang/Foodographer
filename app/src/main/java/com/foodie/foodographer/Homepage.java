@@ -14,12 +14,12 @@ import android.widget.TextView;
 
 
 public class Homepage extends AppCompatActivity
-        implements Home_fragment.OnFragmentInteractionListener,
-        user_profile_fragment.OnFragmentInteractionListener,
-        SearchBar_fragment.OnFragmentInteractionListener,
-        search_result_fragment.OnFragmentInteractionListener,
+        implements HomeFragment.OnFragmentInteractionListener,
+        UserProfileFragment.OnFragmentInteractionListener,
+        SearchBarFragment.OnFragmentInteractionListener,
+        SearchResultFragment.OnFragmentInteractionListener,
         LoginFragment.OnFragmentInteractionListener,
-        account_setting_fragment.OnFragmentInteractionListener{
+        AccountSettingFragment.OnFragmentInteractionListener{
 
     private LinearLayout search_bar;
     private TextView mTextMessage;
@@ -32,14 +32,14 @@ public class Homepage extends AppCompatActivity
             Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    fragment = new Home_fragment();
+                    fragment = new HomeFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_recommend:
                     mTextMessage.setText(R.string.title_recommend);
                     return true;
                 case R.id.navigation_profile:
-                    fragment = new user_profile_fragment();
+                    fragment = new UserProfileFragment();
                     loadFragment(fragment);
                     return true;
             }
@@ -60,7 +60,7 @@ public class Homepage extends AppCompatActivity
 
         //set the default fragment to home
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.replace(R.id.frame_container, new Home_fragment());
+        tx.replace(R.id.frame_container, new HomeFragment());
         tx.commit();
         //search_bar = (LinearLayout)findViewById(R.id.search);
         //search_bar.setOnClickListener(new View.OnClickListener() {

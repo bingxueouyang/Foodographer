@@ -69,6 +69,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
             favListBut.setOnClickListener(this);
             recentViewListBut=(Button) findViewById(R.id.listView);
             recentViewListBut.setOnClickListener(this);
+
             // grab user info from the database and display in the userinfo page
             profileRefer.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -123,7 +124,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         }
         if(view==settingBut){
             finish();
-            startActivity(new Intent(UserProfile.this, account_setting.class));
+            startActivity(new Intent(UserProfile.this, AccountSetting.class));
         }
         if(view==favListBut){
             finish();
