@@ -1,5 +1,6 @@
 package com.foodie.foodographer;
 
+//import necessary libraries
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,7 +13,12 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
+/**
+ * The main container Activity of various fragments(dynamic pages). Switched between different
+ * fragments as the user interact with the navigation bar at the bottom. The navigation bar
+ * consists of three items: home page, recommendation(currently not available), and user profile.
+ * The search button(top left) lead the user to the Search Page.
+ */
 public class Homepage extends AppCompatActivity
         implements HomeFragment.OnFragmentInteractionListener,
         UserProfileFragment.OnFragmentInteractionListener,
@@ -23,7 +29,8 @@ public class Homepage extends AppCompatActivity
 
     private LinearLayout search_bar;
     private TextView mTextMessage;
-
+                
+    //load different fragments as the user clicked on respective navigation items
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -35,6 +42,7 @@ public class Homepage extends AppCompatActivity
                     fragment = new HomeFragment();
                     loadFragment(fragment);
                     return true;
+                //currently the 'recommend' item is not available
                 case R.id.navigation_recommend:
                     mTextMessage.setText(R.string.title_recommend);
                     return true;
@@ -62,38 +70,13 @@ public class Homepage extends AppCompatActivity
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         tx.replace(R.id.frame_container, new HomeFragment());
         tx.commit();
-        //search_bar = (LinearLayout)findViewById(R.id.search);
-        //search_bar.setOnClickListener(new View.OnClickListener() {
-//
-        //     @Override
-        //  public void onClick(View v) {
-        //      gotoSearchBar();
-        //   }
-        //});
-
-        //ArrayList<Article> articles = new ArrayList<Article>(10);
-        //articles.add(new Article("Hello Hamburger","https://amp.businessinsider.com/images/5a7dc169d03072af008b4bf2-750-562.jpg","https://en.m.wikipedia.org/w/index.php?title=Hamburger&mobileaction=toggle_view_mobile"));
-        //articles.add(new Article("Hello XLB","https://daily.jstor.org/wp-content/uploads/2017/11/dim_sum_dumplings_1050x700.jpg","https://en.m.wikipedia.org/wiki/Xiaolongbao"));
-        //articles.add(new Article("Hello JianBing","https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D400/sign=57ab32c9cfcec3fd8b3ea675e689d4b6/a50f4bfbfbedab64edf682c5fb36afc379311e2b.jpg","https://en.m.wikipedia.org/wiki/Jianbing"));
-        //articles.add(new Article("Hello Red Bean Double Skin Milk","https://media-cdn.tripadvisor.com/media/daodao/photo-s/04/19/9e/1a/caption.jpg","https://en.m.wikipedia.org/wiki/Double_skin_milk"));
-        //articles.add(new Article("Hello Crab","https://cp1.douguo.com/upload/caiku/3/9/b/600x400_39fa22c44f4f02d73e5c1fd953c0171b.jpg", "https://learnchinesefood.com/detail%3D9807"));
-
-        // making articles recycle
-        //RecyclerArticleList adapter = new RecyclerArticleList(articles);
-        //RecyclerView myView =  (RecyclerView)findViewById(R.id.recyclerview);
-        //myView.setHasFixedSize(true);
-        //myView.setAdapter(adapter);
-        //LinearLayoutManager llm = new LinearLayoutManager(this);
-        //llm.setOrientation(LinearLayoutManager.VERTICAL);
-        //myView.setLayoutManager(llm);
-
     }
-
+    //deprecated;
     public void gotoSearchBar() {
 
         startActivity(new Intent(this, SearchBar.class));
     }
-
+    //deprecated
     public void gotoProfile(MenuItem item){
 
         startActivity(new Intent(this, UserProfile.class));
