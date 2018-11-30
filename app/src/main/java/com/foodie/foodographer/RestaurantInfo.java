@@ -1,5 +1,6 @@
 package com.foodie.foodographer;
 
+//import all necessary libraries
 
 import android.content.Intent;
 import android.media.Image;
@@ -50,13 +51,17 @@ import android.widget.RatingBar;
 import android.widget.ImageView;
 import android.support.v7.widget.CardView;
 
-public class RestaurantInfo extends AppCompatActivity implements View.OnClickListener{
+public class RestaurantInfo extends AppCompatActivity implements View.OnClickListener {
 
     private CardView amenties;
     private TextView restName;
+    private TextView review_numbers;
+    private RatingBar restRating;
     private LinearLayout restTags;
     private ImageButton favoriteButton;
+    //reference to firebase authentication which allow us to get the current login user
     private FirebaseAuth mAuthSetting;
+    //reference to the current restaurant's comment child
     private DatabaseReference commentRef;
     private DatabaseReference userRef;
     private String currentUserID;
@@ -68,12 +73,13 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
     private RecyclerView myView;
     String Rest_ID;
     private Button reviewButton;
-    private Boolean checkUserExixt=true;
+    private Boolean checkUserExixt = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_info);
-        mAuthSetting= FirebaseAuth.getInstance();
+        mAuthSetting = FirebaseAuth.getInstance();
 
         restTags = findViewById(R.id.rest_tags);
         restTags.setVisibility(View.GONE);
@@ -82,17 +88,17 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
         amenties.setOnClickListener(this);
         myRest = getIntent().getParcelableExtra("myRest");
         favoriteButton = findViewById(R.id.likeButton);
-        reviewButton=(Button) findViewById(R.id.saveRating_Btn);
-        if(mAuthSetting.getCurrentUser()!=null) {
-            checkUserExixt=true;
+        reviewButton = (Button) findViewById(R.id.saveRating_Btn);
+        if (mAuthSetting.getCurrentUser() != null) {
+            checkUserExixt = true;
             currentUserID = mAuthSetting.getCurrentUser().getUid();
             userRef = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
 
         }
         Rest_ID = myRest.getId();
-        if(mAuthSetting.getCurrentUser()==null){
-            Log.d("wassup","it is null");
-            checkUserExixt=false;
+        if (mAuthSetting.getCurrentUser() == null) {
+            Log.d("wassup", "it is null");
+            checkUserExixt = false;
         }
         favoriteButton.setOnClickListener(this);
         reviewButton.setOnClickListener(this);
@@ -100,8 +106,8 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
         restName = findViewById(R.id.rest_name);
         restName.setText(myRest.getName());
 
-        RatingBar restRating = findViewById(R.id.rest_rating);
-        restRating.setRating(myRest.getRating());
+        review_numbers = findViewById(R.id.rest_review_numbers);
+        restRating = findViewById(R.id.rest_rating);
 
         TextView restLocation = findViewById(R.id.rest_location);
         restLocation.setText(myRest.getLocation());
@@ -117,11 +123,26 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Log.i("snapshot", "Inside onDataChange!!!");
                 reviewArrayList.clear();
-                for(DataSnapshot reviewSnapshot: dataSnapshot.getChildren()){
-                    Log.i("database info", "Check: " + reviewSnapshot.getValue());
-                    Review thisReview = reviewSnapshot.getValue(Review.class);
-                    reviewArrayList.add(thisReview);
+                //if the current restaurant contains user reviews
+                if (dataSnapshot.exists()) {
+                    long commentNumber = dataSnapshot.getChildrenCount();
+                    String reviewString = (commentNumber==1) ? "Review" : "Reviews";
+                    review_numbers.setText(commentNumber + " " + reviewString);
+                    float totalReviewPoints = 0;
+                    for (DataSnapshot myComment : dataSnapshot.getChildren()) {
+                        Log.i("database info", "Check: " + myComment.getValue());
+                        Review thisReview = myComment.getValue(Review.class);
+                        reviewArrayList.add(thisReview);
+                        float currentRating = myComment.child("rating").getValue(Float.class);
+                        totalReviewPoints += currentRating;
+                    }
+                    float finalRatingPoints = totalReviewPoints/commentNumber;
+                    restRating.setRating(finalRatingPoints);
+                } else {//if the current restaurant does not contain any comments
+                    restRating.setRating(myRest.getRating());
+                    review_numbers.setText("No Reviews \n(Yelp Rating)");
                 }
+
                 RecyclerReviewList adapter = new RecyclerReviewList(reviewArrayList);
                 myView.setAdapter(adapter);
             }
@@ -146,6 +167,7 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
         super.onStart();
 
     }
+
     public void postReview(View view) {
         Intent intent = new Intent(RestaurantInfo.this, PostReviewActivity.class);
         startActivityForResult(intent, 21);
@@ -160,38 +182,39 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
             saveReviewToDB(userReview, userRating);
         }
     }
-    private void saveReviewToDB(String userReview, float userRating){
+
+    private void saveReviewToDB(String userReview, float userRating) {
         final String review = userReview;
-        final float rating  = userRating;
-        currentUserID=mAuthSetting.getCurrentUser().getUid();
+        final float rating = userRating;
+        currentUserID = mAuthSetting.getCurrentUser().getUid();
         // userRef = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
-        userRef2=userRef.child("comments").child(Rest_ID);
+        userRef2 = userRef.child("comments").child(Rest_ID);
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Log.i("snapshot", "Inside onDataChange!!!");
                 String email = mAuthSetting.getCurrentUser().getEmail();
-                String emailUserName = email.substring(0,email.indexOf('@'));
+                String emailUserName = email.substring(0, email.indexOf('@'));
                 String userIMGURL = dataSnapshot.child("profileImageUrl").getValue().toString();
                 Log.i("database", "image Url is:" + userIMGURL);
-                Review testReview = new Review(emailUserName, userIMGURL, rating,  "3 months ago", review);
+                Review testReview = new Review(emailUserName, userIMGURL, rating, "3 months ago", review);
                 HashMap<String, Object> restaurantParams = new HashMap<>();
                 restaurantParams.put(currentUserID, testReview);
                 commentRef.updateChildren(restaurantParams);
                 HashMap<String, Object> userParams = new HashMap<>();
-                userParams.put("username",emailUserName);
-                userParams.put("userIMGURL",userIMGURL);
-                userParams.put("time","3 months ago");
-                userParams.put("rating",rating);
+                userParams.put("username", emailUserName);
+                userParams.put("userIMGURL", userIMGURL);
+                userParams.put("time", "3 months ago");
+                userParams.put("rating", rating);
                 userParams.put("content", review);
                 userRef2.updateChildren(userParams).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText( RestaurantInfo.this,"Update your favorite restaurant successfully",Toast.LENGTH_SHORT).show();
-                        }else{
-                            String grab_message=task.getException().getMessage();
-                            Toast.makeText( RestaurantInfo.this,"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                        if (task.isSuccessful()) {
+                            Toast.makeText(RestaurantInfo.this, "Update your favorite restaurant successfully", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String grab_message = task.getException().getMessage();
+                            Toast.makeText(RestaurantInfo.this, "Error occured:" + grab_message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -205,23 +228,24 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
 
 
     }
-    private void updateUserFavResteraurant(){
-        currentUserID=mAuthSetting.getCurrentUser().getUid();
+
+    private void updateUserFavResteraurant() {
+        currentUserID = mAuthSetting.getCurrentUser().getUid();
         restReference = userRef.child("Favorite");
-        final String grabUserFavoriteRest= myRest.getName();
-        HashMap temp =new HashMap();
+        final String grabUserFavoriteRest = myRest.getName();
+        HashMap temp = new HashMap();
         //String temp2=restReference.push().getKey();
         //restReference.child(temp2).setValue(myRest);
 
-        temp.put(myRest.getId(),grabUserFavoriteRest);
+        temp.put(myRest.getId(), grabUserFavoriteRest);
         restReference.updateChildren(temp).addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
-                if(task.isSuccessful()){
-                    Toast.makeText( RestaurantInfo.this,"Update your favorite restaurant successfully",Toast.LENGTH_SHORT).show();
-                }else{
-                    String grab_message=task.getException().getMessage();
-                    Toast.makeText( RestaurantInfo.this,"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                if (task.isSuccessful()) {
+                    Toast.makeText(RestaurantInfo.this, "Update your favorite restaurant successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    String grab_message = task.getException().getMessage();
+                    Toast.makeText(RestaurantInfo.this, "Error occured:" + grab_message, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -230,37 +254,35 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
         //sizeCounter++;
 
 
-
-
     }
+
     @Override
     public void onClick(View view) {
         if (view == amenties) {
             if (restTags.getVisibility() != View.VISIBLE) {
                 restTags.setVisibility(View.VISIBLE);
-            }
-            else{
+            } else {
                 restTags.setVisibility(View.GONE);
             }
         }
-        if(view == favoriteButton && checkUserExixt==true){
+        if (view == favoriteButton && checkUserExixt == true) {
 
             updateUserFavResteraurant();
 
         }
 
-        if(view==favoriteButton && checkUserExixt== false){
-            Toast.makeText( RestaurantInfo.this,"User only",Toast.LENGTH_SHORT).show();
+        if (view == favoriteButton && checkUserExixt == false) {
+            Toast.makeText(RestaurantInfo.this, "User only", Toast.LENGTH_SHORT).show();
             //Intent goingToLogin= new Intent(RestaurantInfo.this,LogIn.class);
-            Log.d("checkMes","checking message"+checkUserExixt);
+            Log.d("checkMes", "checking message" + checkUserExixt);
             //goingToLogin.putExtra("Value",checkUserExixt);
             //startActivity(goingToLogin);
         }
-        if(view==reviewButton && checkUserExixt==true){
+        if (view == reviewButton && checkUserExixt == true) {
             postReview(view);
         }
-        if(view==reviewButton && checkUserExixt== false){
-            Toast.makeText( RestaurantInfo.this,"User only",Toast.LENGTH_SHORT).show();
+        if (view == reviewButton && checkUserExixt == false) {
+            Toast.makeText(RestaurantInfo.this, "User only", Toast.LENGTH_SHORT).show();
         }
     }
 
