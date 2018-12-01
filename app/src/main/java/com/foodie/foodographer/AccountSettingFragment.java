@@ -111,16 +111,20 @@ public class AccountSettingFragment extends Fragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_account_setting_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_account_setting_fragment,
+                container, false);
         mAuthSetting = FirebaseAuth.getInstance();
         currentUserID=mAuthSetting.getCurrentUser().getUid();
-        profileRefer=FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
+        profileRefer=FirebaseDatabase.getInstance().getReference().
+                child("users").child(currentUserID);
         storeUserImage=FirebaseStorage.getInstance().getReference().child("Profile Images");
 
         savingBut = (Button) view.findViewById(R.id.savingInformation);
         savingBut.setOnClickListener(this);
         image =(CircleImageView) view.findViewById(R.id.profileSettingImage);
-        ArrayAdapter<String> expertAdapter = new ArrayAdapter<String>( getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
+        ArrayAdapter<String> expertAdapter = new ArrayAdapter<String>( getContext(),
+                android.R.layout.simple_list_item_1, getResources().
+                getStringArray(R.array.expertise_array));
         // Specify the layout to use when the list of choices appears
         expertAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
        
@@ -138,8 +142,9 @@ public class AccountSettingFragment extends Fragment implements View.OnClickList
 
 
 
-        ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>( getContext(), android.R.layout.simple_list_item_1, getResources().
-                                                                        getStringArray(R.array.expertise_array));
+        ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>( getContext(),
+                android.R.layout.simple_list_item_1, getResources().
+                getStringArray(R.array.expertise_array));
         interestAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //get the user input for expert in and 
         changeInterestSpinner = (Spinner) view.findViewById(R.id.InterestChange1);
@@ -198,11 +203,15 @@ public class AccountSettingFragment extends Fragment implements View.OnClickList
             @Override
             public void onComplete(@NonNull Task task) {
                 if(task.isSuccessful()){
-                    Toast.makeText( getContext(),"Update account information successfully",Toast.LENGTH_SHORT).show();
-                    getFragmentManager().beginTransaction().replace(getId(), new UserProfileFragment()).commit();
+                    Toast.makeText( getContext(),
+                            "Update account information successfully",
+                            Toast.LENGTH_SHORT).show();
+                    getFragmentManager().beginTransaction().
+                            replace(getId(), new UserProfileFragment()).commit();
                 }else{
                     String grab_message=task.getException().getMessage();
-                    Toast.makeText( getContext(),"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                    Toast.makeText( getContext(),
+                            "Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -219,11 +228,15 @@ public class AccountSettingFragment extends Fragment implements View.OnClickList
             @Override
             public void onComplete(@NonNull Task task) {
                 if(task.isSuccessful()){
-                    Toast.makeText( getContext(),"Update account information successfully",Toast.LENGTH_SHORT).show();
-                    getFragmentManager().beginTransaction().replace(getId(), new UserProfileFragment()).commit();
+                    Toast.makeText( getContext(),
+                            "Update account information successfully",
+                            Toast.LENGTH_SHORT).show();
+                    getFragmentManager().beginTransaction().
+                            replace(getId(), new UserProfileFragment()).commit();
                 }else{
                     String grab_message=task.getException().getMessage();
-                    Toast.makeText( getContext(),"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                    Toast.makeText( getContext(),
+                            "Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -234,7 +247,8 @@ public class AccountSettingFragment extends Fragment implements View.OnClickList
             final StorageReference filePath = storeUserImage.child(currentUserID);
             Bitmap bitmap=null;
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getApplication().getContentResolver(), resultUri);
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().
+                        getApplication().getContentResolver(), resultUri);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -263,7 +277,9 @@ public class AccountSettingFragment extends Fragment implements View.OnClickList
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(getContext(), "Profile Image stored successfully to Firebase storage...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),
+                                "Profile Image stored successfully to Firebase storage...",
+                                Toast.LENGTH_SHORT).show();
 
                         Uri uriAddress=task.getResult();
                         Map newImage = new HashMap();

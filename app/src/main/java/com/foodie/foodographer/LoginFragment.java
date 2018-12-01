@@ -93,7 +93,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         
         //if the user exist, go to user profile page
         if(mAuth2.getCurrentUser()!= null){
-            getFragmentManager().beginTransaction().replace(R.id.LoginPage, new UserProfileFragment()).commit();
+            getFragmentManager().beginTransaction().
+                    replace(R.id.LoginPage, new UserProfileFragment()).commit();
         }
         
         progressDialog2= new ProgressDialog(getContext());
@@ -142,7 +143,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                         }else {
                             // If sign in fails, display a message to the user.
                             String grab_error=task.getException().getMessage();
-                            Toast.makeText(getActivity(),"Error occur:"+grab_error,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(),
+                                    "Error occur:"+grab_error,Toast.LENGTH_SHORT).show();
                         }
                         progressDialog2.dismiss();
 
@@ -156,9 +158,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         checkingEmail_true= user.isEmailVerified();
 
         if(checkingEmail_true==true){
-            getFragmentManager().beginTransaction().replace(getId(), new UserProfileFragment()).commit();
+            getFragmentManager().beginTransaction().
+                    replace(getId(), new UserProfileFragment()).commit();
         }else{
-            Toast.makeText(getActivity(),"Go verified your email please!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),
+                    "Go verified your email please!",Toast.LENGTH_SHORT).show();
             mAuth2.signOut();
         }
     }
@@ -189,14 +193,17 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view){
+        //logout
         if(view==loginBut){
             userLogin();
 
         }
+        //go to sign up page
         if(view ==loginText){
             getActivity().finish();
             startActivity(new Intent(getActivity(),SignUp.class));
         }
+        //go to find my password page
         if(view ==forgotpasswordLink){
             getActivity().finish();
             startActivity(new Intent(getActivity(),ResetPassword.class));

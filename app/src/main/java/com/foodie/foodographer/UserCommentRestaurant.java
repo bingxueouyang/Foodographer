@@ -16,7 +16,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class UserCommentRestaurant extends AppCompatActivity {
-    public static ArrayList<String> restaurantIDList; //ArrayList to store all of user's recent comment restaurant IDs
+    //ArrayList to store all of user's recent comment restaurant IDs
+    public static ArrayList<String> restaurantIDList;
     //ArrayList to store user's recent comment as Review Objects
     ArrayList<Review> favoriteReviewList;
     //DB reference to current user
@@ -35,7 +36,8 @@ public class UserCommentRestaurant extends AppCompatActivity {
         commentView= (RecyclerView)findViewById(R.id.commentUserRecyclerView);
         mAuthSetting = FirebaseAuth.getInstance();
         String currentUserID = mAuthSetting.getCurrentUser().getUid();
-        currentUserReference = FirebaseDatabase.getInstance().getReference("users").child(currentUserID);
+        currentUserReference = FirebaseDatabase.getInstance().
+                getReference("users").child(currentUserID);
         restaurantReference = FirebaseDatabase.getInstance().getReference("Restaurants");
         //initialize two container lists
         restaurantIDList = new ArrayList<>();
@@ -49,11 +51,13 @@ public class UserCommentRestaurant extends AppCompatActivity {
                 favoriteReviewList.clear();
                 //for every child under user's "comments"
                 for (DataSnapshot commentRestaurantID : dataSnapshot.getChildren()) {
-                    Log.i("comment", "Current comments is: " + commentRestaurantID.getKey());
+                    Log.i("comment", "Current comments is: " +
+                            commentRestaurantID.getKey());
                     restaurantIDList.add(commentRestaurantID.getKey());
                     Review thisComment = commentRestaurantID.getValue(Review.class);
                     favoriteReviewList.add(thisComment);
-                    Log.i("commentTocheck", "Restaurant added:" + thisComment.getUsername());
+                    Log.i("commentTocheck", "Restaurant added:" +
+                            thisComment.getUsername());
                     Log.i("commenNOT", "IMGURL: " + thisComment.getUserIMGURL());
                 }
                 RecyclerReviewList adapter = new RecyclerReviewList(favoriteReviewList);

@@ -22,15 +22,15 @@
             <LinearLayout
                 android:id="@+id/search"
                 android:layout_width="325dp"
-                android:onClick="gotoSearchBar"
                 android:layout_height="wrap_content"
                 android:background="@color/white">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/search_icon"
                     android:layout_gravity="start"
-                    android:padding="10dp"/>
+                    android:padding="10dp"
+                    android:src="@mipmap/search_icon" />
 
             </LinearLayout>
 
@@ -39,7 +39,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
-                android:onClick="gotoFilter"
                 app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
 
 

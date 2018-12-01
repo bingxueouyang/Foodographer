@@ -99,7 +99,8 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_user_profile_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_profile_fragment,
+                container, false);
 
         //declare signout button and set ClickListener
         signout= (Button) view.findViewById(R.id.logoutButton);
@@ -115,12 +116,14 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         
         //go back to login if this user is not exist
         if(currentUser==null){
-            getFragmentManager().beginTransaction().replace(R.id.userProfile, new LoginFragment()).commit();
+            getFragmentManager().beginTransaction().replace(R.id.userProfile,
+                    new LoginFragment()).commit();
         }
         //save user's information, set signout, setting, favList, recent view and comment buttons.
         else {
             currentUserID = currentUser.getUid();
-            profileRefer = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
+            profileRefer = FirebaseDatabase.getInstance().getReference().
+                    child("users").child(currentUserID);
 
             userEmail_textview = (TextView) view.findViewById(R.id.username);
             String email = currentUser.getEmail();
@@ -212,7 +215,8 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         }
         //go to account setting page is clicked setting button
         if(v == settingBut){
-            getFragmentManager().beginTransaction().replace(R.id.userProfile, new AccountSettingFragment()).
+            getFragmentManager().beginTransaction().
+                    replace(R.id.userProfile, new AccountSettingFragment()).
                 addToBackStack(null).commit();
         }
         //go to favorite restaurant page if clicked favlist button

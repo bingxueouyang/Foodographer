@@ -17,7 +17,8 @@ import com.squareup.picasso.Picasso;
 import android.util.Log;
 import de.hdodenhof.circleimageview.CircleImageView;
 public class UserProfile extends AppCompatActivity implements View.OnClickListener {
-    // initialize firebase authentication, button, textview, circleimageview of user image and datebase reference.
+    // initialize firebase authentication, button, textview,
+    // circleimageview of user image and datebase reference.
     private FirebaseAuth mAuth3;
     private Button signout;
     private TextView userEmail_textview;
@@ -52,7 +53,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
             //grab current user id
             currentUserID = currentUser.getUid();
             //going to database with user id to read the user info
-            profileRefer = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
+            profileRefer = FirebaseDatabase.getInstance().
+                    getReference().child("users").child(currentUserID);
             
             userEmail_textview = (TextView) findViewById(R.id.username);
             String email = currentUser.getEmail();
@@ -78,9 +80,12 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
                     String imageOfUser = dataSnapshot.child("profileImageUrl").getValue().toString();
                     Log.d("checking", imageOfUser + "checking id");
 
-                    String firstExpertise = dataSnapshot.child("Expert").child("Expert1").getValue().toString();
-                    String secondExpertise = dataSnapshot.child("Expert").child("Expert2").getValue().toString();
-                    String thirdExpertise = dataSnapshot.child("Expert").child("Expert3").getValue().toString();
+                    String firstExpertise = dataSnapshot.child("Expert").
+                            child("Expert1").getValue().toString();
+                    String secondExpertise = dataSnapshot.child("Expert").
+                            child("Expert2").getValue().toString();
+                    String thirdExpertise = dataSnapshot.child("Expert").
+                            child("Expert3").getValue().toString();
 
                     totalExpertise = firstExpertise +" | "+ secondExpertise +" | "+ thirdExpertise;
                     //showing user image

@@ -29,7 +29,8 @@ public class PostReviewActivity extends AppCompatActivity {
       String inputReview = ReviewText.getText().toString().trim();
       float inputRating = RatingBar.getRating();
       if(inputReview.equals("")){
-         Toast.makeText(this, "Please enter a valid review.", Toast.LENGTH_SHORT).show();
+         Toast.makeText(this,
+                 "Please enter a valid review.", Toast.LENGTH_SHORT).show();
          return;
       }
       Intent resultIntent = new Intent();

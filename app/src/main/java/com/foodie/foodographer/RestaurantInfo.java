@@ -86,7 +86,8 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
         if(mAuthSetting.getCurrentUser()!=null) {
             checkUserExixt=true;
             currentUserID = mAuthSetting.getCurrentUser().getUid();
-            userRef = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
+            userRef = FirebaseDatabase.getInstance().
+                    getReference().child("users").child(currentUserID);
 
         }
         Rest_ID = myRest.getId();
@@ -108,7 +109,8 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
 
         ImageView restIMG = findViewById(R.id.rest_IMG);
         new DownloadImageTask(restIMG).execute(myRest.getIMGURL());
-        commentRef = FirebaseDatabase.getInstance().getReference("Restaurants").child(Rest_ID).child("comments");
+        commentRef = FirebaseDatabase.getInstance().
+                getReference("Restaurants").child(Rest_ID).child("comments");
         myView = (RecyclerView) findViewById(R.id.recyclerview);
         reviewArrayList = new ArrayList<>();
 
@@ -164,7 +166,6 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
         final String review = userReview;
         final float rating  = userRating;
         currentUserID=mAuthSetting.getCurrentUser().getUid();
-        // userRef = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
         userRef2=userRef.child("comments").child(Rest_ID);
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -174,7 +175,8 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
                 String emailUserName = email.substring(0,email.indexOf('@'));
                 String userIMGURL = dataSnapshot.child("profileImageUrl").getValue().toString();
                 Log.i("database", "image Url is:" + userIMGURL);
-                Review testReview = new Review(emailUserName, userIMGURL, rating,  "3 months ago", review);
+                Review testReview = new Review(emailUserName, userIMGURL, rating,
+                        "3 months ago", review);
                 HashMap<String, Object> restaurantParams = new HashMap<>();
                 restaurantParams.put(currentUserID, testReview);
                 commentRef.updateChildren(restaurantParams);
@@ -188,10 +190,13 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText( RestaurantInfo.this,"Update your favorite restaurant successfully",Toast.LENGTH_SHORT).show();
+                            Toast.makeText( RestaurantInfo.this,
+                                    "Update your favorite restaurant successfully",
+                                    Toast.LENGTH_SHORT).show();
                         }else{
                             String grab_message=task.getException().getMessage();
-                            Toast.makeText( RestaurantInfo.this,"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                            Toast.makeText( RestaurantInfo.this,
+                                    "Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -218,10 +223,13 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onComplete(@NonNull Task task) {
                 if(task.isSuccessful()){
-                    Toast.makeText( RestaurantInfo.this,"Update your favorite restaurant successfully",Toast.LENGTH_SHORT).show();
+                    Toast.makeText( RestaurantInfo.this,
+                            "Update your favorite restaurant successfully",
+                            Toast.LENGTH_SHORT).show();
                 }else{
                     String grab_message=task.getException().getMessage();
-                    Toast.makeText( RestaurantInfo.this,"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                    Toast.makeText( RestaurantInfo.this,
+                            "Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
                 }
 
             }

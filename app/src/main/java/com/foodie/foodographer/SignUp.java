@@ -67,7 +67,9 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
         addInterest.setOnClickListener(this);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> expertAdapter = new ArrayAdapter<String>( SignUp.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
+        ArrayAdapter<String> expertAdapter = new ArrayAdapter<String>( SignUp.this,
+                android.R.layout.simple_list_item_1, getResources().
+                getStringArray(R.array.expertise_array));
         // Specify the layout to use when the list of choices appears
         expertAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
@@ -87,7 +89,9 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
 
 
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>( SignUp.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
+        ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>( SignUp.this,
+                android.R.layout.simple_list_item_1, getResources().
+                getStringArray(R.array.expertise_array));
         // Specify the layout to use when the list of choices appears
         interestAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
@@ -133,11 +137,11 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if(task.isSuccessful()){
-                            //Toast.makeText(SignupActivity.this,"Successfully",Toast.LENGTH_SHORT).show();
                             send_message_verifed_email();
 
                         }else{
-                            Toast.makeText( SignUp.this,"Failed",Toast.LENGTH_SHORT).show();
+                            Toast.makeText( SignUp.this,
+                                    "Failed",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -171,9 +175,11 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
 
-                        Toast.makeText( SignUp.this,"Please verified your account!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText( SignUp.this,
+                                "Please verified your account!",Toast.LENGTH_SHORT).show();
                         String user_id=mAuth.getCurrentUser().getUid();
-                        mDatabase=FirebaseDatabase.getInstance().getReference().child("users").child(user_id);
+                        mDatabase=FirebaseDatabase.getInstance().
+                                getReference().child("users").child(user_id);
 
                         //updating the user basic info into datebase
                         HashMap user_info= new HashMap();
@@ -184,7 +190,8 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
                         user_info.put("RecentView","");
                         user_info.put("comments","");
                         
-                        user_info.put("profileImageUrl","http://img.icons8.com/color/1600/circled-user-male-skin-type-1-2.png");
+                        user_info.put("profileImageUrl",
+                                "http://img.icons8.com/color/1600/circled-user-male-skin-type-1-2.png");
                         mDatabase.setValue(user_info);
                         DatabaseReference createExpert=mDatabase.child("Expert");
                         HashMap userExpert= new HashMap();
@@ -205,7 +212,8 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
                         mAuth.signOut();
                     }else{
                         String grab_message=task.getException().getMessage();
-                        Toast.makeText( SignUp.this,"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                        Toast.makeText( SignUp.this,
+                                "Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
                         mAuth.signOut();
                     }
                 }

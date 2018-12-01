@@ -1,6 +1,7 @@
 package com.foodie.foodographer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -63,11 +65,14 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
     
     ArrayList<Business> businesses;
     ArrayList<Restaurant> restaurants;
+
+    ImageButton filter;
     
     ListView list;
     
     private LinearLayout search_bar;
-    private DatabaseReference restRef = FirebaseDatabase.getInstance().getReference("Restaurants");
+    private DatabaseReference restRef = FirebaseDatabase.
+            getInstance().getReference("Restaurants");
     private RecyclerView res_recycler;
 
     public SearchResultFragment() {
@@ -105,10 +110,14 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_search_result_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_search_result_fragment,
+                container, false);
         // start the thread to search for the correct restaruant with given information
         thread.start();
         search_bar = view.findViewById(R.id.search);
+        search_bar.setOnClickListener(this);
+        filter = view.findViewById(R.id.filter_button);
+        filter.setOnClickListener(this);
         return view;
     }
     //thread to search for the correct restaruant with given information
@@ -117,7 +126,8 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
         public void run() {
             try {
                 yelpFusionApiFactory = new YelpFusionApiFactory();
-                yelpFusionApi = yelpFusionApiFactory.createAPI(getString(R.string.apiKey));
+                yelpFusionApi = yelpFusionApiFactory.
+                        createAPI(getString(R.string.apiKey));
                 this_name = getArguments().getString("name");
                 this_location = getArguments().getString("location");
                 Map<String, String> params = new HashMap<>();
@@ -143,7 +153,8 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
             int totalNumberOfResult = searchResponse.getTotal();  // 3
             Log.i("yelp", String.valueOf(totalNumberOfResult));
             if (totalNumberOfResult == 0) {
-                Toast.makeText(getActivity(), "Sorry, no result was found.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),
+                        "Sorry, no result was found.", Toast.LENGTH_SHORT).show();
             }
             businesses = searchResponse.getBusinesses();
             //generate an array list of result restaurants(businesses)
@@ -157,7 +168,8 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
                 final Restaurant myRest = new Restaurant(businesses.get(i));
                 restaurants.add(myRest);
                 // save the restaurant into our database whenever the user search it
-                restRef.child(myRest.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                restRef.child(myRest.getId()).
+                        addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
@@ -180,13 +192,14 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
 
             // write your filter algorithm here (sort and delete businesses objects)
             // https://stackoverflow.com/questions/16856554/filtering-an-arraylist-using-an-objects-field
-            // https://stackoverflow.com/questions/23262445/sorting-and-filtering-listview-with-custom-array-adapter-with-two-textview
+            // https://stackoverflow.com/questions/23262445/sorting-and-filtering-listview-
+            // with-custom-array-adapter-with-two-textview
 
-            /*String expert = getIntent().getStringExtra("expert");
-            String rating = getIntent().getStringExtra("rating");
-            String price = getIntent().getStringExtra("price");
-            String distance = getIntent().getStringExtra("distance");
-            */
+            String expert = getArguments().getString("expert");
+            String rating = getArguments().getString("rating");
+            String price = getArguments().getString("price");
+            String distance = getArguments().getString("distance");
+
 
             //get the restaruants and make it a list
             RecyclerResultList adapter = new RecyclerResultList(restaurants);
@@ -234,8 +247,12 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
     public void onClick(View v) {
         if(v == search_bar){
             FragmentTransaction fr = getFragmentManager().beginTransaction();
-            fr.replace(R.id.search_result_container, new SearchBarFragment());
+            fr.replace(getId(), new SearchBarFragment());
             fr.commit();
+        }
+
+        if(v == filter){
+            startActivity(new Intent(getContext(), Filter.class));
         }
     }
 

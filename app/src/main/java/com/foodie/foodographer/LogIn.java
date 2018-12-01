@@ -80,7 +80,8 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
                         }else {
                             // If sign in fails, display a message to the user.
                             String grab_error=task.getException().getMessage();
-                            Toast.makeText(LogIn.this,"Error occur:"+grab_error,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LogIn.this,
+                                    "Error occur:"+grab_error,Toast.LENGTH_SHORT).show();
                         }
                         progressDialog2.dismiss();
 
@@ -104,7 +105,8 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
             //finish();
         }else{
             //tell user to verified his email first
-            Toast.makeText(LogIn.this,"Go verified your email please!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(LogIn.this,
+                    "Go verified your email please!",Toast.LENGTH_SHORT).show();
             mAuth2.signOut();
         }
     }

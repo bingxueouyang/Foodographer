@@ -12,7 +12,9 @@ public class User implements Parcelable {
     private DatabaseReference userRefer;
     public String IMGURL, email, expert1, expert2, expert3, interest1, interest2, interest3, interest4;
 
-    public User(String email, String IMGURL, String expert1, String expert2, String expert3, String interest1, String interest2, String interest3, String interest4){
+    public User(String email, String IMGURL, String expert1,
+                String expert2, String expert3, String interest1, String interest2,
+                String interest3, String interest4){
         //this.uid = uid;
         this.email = email;
         this.IMGURL = IMGURL;
@@ -23,16 +25,6 @@ public class User implements Parcelable {
         this.interest2 = interest2;
         this.interest3 = interest3;
         this.interest4 = interest4;
-        /*
-        readData(new MyCallback() {
-            @Override
-            public void onCallback(String email, String IMGURL, String expert1, String expert2, String expert3, String interest1, String interest2, String interest3, String interest4) {
-                setEmail(email);
-                setIMGURL(IMGURL);
-            }
-        });
-        */
-        // get user object from firebase by uid
     }
 
     public void setEmail(String email){

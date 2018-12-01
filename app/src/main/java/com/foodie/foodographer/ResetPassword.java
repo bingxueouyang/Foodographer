@@ -33,7 +33,8 @@ public class ResetPassword extends AppCompatActivity {
             public void onClick(View v) {
                 String email_input=user_reset_enter_email.getText().toString();
                 if(TextUtils.isEmpty(email_input)){
-                    Toast.makeText(ResetPassword.this, "Enter the email please",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ResetPassword.this,
+                            "Enter the email please",Toast.LENGTH_SHORT).show();
                 }else{
                     //go into firebase authentication to send reset password
                     checkAuth.sendPasswordResetEmail(email_input).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -41,12 +42,16 @@ public class ResetPassword extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
                                 //check if it is successful
-                                Toast.makeText(ResetPassword.this, "Success, Check your email",Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(ResetPassword.this,LogIn.class));
+                                Toast.makeText(ResetPassword.this,
+                                        "Success, Check your email",Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(ResetPassword.this,
+                                        LogIn.class));
                             }else{
                                 //check if there is an error
                                 String bug_error=task.getException().getMessage();
-                                Toast.makeText(ResetPassword.this, "Error Something went wrong!"+bug_error,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ResetPassword.this,
+                                        "Error Something went wrong!"
+                                                +bug_error,Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

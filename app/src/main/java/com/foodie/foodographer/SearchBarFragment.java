@@ -72,7 +72,8 @@ public class SearchBarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_search_bar_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_search_bar_fragment,
+                container, false);
         
         //save the name and location of the restruant if the searchbar for name exist
         nameSearch = view.findViewById(R.id.name_search);
@@ -84,7 +85,8 @@ public class SearchBarFragment extends Fragment {
                 args.putString("name", name);
                 args.putString("location", location);
                 search_result.setArguments(args);
-                getFragmentManager().beginTransaction().replace(R.id.search_result_container, search_result).commit();
+                getFragmentManager().beginTransaction().replace(R.id.search_result_container,
+                        search_result).commit();
                 //gotoSearch(name, location);
                 return true;
             }
@@ -105,7 +107,8 @@ public class SearchBarFragment extends Fragment {
                 args.putString("name", name);
                 args.putString("location", location);
                 search_result.setArguments(args);
-                getFragmentManager().beginTransaction().replace(R.id.search_result_container, search_result).commit();
+                getFragmentManager().beginTransaction().replace(R.id.search_result_container,
+                        search_result).commit();
                 return true;
             }
 
@@ -155,16 +158,5 @@ public class SearchBarFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-
-    //go to search result page with name and location of the restruant
-    public void gotoSearch(String rest_name, String rest_location) {
-
-        Intent intent = new Intent(getActivity(), SearchResult.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("name", rest_name);
-        bundle.putString("location", rest_location);
-        intent.putExtras(bundle);
-        startActivity(intent);
     }
 }

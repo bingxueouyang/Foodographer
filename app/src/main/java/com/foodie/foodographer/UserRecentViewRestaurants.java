@@ -36,7 +36,8 @@ public class UserRecentViewRestaurants extends AppCompatActivity {
         //find current user and set up DB references
         mAuthSetting = FirebaseAuth.getInstance();
         String currentUserID = mAuthSetting.getCurrentUser().getUid();
-        currentUserReference = FirebaseDatabase.getInstance().getReference("users").child(currentUserID);
+        currentUserReference = FirebaseDatabase.getInstance().
+                getReference("users").child(currentUserID);
         restaurantReference = FirebaseDatabase.getInstance().getReference("Restaurants");
         //initialize two container lists
         restaurantIDList = new ArrayList<>();
@@ -44,9 +45,10 @@ public class UserRecentViewRestaurants extends AppCompatActivity {
 
 
         /**
-         * If we find user's recent view restaurant list changed, we would first update favoriteIDlist to the
-         * newest version, and update the restaurantList as well. Kind of messy down here.
-         * Could be optimized as this gets laggy/slow when the user have a lot of recent view restaurants
+         * If we find user's recent view restaurant list changed, we would first update
+         * favoriteIDlist to the newest version, and update the restaurantList as well.
+         * Kind of messy down here. Could be optimized as this gets laggy/slow when the user have
+         * a lot of recent view restaurants
          */
         currentUserReference.child("RecentView").addValueEventListener(new ValueEventListener() {
             @Override
@@ -56,7 +58,8 @@ public class UserRecentViewRestaurants extends AppCompatActivity {
                 restaurantIDList.clear();
                 //for every child under user's "favorite"
                 for (DataSnapshot favoriteRestaurantID : dataSnapshot.getChildren()) {
-                    Log.i("recentview", "Current recentview is: " + favoriteRestaurantID.getKey());
+                    Log.i("recentview", "Current recentview is: " +
+                            favoriteRestaurantID.getKey());
                     restaurantIDList.add(favoriteRestaurantID.getKey());
                 }
                 //begin to fetch Restaurant Objects from DB's restaurant reference
@@ -69,12 +72,16 @@ public class UserRecentViewRestaurants extends AppCompatActivity {
                         for (String this_restaurantID : restaurantIDList) {
                             if (dataSnapshot.child(this_restaurantID).exists()) {
                                 Log.i("favorite", this_restaurantID + " exists!");
-                                String imgurl = dataSnapshot.child(this_restaurantID).child("imgurl").getValue().toString();
+                                String imgurl = dataSnapshot.child(this_restaurantID).
+                                        child("imgurl").getValue().toString();
                                 Log.i("favorite", "imgurl: " + imgurl);
-                                Restaurant this_restaurant = dataSnapshot.child(this_restaurantID).getValue(Restaurant.class);
+                                Restaurant this_restaurant = dataSnapshot.
+                                        child(this_restaurantID).getValue(Restaurant.class);
                                 recentViewRestaurantList.add(this_restaurant);
-                                Log.i("favorite", "Restaurant added:" + this_restaurant.getName());
-                                Log.i("favorite", "IMGURL: " + this_restaurant.getIMGURL());
+                                Log.i("favorite", "Restaurant added:" +
+                                        this_restaurant.getName());
+                                Log.i("favorite", "IMGURL: " +
+                                        this_restaurant.getIMGURL());
                             }
                         }
                         //update our recyclerView as data changed

@@ -2,6 +2,8 @@ package com.foodie.foodographer;
 
 
 import android.content.Intent;
+import android.net.Uri;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +12,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.RatingBar;
 
-public class Filter extends AppCompatActivity implements View.OnClickListener{
+public class Filter extends AppCompatActivity implements View.OnClickListener,
+SearchResultFragment.OnFragmentInteractionListener{
     private Button compBut;
     private Spinner expertSpinner;
     private RatingBar ratingBar;
@@ -45,13 +48,16 @@ public class Filter extends AppCompatActivity implements View.OnClickListener{
 
         // spinner adapters
         expertSpinner = (Spinner) findViewById(R.id.expert_spinner);
-        ArrayAdapter<String> expertAdapter = new ArrayAdapter<String>(Filter.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
+        ArrayAdapter<String> expertAdapter =
+                new ArrayAdapter<String>(Filter.this, android.R.layout.simple_list_item_1,
+                        getResources().getStringArray(R.array.expertise_array));
         expertAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         expertSpinner.setAdapter(expertAdapter);
 
         distanceSpinner = (Spinner) findViewById(R.id.distance_spinner);
         ArrayAdapter<String> distanceAdapter = new ArrayAdapter<String>(Filter.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.distance_array));
+                android.R.layout.simple_list_item_1,
+                getResources().getStringArray(R.array.distance_array));
         distanceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         distanceSpinner.setAdapter(distanceAdapter);
 
@@ -69,12 +75,15 @@ public class Filter extends AppCompatActivity implements View.OnClickListener{
         final String rating = Float.toString(ratingBar.getRating());
         final String price = priceSelect;
 
-        Intent searchResult = new Intent(this, SearchResult.class);
-        searchResult.putExtra("expert", expert);
-        searchResult.putExtra("rating", rating);
-        searchResult.putExtra("price", price);
-        searchResult.putExtra("distance",distance);
-        startActivity(searchResult);
+        SearchResultFragment searchResult = new SearchResultFragment();
+        Bundle args = new Bundle();
+        args.putString("expert", expert);
+        args.putString("rating", rating);
+        args.putString("price", price);
+        args.putString("distance", distance);
+        searchResult.setArguments(args);
+        finish();
+        getSupportFragmentManager().beginTransaction().replace(R.id.filter, searchResult).commit();
     }
 
     @Override
@@ -115,6 +124,11 @@ public class Filter extends AppCompatActivity implements View.OnClickListener{
             price_$$.setTextColor(getResources().getColor(R.color.colorAccent));
             price_$.setTextColor(getResources().getColor(R.color.colorAccent));
         }
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 }

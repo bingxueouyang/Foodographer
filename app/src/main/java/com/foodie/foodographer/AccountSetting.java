@@ -66,7 +66,9 @@ public class AccountSetting extends AppCompatActivity implements View.OnClickLis
         savingBut = (Button) findViewById(R.id.savingInformation);
         savingBut.setOnClickListener(this);
         image =(CircleImageView) findViewById(R.id.profileSettingImage);
-        ArrayAdapter<String> expertAdapter = new ArrayAdapter<String>( AccountSetting.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
+        ArrayAdapter<String> expertAdapter = new ArrayAdapter<String>( AccountSetting.this,
+                android.R.layout.simple_list_item_1,
+                getResources().getStringArray(R.array.expertise_array));
         // Specify the layout to use when the list of choices appears
         expertAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
@@ -85,7 +87,9 @@ public class AccountSetting extends AppCompatActivity implements View.OnClickLis
         changeExpertSpinner3.setVisibility(View.VISIBLE);
 
         // store interests that user pick into arraylist for spinner
-        ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>( AccountSetting.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.expertise_array));
+        ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>( AccountSetting.this,
+                android.R.layout.simple_list_item_1,
+                getResources().getStringArray(R.array.expertise_array));
         interestAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         changeInterestSpinner = (Spinner) findViewById(R.id.InterestChange1);
@@ -139,13 +143,16 @@ public class AccountSetting extends AppCompatActivity implements View.OnClickLis
             public void onComplete(@NonNull Task task) {
                     //checking the task is success then send a message
                     if(task.isSuccessful()){
-                        Toast.makeText( AccountSetting.this,"Update account information successfully",Toast.LENGTH_SHORT).show();
+                        Toast.makeText( AccountSetting.this,
+                                "Update account information successfully",
+                                Toast.LENGTH_SHORT).show();
                         finish();
                         startActivity(new Intent(getApplicationContext(),UserProfile.class));
                     }else{
                         // not success and send the error message
                         String grab_message=task.getException().getMessage();
-                        Toast.makeText( AccountSetting.this,"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                        Toast.makeText( AccountSetting.this,
+                                "Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
                     }
 
             }
@@ -162,13 +169,16 @@ public class AccountSetting extends AppCompatActivity implements View.OnClickLis
             public void onComplete(@NonNull Task task) {
                 //checking the task is success then send a message
                 if(task.isSuccessful()){
-                    Toast.makeText( AccountSetting.this,"Update account information successfully",Toast.LENGTH_SHORT).show();
+                    Toast.makeText( AccountSetting.this,
+                            "Update account information successfully",
+                            Toast.LENGTH_SHORT).show();
                     finish();
                     startActivity(new Intent(getApplicationContext(),UserProfile.class));
                 }else{
                     // not success and send the error message
                     String grab_message=task.getException().getMessage();
-                    Toast.makeText( AccountSetting.this,"Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                    Toast.makeText( AccountSetting.this,
+                            "Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -178,7 +188,8 @@ public class AccountSetting extends AppCompatActivity implements View.OnClickLis
             final StorageReference filePath = storeUserImage.child(currentUserID);
             Bitmap bitmap=null;
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getApplication().getContentResolver(), resultUri);
+                bitmap = MediaStore.Images.Media.getBitmap(getApplication().
+                        getContentResolver(), resultUri);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -209,7 +220,9 @@ public class AccountSetting extends AppCompatActivity implements View.OnClickLis
                 public void onComplete(@NonNull Task<Uri> task) {
                     if(task.isSuccessful()){
                         //if the task is success, then the send successful message
-                        Toast.makeText(AccountSetting.this, "Profile Image stored successfully to Firebase storage...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AccountSetting.this,
+                                "Profile Image stored successfully to Firebase storage...",
+                                Toast.LENGTH_SHORT).show();
 
                         Uri uriAddress=task.getResult();
                         Map newImage = new HashMap();

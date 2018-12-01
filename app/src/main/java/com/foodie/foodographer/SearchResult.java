@@ -43,7 +43,8 @@ public class SearchResult extends AppCompatActivity implements Serializable{
     ArrayList<Restaurant> restaurants;
     ListView list;
     private LinearLayout search_bar;
-    private DatabaseReference restRef = FirebaseDatabase.getInstance().getReference("Restaurants");
+    private DatabaseReference restRef = FirebaseDatabase.getInstance().
+            getReference("Restaurants");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,8 @@ public class SearchResult extends AppCompatActivity implements Serializable{
         public void run() {
             try {
                 yelpFusionApiFactory = new YelpFusionApiFactory();
-                yelpFusionApi = yelpFusionApiFactory.createAPI(getString(R.string.apiKey));
+                yelpFusionApi = yelpFusionApiFactory.
+                        createAPI(getString(R.string.apiKey));
                 Intent intent = getIntent();
                 Bundle bundle = intent.getExtras();
                 if(bundle!=null){
@@ -86,7 +88,8 @@ public class SearchResult extends AppCompatActivity implements Serializable{
         }
     });
     // Yelp source:
-    // https://github.com/ranga543/yelp-fusion-android/blob/master/yelp-fusion-client/src/main/java/com/yelp/fusion/client/models/Business.java
+    // https://github.com/ranga543/yelp-fusion-android/blob/master/yelp-fusion-client/
+    // src/main/java/com/yelp/fusion/client/models/Business.java
     Callback<SearchResponse> callback = new Callback<SearchResponse>() {
 
         @Override
@@ -98,7 +101,8 @@ public class SearchResult extends AppCompatActivity implements Serializable{
             int totalNumberOfResult = searchResponse.getTotal();  // 3
             Log.i("yelp", String.valueOf(totalNumberOfResult));
             if (totalNumberOfResult == 0) {
-                Toast.makeText(SearchResult.this, "Sorry, no result was found.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchResult.this,
+                        "Sorry, no result was found.", Toast.LENGTH_SHORT).show();
             }
             businesses = searchResponse.getBusinesses();
             //generate an array list of result restaurants(businesses)
@@ -112,7 +116,8 @@ public class SearchResult extends AppCompatActivity implements Serializable{
                 final Restaurant myRest = new Restaurant(businesses.get(i));
                 restaurants.add(myRest);
                 // save the restaurant into our database whenever the user search it
-                restRef.child(myRest.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                restRef.child(myRest.getId()).
+                        addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
@@ -131,16 +136,6 @@ public class SearchResult extends AppCompatActivity implements Serializable{
                 });
             }
 
-
-
-            // write your filter algorithm here (sort and delete businesses objects)
-            // https://stackoverflow.com/questions/16856554/filtering-an-arraylist-using-an-objects-field
-            // https://stackoverflow.com/questions/23262445/sorting-and-filtering-listview-with-custom-array-adapter-with-two-textview
-
-            String expert = getIntent().getStringExtra("expert");
-            String rating = getIntent().getStringExtra("rating");
-            String price = getIntent().getStringExtra("price");
-            String distance = getIntent().getStringExtra("distance");
 
 
             RecyclerResultList adapter = new RecyclerResultList(restaurants);

@@ -42,7 +42,8 @@ public class UserFavoriteRestaurants extends AppCompatActivity {
         //find current user and set up DB references
         mAuthSetting = FirebaseAuth.getInstance();
         String currentUserID = mAuthSetting.getCurrentUser().getUid();
-        currentUserReference = FirebaseDatabase.getInstance().getReference("users").child(currentUserID);
+        currentUserReference = FirebaseDatabase.getInstance().
+                getReference("users").child(currentUserID);
         restaurantReference = FirebaseDatabase.getInstance().getReference("Restaurants");
         //initialize two container lists
         restaurantIDList = new ArrayList<>();
@@ -61,7 +62,8 @@ public class UserFavoriteRestaurants extends AppCompatActivity {
                 restaurantIDList.clear();
                 //for every child under user's "favorite"
                 for (DataSnapshot favoriteRestaurantID : dataSnapshot.getChildren()) {
-                    Log.i("favorite", "Current favorite is: " + favoriteRestaurantID.getKey());
+                    Log.i("favorite",
+                            "Current favorite is: " + favoriteRestaurantID.getKey());
                     restaurantIDList.add(favoriteRestaurantID.getKey());
                 }
                 //begin to fetch Restaurant Objects from DB's restaurant reference
@@ -74,12 +76,16 @@ public class UserFavoriteRestaurants extends AppCompatActivity {
                         for (String this_restaurantID : restaurantIDList) {
                             if (dataSnapshot.child(this_restaurantID).exists()) {
                                 Log.i("favorite", this_restaurantID + " exists!");
-                                String imgurl = dataSnapshot.child(this_restaurantID).child("imgurl").getValue().toString();
+                                String imgurl = dataSnapshot.child(this_restaurantID).
+                                        child("imgurl").getValue().toString();
                                 Log.i("favorite", "imgurl: " + imgurl);
-                                Restaurant this_restaurant = dataSnapshot.child(this_restaurantID).getValue(Restaurant.class);
+                                Restaurant this_restaurant = dataSnapshot.
+                                        child(this_restaurantID).getValue(Restaurant.class);
                                 favoriteRestaurantList.add(this_restaurant);
-                                Log.i("favorite", "Restaurant added:" + this_restaurant.getName());
-                                Log.i("favorite", "IMGURL: " + this_restaurant.getIMGURL());
+                                Log.i("favorite",
+                                        "Restaurant added:" + this_restaurant.getName());
+                                Log.i("favorite",
+                                        "IMGURL: " + this_restaurant.getIMGURL());
                             }
                         }
                         //update our recyclerView as data changed

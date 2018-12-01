@@ -34,7 +34,8 @@ public class Restaurant implements Parcelable{
     // hashmap that stores each experties' rating
     public HashMap<String, Float> expertRating;
 
-    //private float expertRating; // rating from user expert in this type of rest if we're running out of time
+    //private float expertRating;
+    //rating from user expert in this type of rest if we're running out of time
     private String location;
     public Restaurant(){
 
@@ -71,9 +72,11 @@ public class Restaurant implements Parcelable{
         expertRating.put("vietnamese", 0.0f);
 
         if(p.getLocation().getAddress2() != "") {
-            location = p.getLocation().getAddress1() + ", " + p.getLocation().getAddress2() + ", " + p.getLocation().getCity();
+            location = p.getLocation().getAddress1() + ", " +
+                    p.getLocation().getAddress2() + ", " + p.getLocation().getCity();
             if (p.getLocation().getAddress3() != "") {
-                location = p.getLocation().getAddress1() + ", " + p.getLocation().getAddress2() + ", " + p.getLocation().getAddress3() + ", " + p.getLocation().getCity();
+                location = p.getLocation().getAddress1() + ", " + p.getLocation().getAddress2() +
+                        ", " + p.getLocation().getAddress3() + ", " + p.getLocation().getCity();
             }
         }
         else {
@@ -148,10 +151,12 @@ public class Restaurant implements Parcelable{
         dest.writeFloat(this.distance);
         //dest.writeTypedList(this.reviews);
 
-        dest.writeStringArray(new String[]{this.name,this.imgurl,String.valueOf(this.rating), this.location, String.valueOf(this.distance) });
+        dest.writeStringArray(new String[]{this.name,this.imgurl,
+                String.valueOf(this.rating), this.location, String.valueOf(this.distance) });
     }
 
-    public static final Parcelable.Creator<Restaurant> CREATOR= new Parcelable.Creator<Restaurant>() {
+    public static final Parcelable.Creator<Restaurant> CREATOR=
+            new Parcelable.Creator<Restaurant>() {
 
         @Override
         public Restaurant createFromParcel(Parcel source) {

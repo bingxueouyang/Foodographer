@@ -65,14 +65,14 @@
                         android:textAlignment="textStart"
                         app:layout_constraintEnd_toStartOf="@+id/create_password" />
 
-                    <EditText
-                        android:id="@+id/create_password"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:autofillHints=""
-                        android:ems="10"
-                        android:hint="Enter password"
-                        android:inputType="textShortMessage" />
+                <EditText
+                    android:id="@+id/create_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="Enter password"
+                    android:inputType="textPassword" />
 
 
                 </LinearLayout>
