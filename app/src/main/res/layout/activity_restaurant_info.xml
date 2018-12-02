@@ -126,7 +126,7 @@
                         <TextView
                             android:layout_width="260dp"
                             android:layout_height="wrap_content"
-                            android:text="close opening time today" />
+                            android:text="More time information" />
 
                         <!--More button to see the details of opening and closing time-->
                         <Button
