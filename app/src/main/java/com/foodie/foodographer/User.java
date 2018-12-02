@@ -7,14 +7,13 @@ import android.util.Log;
 import com.google.firebase.database.DatabaseReference;
 
 
-
 public class User implements Parcelable {
     private DatabaseReference userRefer;
     public String IMGURL, email, expert1, expert2, expert3, interest1, interest2, interest3, interest4;
 
     public User(String email, String IMGURL, String expert1,
                 String expert2, String expert3, String interest1, String interest2,
-                String interest3, String interest4){
+                String interest3, String interest4) {
         //this.uid = uid;
         this.email = email;
         this.IMGURL = IMGURL;
@@ -27,43 +26,53 @@ public class User implements Parcelable {
         this.interest4 = interest4;
     }
 
-    public void setEmail(String email){
+    public void setEmail(String email) {
         this.email = email;
         Log.i("ssss", email);
     }
-    public String getEmail(){
+
+    public String getEmail() {
         //Log.i("ssss",this.email);
         return this.email;
     }
 
-    public void setIMGURL(String IMGURL){
+    public void setIMGURL(String IMGURL) {
         this.IMGURL = IMGURL;
     }
-    public String getIMGURL(){
+
+    public String getIMGURL() {
         return this.IMGURL;
     }
 
-    public String getExpert1(){
+    public String getExpert1() {
         return this.expert1;
     }
 
-    public String getExpert2(){
+    public String getExpert2() {
         return this.expert2;
     }
 
-    public String getExpert3(){
+    public String getExpert3() {
         return this.expert3;
     }
 
-    public String getInterest1() { return this.interest1; }
+    public String getInterest1() {
+        return this.interest1;
+    }
 
-    public String getInterest2() { return this.interest2; }
+    public String getInterest2() {
+        return this.interest2;
+    }
 
-    public String getInterest3() { return this.interest3; }
+    public String getInterest3() {
+        return this.interest3;
+    }
 
-    public String getInterest4() { return this.interest4; }
+    public String getInterest4() {
+        return this.interest4;
+    }
 
-    public User(Parcel in){
+    public User(Parcel in) {
         //uid, IMGURL, email, expert1, expert2, expert3, interest1, interest2, interest3, interest4;
         this.email = in.readString();
         this.IMGURL = in.readString();
@@ -96,7 +105,7 @@ public class User implements Parcelable {
         dest.writeString(this.interest4);
     }
 
-    public static final Parcelable.Creator<User> CREATOR= new Parcelable.Creator<User>() {
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
 
         @Override
         public User createFromParcel(Parcel source) {

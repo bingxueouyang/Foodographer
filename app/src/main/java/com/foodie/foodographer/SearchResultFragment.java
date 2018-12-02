@@ -45,7 +45,7 @@ import retrofit2.Response;
  * Use the {@link SearchResultFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SearchResultFragment extends Fragment implements View.OnClickListener{
+public class SearchResultFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -59,17 +59,17 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
 
     YelpFusionApiFactory yelpFusionApiFactory;
     YelpFusionApi yelpFusionApi;
-    
+
     String this_name;
     String this_location;
-    
+
     ArrayList<Business> businesses;
     ArrayList<Restaurant> restaurants;
 
     ImageButton filter;
-    
+
     ListView list;
-    
+
     private LinearLayout search_bar;
     private DatabaseReference restRef = FirebaseDatabase.
             getInstance().getReference("Restaurants");
@@ -120,6 +120,7 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
         filter.setOnClickListener(this);
         return view;
     }
+
     //thread to search for the correct restaruant with given information
     Thread thread = new Thread(new Runnable() {
         @Override
@@ -164,30 +165,29 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
             }
 
             restaurants = new ArrayList<Restaurant>(businesses.size());
-            for(int i=0; i< businesses.size(); i++){
+            for (int i = 0; i < businesses.size(); i++) {
                 final Restaurant myRest = new Restaurant(businesses.get(i));
                 restaurants.add(myRest);
                 // save the restaurant into our database whenever the user search it
                 restRef.child(myRest.getId()).
                         addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
-                            Log.i("database info", "gotoRestaurant is called!");
-                            return;
-                        }
-                        else {
-                            //the restaurant is not created yet; create it first
-                            restRef.child(myRest.getId()).setValue(myRest);
-                            return;
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
-            }
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    Log.i("database info", "gotoRestaurant is called!");
+                                    return;
+                                } else {
+                                    //the restaurant is not created yet; create it first
+                                    restRef.child(myRest.getId()).setValue(myRest);
+                                    return;
+                                }
+                            }
 
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                            }
+                        });
+            }
 
 
             // write your filter algorithm here (sort and delete businesses objects)
@@ -203,7 +203,7 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
 
             //get the restaruants and make it a list
             RecyclerResultList adapter = new RecyclerResultList(restaurants);
-            res_recycler =  (RecyclerView)getView().findViewById(R.id.recyclerview);
+            res_recycler = (RecyclerView) getView().findViewById(R.id.recyclerview);
             res_recycler.setHasFixedSize(true);
             res_recycler.setAdapter(adapter);
             LinearLayoutManager llm = new LinearLayoutManager(getActivity());
@@ -245,13 +245,13 @@ public class SearchResultFragment extends Fragment implements View.OnClickListen
     @Override
     //go to search result when clicked search bar
     public void onClick(View v) {
-        if(v == search_bar){
+        if (v == search_bar) {
             FragmentTransaction fr = getFragmentManager().beginTransaction();
             fr.replace(getId(), new SearchBarFragment());
             fr.commit();
         }
 
-        if(v == filter){
+        if (v == filter) {
             startActivity(new Intent(getContext(), Filter.class));
         }
     }

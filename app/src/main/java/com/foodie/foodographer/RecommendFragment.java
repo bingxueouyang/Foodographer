@@ -19,7 +19,7 @@ import android.widget.Button;
  * Use the {@link RecommendFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RecommendFragment extends Fragment implements View.OnClickListener{
+public class RecommendFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -101,7 +101,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener{
     //go back to main page
     @Override
     public void onClick(View v) {
-        if (v == gotoHome){
+        if (v == gotoHome) {
             FragmentTransaction fr = getFragmentManager().beginTransaction();
             fr.replace(getId(), new HomeFragment());
             fr.commit();

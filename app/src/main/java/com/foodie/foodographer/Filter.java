@@ -13,7 +13,7 @@ import android.widget.Spinner;
 import android.widget.RatingBar;
 
 public class Filter extends AppCompatActivity implements View.OnClickListener,
-SearchResultFragment.OnFragmentInteractionListener{
+        SearchResultFragment.OnFragmentInteractionListener {
     private Button compBut;
     private Spinner expertSpinner;
     private RatingBar ratingBar;
@@ -66,10 +66,9 @@ SearchResultFragment.OnFragmentInteractionListener{
         ratingBar = (RatingBar) findViewById(R.id.rating_rating_bar);
 
 
-
     }
 
-    private void complete(){
+    private void complete() {
         final String expert = expertSpinner.getSelectedItem().toString().trim();
         final String distance = distanceSpinner.getSelectedItem().toString().trim();
         final String rating = Float.toString(ratingBar.getRating());
@@ -87,11 +86,11 @@ SearchResultFragment.OnFragmentInteractionListener{
     }
 
     @Override
-    public void onClick(View view){
-        if(view == compBut){
+    public void onClick(View view) {
+        if (view == compBut) {
             complete();
         }
-        if(view == price_$){
+        if (view == price_$) {
             priceSelect = "$";
             price_$$$$.setTextColor(getResources().getColor(R.color.colorAccent));
             price_$$$.setTextColor(getResources().getColor(R.color.colorAccent));
@@ -99,7 +98,7 @@ SearchResultFragment.OnFragmentInteractionListener{
             // to red
             price_$.setTextColor(getResources().getColor(R.color.colorPrimary));
         }
-        if(view == price_$$){
+        if (view == price_$$) {
             priceSelect = "$$";
             price_$$$$.setTextColor(getResources().getColor(R.color.colorAccent));
             price_$$$.setTextColor(getResources().getColor(R.color.colorAccent));
@@ -107,7 +106,7 @@ SearchResultFragment.OnFragmentInteractionListener{
             // to red
             price_$$.setTextColor(getResources().getColor(R.color.colorPrimary));
         }
-        if(view == price_$$$){
+        if (view == price_$$$) {
             priceSelect = "$$$";
             // to red
             price_$$$.setTextColor(getResources().getColor(R.color.colorPrimary));
@@ -115,7 +114,7 @@ SearchResultFragment.OnFragmentInteractionListener{
             price_$$.setTextColor(getResources().getColor(R.color.colorAccent));
             price_$.setTextColor(getResources().getColor(R.color.colorAccent));
         }
-        if(view == price_$$$$){
+        if (view == price_$$$$) {
             priceSelect = "$$$$";
             // to red
             price_$$$$.setTextColor(getResources().getColor(R.color.colorPrimary));

@@ -9,6 +9,7 @@ public class SearchBar extends AppCompatActivity {
     String location;
     android.widget.SearchView nameSearch;
     android.widget.SearchView locationSearch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

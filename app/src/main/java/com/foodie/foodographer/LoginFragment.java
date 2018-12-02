@@ -31,7 +31,7 @@ import com.google.firebase.auth.FirebaseUser;
  * Use the {@link LoginFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LoginFragment extends Fragment implements View.OnClickListener{
+public class LoginFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -89,22 +89,22 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-        mAuth2=FirebaseAuth.getInstance();
-        
+        mAuth2 = FirebaseAuth.getInstance();
+
         //if the user exist, go to user profile page
-        if(mAuth2.getCurrentUser()!= null){
+        if (mAuth2.getCurrentUser() != null) {
             getFragmentManager().beginTransaction().
                     replace(R.id.LoginPage, new UserProfileFragment()).commit();
         }
-        
-        progressDialog2= new ProgressDialog(getContext());
-        
+
+        progressDialog2 = new ProgressDialog(getContext());
+
         user_input_email = (EditText) view.findViewById(R.id.user_enter_email);
         user_input_password = (EditText) view.findViewById(R.id.user_enter_password);
-        loginBut= (Button) view.findViewById(R.id.loginRegister);
-        loginText=(TextView) view.findViewById(R.id.hint_signup);
-        forgotpasswordLink=(TextView) view.findViewById(R.id.forgot_password);
-        
+        loginBut = (Button) view.findViewById(R.id.loginRegister);
+        loginText = (TextView) view.findViewById(R.id.hint_signup);
+        forgotpasswordLink = (TextView) view.findViewById(R.id.forgot_password);
+
         loginBut.setOnClickListener(this);
         loginText.setOnClickListener(this);
         forgotpasswordLink.setOnClickListener(this);
@@ -112,57 +112,57 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         return view;
     }
 
-    private void userLogin(){
+    private void userLogin() {
         //get user email
-        String email2=user_input_email.getText().toString().trim();
-        
+        String email2 = user_input_email.getText().toString().trim();
+
         //get user password
-        String password2=user_input_password.getText().toString().trim();
-        
+        String password2 = user_input_password.getText().toString().trim();
+
         //warn them if the user didn't enter their email
-        if(TextUtils.isEmpty(email2)){
-            Toast.makeText(getActivity(),"Please enter an email !",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(email2)) {
+            Toast.makeText(getActivity(), "Please enter an email !", Toast.LENGTH_SHORT).show();
             return;
         }
-        
+
         //warn them if the user didn't enter their password 
-        if(TextUtils.isEmpty(password2)){
-            Toast.makeText(getActivity(),"Please enter password !",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(password2)) {
+            Toast.makeText(getActivity(), "Please enter password !", Toast.LENGTH_SHORT).show();
             return;
         }
-        
+
         //show message
         progressDialog2.setMessage("Login Account...");
         progressDialog2.show();
-        mAuth2.signInWithEmailAndPassword(email2,password2)
+        mAuth2.signInWithEmailAndPassword(email2, password2)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             email_verified();
-                        }else {
+                        } else {
                             // If sign in fails, display a message to the user.
-                            String grab_error=task.getException().getMessage();
+                            String grab_error = task.getException().getMessage();
                             Toast.makeText(getActivity(),
-                                    "Error occur:"+grab_error,Toast.LENGTH_SHORT).show();
+                                    "Error occur:" + grab_error, Toast.LENGTH_SHORT).show();
                         }
                         progressDialog2.dismiss();
 
                     }
                 });
     }
-    
-    //verify email
-    private void email_verified(){
-        FirebaseUser user=mAuth2.getCurrentUser();
-        checkingEmail_true= user.isEmailVerified();
 
-        if(checkingEmail_true==true){
+    //verify email
+    private void email_verified() {
+        FirebaseUser user = mAuth2.getCurrentUser();
+        checkingEmail_true = user.isEmailVerified();
+
+        if (checkingEmail_true == true) {
             getFragmentManager().beginTransaction().
                     replace(getId(), new UserProfileFragment()).commit();
-        }else{
+        } else {
             Toast.makeText(getActivity(),
-                    "Go verified your email please!",Toast.LENGTH_SHORT).show();
+                    "Go verified your email please!", Toast.LENGTH_SHORT).show();
             mAuth2.signOut();
         }
     }
@@ -192,21 +192,21 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     }
 
     @Override
-    public void onClick(View view){
+    public void onClick(View view) {
         //logout
-        if(view==loginBut){
+        if (view == loginBut) {
             userLogin();
 
         }
         //go to sign up page
-        if(view ==loginText){
+        if (view == loginText) {
             getActivity().finish();
-            startActivity(new Intent(getActivity(),SignUp.class));
+            startActivity(new Intent(getActivity(), SignUp.class));
         }
         //go to find my password page
-        if(view ==forgotpasswordLink){
+        if (view == forgotpasswordLink) {
             getActivity().finish();
-            startActivity(new Intent(getActivity(),ResetPassword.class));
+            startActivity(new Intent(getActivity(), ResetPassword.class));
         }
     }
 

@@ -1,10 +1,14 @@
 package com.foodie.foodographer;
+
 import android.os.Parcelable;
+
 import com.yelp.fusion.client.models.Business;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.os.Parcel;
+
 import com.yelp.fusion.client.models.Category;
 import com.yelp.fusion.client.models.Hour;
 
@@ -17,7 +21,7 @@ import com.yelp.fusion.client.models.Hour;
  but reading Restaurant obj is not from here, you should read from Firebase by onDataChange
  Then use the methods inside this class
  */
-public class Restaurant implements Parcelable{
+public class Restaurant implements Parcelable {
     private String id;
     private String name;
     private String imgurl;
@@ -37,15 +41,17 @@ public class Restaurant implements Parcelable{
     //private float expertRating;
     //rating from user expert in this type of rest if we're running out of time
     private String location;
-    public Restaurant(){
+
+    public Restaurant() {
 
     }
-    public Restaurant(Business p){
+
+    public Restaurant(Business p) {
         this.id = p.getId();
         this.name = p.getName();
-        this.rating = (float)p.getRating();
+        this.rating = (float) p.getRating();
         this.imgurl = p.getImageUrl();
-        this.distance = (float)p.getDistance();
+        this.distance = (float) p.getDistance();
         this.categories = p.getCategories();
         this.hours = p.getHours();
         this.phone = p.getPhone();
@@ -71,25 +77,30 @@ public class Restaurant implements Parcelable{
         expertRating.put("korean", 0.0f);
         expertRating.put("vietnamese", 0.0f);
 
-        if(p.getLocation().getAddress2() != "") {
+        if (p.getLocation().getAddress2() != "") {
             location = p.getLocation().getAddress1() + ", " +
                     p.getLocation().getAddress2() + ", " + p.getLocation().getCity();
             if (p.getLocation().getAddress3() != "") {
                 location = p.getLocation().getAddress1() + ", " + p.getLocation().getAddress2() +
                         ", " + p.getLocation().getAddress3() + ", " + p.getLocation().getCity();
             }
-        }
-        else {
+        } else {
             location = p.getLocation().getAddress1() + ", " + p.getLocation().getCity();
         }
 
     }
-    public String getId() { return this.id; };
 
-    public String getName(){
+    public String getId() {
+        return this.id;
+    }
+
+    ;
+
+    public String getName() {
         return this.name;
     }
-    public String getIMGURL(){
+
+    public String getIMGURL() {
         return this.imgurl;
     }
 
@@ -97,22 +108,26 @@ public class Restaurant implements Parcelable{
         return this.price;
     }
 
-    public void setRating(float rating){
+    public void setRating(float rating) {
         this.rating = rating;
     }
-    public float getRating(){
+
+    public float getRating() {
         return this.rating;
     }
 
     public String getDisplayPhone() {
         return this.displayPhone;
     }
+
     public ArrayList<Hour> getHours() {
         return this.hours;
     }
+
     public String getPhone() {
         return this.phone;
     }
+
     public ArrayList<Category> getCategories() {
         return this.categories;
     }
@@ -122,9 +137,11 @@ public class Restaurant implements Parcelable{
         return this.location;
     }
 
-    public float getDistance() { return this.distance; }
+    public float getDistance() {
+        return this.distance;
+    }
 
-    public Restaurant(Parcel in){
+    public Restaurant(Parcel in) {
         this.id = in.readString();
         this.name = in.readString();
         this.imgurl = in.readString();
@@ -151,23 +168,23 @@ public class Restaurant implements Parcelable{
         dest.writeFloat(this.distance);
         //dest.writeTypedList(this.reviews);
 
-        dest.writeStringArray(new String[]{this.name,this.imgurl,
-                String.valueOf(this.rating), this.location, String.valueOf(this.distance) });
+        dest.writeStringArray(new String[]{this.name, this.imgurl,
+                String.valueOf(this.rating), this.location, String.valueOf(this.distance)});
     }
 
-    public static final Parcelable.Creator<Restaurant> CREATOR=
+    public static final Parcelable.Creator<Restaurant> CREATOR =
             new Parcelable.Creator<Restaurant>() {
 
-        @Override
-        public Restaurant createFromParcel(Parcel source) {
-            // TODO Auto-generated method stub
-            return new Restaurant(source);  //using parcelable constructor
-        }
+                @Override
+                public Restaurant createFromParcel(Parcel source) {
+                    // TODO Auto-generated method stub
+                    return new Restaurant(source);  //using parcelable constructor
+                }
 
-        @Override
-        public Restaurant[] newArray(int size) {
-            // TODO Auto-generated method stub
-            return new Restaurant[size];
-        }
-    };
+                @Override
+                public Restaurant[] newArray(int size) {
+                    // TODO Auto-generated method stub
+                    return new Restaurant[size];
+                }
+            };
 }

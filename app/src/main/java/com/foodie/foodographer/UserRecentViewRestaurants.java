@@ -1,5 +1,6 @@
 package com.foodie.foodographer;
 // import eveything needed for this java class
+
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class UserRecentViewRestaurants extends AppCompatActivity {
@@ -27,6 +29,7 @@ public class UserRecentViewRestaurants extends AppCompatActivity {
     RecyclerView userRecentView;
     //DB authentication reference
     FirebaseAuth mAuthSetting;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +44,7 @@ public class UserRecentViewRestaurants extends AppCompatActivity {
         restaurantReference = FirebaseDatabase.getInstance().getReference("Restaurants");
         //initialize two container lists
         restaurantIDList = new ArrayList<>();
-        recentViewRestaurantList= new ArrayList<>();
+        recentViewRestaurantList = new ArrayList<>();
 
 
         /**

@@ -33,7 +33,7 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import java.io.Serializable;
 
-public class SearchResult extends AppCompatActivity implements Serializable{
+public class SearchResult extends AppCompatActivity implements Serializable {
 
     YelpFusionApiFactory yelpFusionApiFactory;
     YelpFusionApi yelpFusionApi;
@@ -60,6 +60,7 @@ public class SearchResult extends AppCompatActivity implements Serializable{
             }
         });
     }
+
     Thread thread = new Thread(new Runnable() {
         @Override
         public void run() {
@@ -69,11 +70,11 @@ public class SearchResult extends AppCompatActivity implements Serializable{
                         createAPI(getString(R.string.apiKey));
                 Intent intent = getIntent();
                 Bundle bundle = intent.getExtras();
-                if(bundle!=null){
-                    if(intent.hasExtra("name")){
+                if (bundle != null) {
+                    if (intent.hasExtra("name")) {
                         this_name = bundle.getString("name", "No info");
                     }
-                    if(intent.hasExtra("location")){
+                    if (intent.hasExtra("location")) {
                         this_location = bundle.getString("location", "location");
                     }
                 }
@@ -112,34 +113,33 @@ public class SearchResult extends AppCompatActivity implements Serializable{
             }
 
             restaurants = new ArrayList<Restaurant>(businesses.size());
-            for(int i=0; i< businesses.size(); i++){
+            for (int i = 0; i < businesses.size(); i++) {
                 final Restaurant myRest = new Restaurant(businesses.get(i));
                 restaurants.add(myRest);
                 // save the restaurant into our database whenever the user search it
                 restRef.child(myRest.getId()).
                         addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
-                            Log.i("database info", "gotoRestaurant is called!");
-                            return;
-                        }
-                        else {
-                            //the restaurant is not created yet; create it first
-                            restRef.child(myRest.getId()).setValue(myRest);
-                            return;
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    Log.i("database info", "gotoRestaurant is called!");
+                                    return;
+                                } else {
+                                    //the restaurant is not created yet; create it first
+                                    restRef.child(myRest.getId()).setValue(myRest);
+                                    return;
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                            }
+                        });
             }
 
 
-
             RecyclerResultList adapter = new RecyclerResultList(restaurants);
-            RecyclerView myView =  (RecyclerView)findViewById(R.id.recyclerview);
+            RecyclerView myView = (RecyclerView) findViewById(R.id.recyclerview);
             myView.setHasFixedSize(true);
             myView.setAdapter(adapter);
             LinearLayoutManager llm = new LinearLayoutManager(SearchResult.this);
@@ -154,13 +154,13 @@ public class SearchResult extends AppCompatActivity implements Serializable{
         }
     };
 
-    public void gotoFilter(View view){
+    public void gotoFilter(View view) {
 
-        startActivity(new Intent(this,Filter.class));
+        startActivity(new Intent(this, Filter.class));
     }
 
-    public void gotoSearchBar(){
+    public void gotoSearchBar() {
 
-        startActivity(new Intent(this,SearchBar.class));
+        startActivity(new Intent(this, SearchBar.class));
     }
 }

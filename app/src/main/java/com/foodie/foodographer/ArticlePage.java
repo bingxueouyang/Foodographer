@@ -13,10 +13,10 @@ public class ArticlePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
-        
+
         // create WebView
         WebView web = findViewById(R.id.webview);
-        
+
         // get webURL from recyclerArticle holder object
         String webURL = getIntent().getStringExtra("webURL");
         web.loadUrl(webURL);

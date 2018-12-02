@@ -25,7 +25,7 @@ public class Homepage extends AppCompatActivity
         SearchResultFragment.OnFragmentInteractionListener,
         LoginFragment.OnFragmentInteractionListener,
         AccountSettingFragment.OnFragmentInteractionListener,
-        RecommendFragment.OnFragmentInteractionListener{
+        RecommendFragment.OnFragmentInteractionListener {
 
     //load different fragments as the user clicked on respective navigation items
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -73,7 +73,7 @@ public class Homepage extends AppCompatActivity
         startActivity(new Intent(this, SearchBar.class));
     }
 
-    public void gotoProfile(MenuItem item){
+    public void gotoProfile(MenuItem item) {
 
         startActivity(new Intent(this, UserProfile.class));
     }

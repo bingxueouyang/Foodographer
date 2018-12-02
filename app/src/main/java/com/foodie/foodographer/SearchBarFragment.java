@@ -74,7 +74,7 @@ public class SearchBarFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_bar_fragment,
                 container, false);
-        
+
         //save the name and location of the restruant if the searchbar for name exist
         nameSearch = view.findViewById(R.id.name_search);
         nameSearch.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
@@ -97,7 +97,7 @@ public class SearchBarFragment extends Fragment {
                 return true;
             }
         });
-        
+
         //save the name and location of the restruant if the searchbar for location exist
         locationSearch = view.findViewById(R.id.location_search);
         locationSearch.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {

@@ -43,18 +43,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Use the {@link AccountSettingFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AccountSettingFragment extends Fragment implements View.OnClickListener{
+public class AccountSettingFragment extends Fragment implements View.OnClickListener {
+    final static int galleryPic = 1;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     private Button savingBut;
-    
     private Spinner changeExpertSpinner;
     private Spinner changeExpertSpinner2;
     private Spinner changeExpertSpinner3;
@@ -62,15 +60,12 @@ public class AccountSettingFragment extends Fragment implements View.OnClickList
     private Spinner changeInterestSpinner2;
     private Spinner changeInterestSpinner3;
     private Spinner changeInterestSpinner4;
-    
     private FirebaseAuth mAuthSetting;
     private DatabaseReference profileRefer;
     private DatabaseReference profileReferExpert;
     private DatabaseReference profileReferInterest;
-    
     private String currentUserID;
     private CircleImageView image;
-    final static int galleryPic=1;
     private StorageReference storeUserImage;
     private Uri resultUri;
 
@@ -114,20 +109,20 @@ public class AccountSettingFragment extends Fragment implements View.OnClickList
         View view = inflater.inflate(R.layout.fragment_account_setting_fragment,
                 container, false);
         mAuthSetting = FirebaseAuth.getInstance();
-        currentUserID=mAuthSetting.getCurrentUser().getUid();
-        profileRefer=FirebaseDatabase.getInstance().getReference().
+        currentUserID = mAuthSetting.getCurrentUser().getUid();
+        profileRefer = FirebaseDatabase.getInstance().getReference().
                 child("users").child(currentUserID);
-        storeUserImage=FirebaseStorage.getInstance().getReference().child("Profile Images");
+        storeUserImage = FirebaseStorage.getInstance().getReference().child("Profile Images");
 
         savingBut = (Button) view.findViewById(R.id.savingInformation);
         savingBut.setOnClickListener(this);
-        image =(CircleImageView) view.findViewById(R.id.profileSettingImage);
-        ArrayAdapter<String> expertAdapter = new ArrayAdapter<String>( getContext(),
+        image = (CircleImageView) view.findViewById(R.id.profileSettingImage);
+        ArrayAdapter<String> expertAdapter = new ArrayAdapter<String>(getContext(),
                 android.R.layout.simple_list_item_1, getResources().
                 getStringArray(R.array.expertise_array));
         // Specify the layout to use when the list of choices appears
         expertAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-       
+
         // Apply the adapter to the spinner
         changeExpertSpinner = (Spinner) view.findViewById(R.id.expertiseChange1);
         changeExpertSpinner.setAdapter(expertAdapter);
@@ -141,8 +136,7 @@ public class AccountSettingFragment extends Fragment implements View.OnClickList
         changeExpertSpinner3.setVisibility(View.VISIBLE);
 
 
-
-        ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>( getContext(),
+        ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>(getContext(),
                 android.R.layout.simple_list_item_1, getResources().
                 getStringArray(R.array.expertise_array));
         interestAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -165,10 +159,10 @@ public class AccountSettingFragment extends Fragment implements View.OnClickList
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent pictureIntent= new Intent();
+                Intent pictureIntent = new Intent();
                 pictureIntent.setAction(Intent.ACTION_PICK);
                 pictureIntent.setType("image/*");
-                startActivityForResult(pictureIntent,galleryPic);
+                startActivityForResult(pictureIntent, galleryPic);
             }
         });
 
@@ -181,9 +175,9 @@ public class AccountSettingFragment extends Fragment implements View.OnClickList
             mListener.onFragmentInteraction(uri);
         }
     }
-    
+
     //update the new user information. (experties, interest and profile picture)
-    private void updateInformation(){
+    private void updateInformation() {
         final String expert1 = changeExpertSpinner.getSelectedItem().toString().trim();
         final String expert2 = changeExpertSpinner2.getSelectedItem().toString().trim();
         final String expert3 = changeExpertSpinner3.getSelectedItem().toString().trim();
@@ -194,58 +188,58 @@ public class AccountSettingFragment extends Fragment implements View.OnClickList
         final String interest4 = changeInterestSpinner4.getSelectedItem().toString().trim();
 
         //experties
-        profileReferExpert=profileRefer.child("Expert");
-        HashMap usermap= new HashMap();
-        usermap.put("Expert1",expert1);
-        usermap.put("Expert2",expert2);
-        usermap.put("Expert3",expert3);
+        profileReferExpert = profileRefer.child("Expert");
+        HashMap usermap = new HashMap();
+        usermap.put("Expert1", expert1);
+        usermap.put("Expert2", expert2);
+        usermap.put("Expert3", expert3);
         profileReferExpert.updateChildren(usermap).addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
-                if(task.isSuccessful()){
-                    Toast.makeText( getContext(),
+                if (task.isSuccessful()) {
+                    Toast.makeText(getContext(),
                             "Update account information successfully",
                             Toast.LENGTH_SHORT).show();
                     getFragmentManager().beginTransaction().
                             replace(getId(), new UserProfileFragment()).commit();
-                }else{
-                    String grab_message=task.getException().getMessage();
-                    Toast.makeText( getContext(),
-                            "Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                } else {
+                    String grab_message = task.getException().getMessage();
+                    Toast.makeText(getContext(),
+                            "Error occured:" + grab_message, Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
-        
+
         //interest
-        profileReferInterest=profileRefer.child("Interest");
-        HashMap usermap2= new HashMap();
-        usermap2.put("Interest1",interest1);
-        usermap2.put("Interest2",interest2);
-        usermap2.put("Interest3",interest3);
-        usermap2.put("Interest4",interest4);
+        profileReferInterest = profileRefer.child("Interest");
+        HashMap usermap2 = new HashMap();
+        usermap2.put("Interest1", interest1);
+        usermap2.put("Interest2", interest2);
+        usermap2.put("Interest3", interest3);
+        usermap2.put("Interest4", interest4);
         profileReferInterest.updateChildren(usermap2).addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
-                if(task.isSuccessful()){
-                    Toast.makeText( getContext(),
+                if (task.isSuccessful()) {
+                    Toast.makeText(getContext(),
                             "Update account information successfully",
                             Toast.LENGTH_SHORT).show();
                     getFragmentManager().beginTransaction().
                             replace(getId(), new UserProfileFragment()).commit();
-                }else{
-                    String grab_message=task.getException().getMessage();
-                    Toast.makeText( getContext(),
-                            "Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                } else {
+                    String grab_message = task.getException().getMessage();
+                    Toast.makeText(getContext(),
+                            "Error occured:" + grab_message, Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
-        
+
         //upload user profile picture
-        if(resultUri!= null){
+        if (resultUri != null) {
             final StorageReference filePath = storeUserImage.child(currentUserID);
-            Bitmap bitmap=null;
+            Bitmap bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getActivity().
                         getApplication().getContentResolver(), resultUri);
@@ -276,12 +270,12 @@ public class AccountSettingFragment extends Fragment implements View.OnClickList
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         Toast.makeText(getContext(),
                                 "Profile Image stored successfully to Firebase storage...",
                                 Toast.LENGTH_SHORT).show();
 
-                        Uri uriAddress=task.getResult();
+                        Uri uriAddress = task.getResult();
                         Map newImage = new HashMap();
                         newImage.put("profileImageUrl", uriAddress.toString());
                         profileRefer.updateChildren(newImage);
@@ -316,7 +310,7 @@ public class AccountSettingFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if(v == savingBut){
+        if (v == savingBut) {
             updateInformation();
         }
     }

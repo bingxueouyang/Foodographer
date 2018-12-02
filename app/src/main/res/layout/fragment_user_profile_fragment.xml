@@ -205,7 +205,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_margin="10dp"
-                            android:text="Recently Viewd"
+                            android:text="Recently Viewed"
                             android:textSize="18sp" />
 
                         <Button

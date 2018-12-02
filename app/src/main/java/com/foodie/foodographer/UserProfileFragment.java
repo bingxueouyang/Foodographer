@@ -32,7 +32,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Use the {@link UserProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserProfileFragment extends Fragment implements View.OnClickListener{
+public class UserProfileFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -57,8 +57,8 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     private TextView mostFavRest;
     private DatabaseReference profileRestRefer;
     private FirebaseUser currentUser;
-    private int checkSize=0;
-    private  String userFavRest;
+    private int checkSize = 0;
+    private String userFavRest;
     private Button favListBut;
     private Button recentViewListBut;
     private Button commentBut;
@@ -103,19 +103,19 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                 container, false);
 
         //declare signout button and set ClickListener
-        signout= (Button) view.findViewById(R.id.logoutButton);
+        signout = (Button) view.findViewById(R.id.logoutButton);
         signout.setOnClickListener(this);
 
         //declare setting button and set ClickListener
-        settingBut=(Button) view.findViewById(R.id.setting);
+        settingBut = (Button) view.findViewById(R.id.setting);
         settingBut.setOnClickListener(this);
 
         //declare firebase auth
-        mAuth3=FirebaseAuth.getInstance();
-        currentUser=mAuth3.getCurrentUser();
-        
+        mAuth3 = FirebaseAuth.getInstance();
+        currentUser = mAuth3.getCurrentUser();
+
         //go back to login if this user is not exist
-        if(currentUser==null){
+        if (currentUser == null) {
             getFragmentManager().beginTransaction().replace(R.id.userProfile,
                     new LoginFragment()).commit();
         }
@@ -127,28 +127,28 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
 
             userEmail_textview = (TextView) view.findViewById(R.id.username);
             String email = currentUser.getEmail();
-            String emailUserName = email.substring(0,email.indexOf('@'));
+            String emailUserName = email.substring(0, email.indexOf('@'));
             userEmail_textview.setText(emailUserName);
-            
+
             signout = (Button) view.findViewById(R.id.logoutButton);
             signout.setOnClickListener(this);
-            
+
             settingBut = (Button) view.findViewById(R.id.setting);
             settingBut.setOnClickListener(this);
-            
+
             userImageView = (CircleImageView) view.findViewById(R.id.profile_image);
             expertiseText = (TextView) view.findViewById(R.id.perosonalExpertise);
             mostFavRest = (TextView) view.findViewById(R.id.favoriteRest);
-            
-            favListBut =(Button) view.findViewById(R.id.listFavor);
+
+            favListBut = (Button) view.findViewById(R.id.listFavor);
             favListBut.setOnClickListener(this);
-            
-            recentViewListBut=(Button) view.findViewById(R.id.listView);
+
+            recentViewListBut = (Button) view.findViewById(R.id.listView);
             recentViewListBut.setOnClickListener(this);
-            
-            commentBut=(Button) view.findViewById(R.id.reviewList);
+
+            commentBut = (Button) view.findViewById(R.id.reviewList);
             commentBut.setOnClickListener(this);
-            
+
             //give user the ability to change or add expert in.
             profileRefer.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -157,14 +157,14 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                     String imageOfUser = dataSnapshot.child("profileImageUrl").getValue().toString();
                     Log.d("checking", imageOfUser + "checking id");
                     String firstExpertise = dataSnapshot.child("Expert").child("Expert1").
-                        getValue().toString();
+                            getValue().toString();
                     String secondExpertise = dataSnapshot.child("Expert").child("Expert2").
-                        getValue().toString();
+                            getValue().toString();
                     String thirdExpertise = dataSnapshot.child("Expert").child("Expert3").
-                        getValue().toString();
+                            getValue().toString();
 
-                    totalExpertise = firstExpertise +" | "+ secondExpertise +" | "+ thirdExpertise;
-                    
+                    totalExpertise = firstExpertise + " | " + secondExpertise + " | " + thirdExpertise;
+
                     Picasso.with(getActivity()).load(imageOfUser).into(userImageView);
                     expertiseText.setText(totalExpertise);
                 }
@@ -208,25 +208,25 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         // If clicked signout, signout and go to login page
-        if(v == signout){
+        if (v == signout) {
             mAuth3.signOut();
             getFragmentManager().beginTransaction().replace(R.id.userProfile, new LoginFragment()).
-                addToBackStack(null).commit();
+                    addToBackStack(null).commit();
         }
         //go to account setting page is clicked setting button
-        if(v == settingBut){
+        if (v == settingBut) {
             startActivity(new Intent(getActivity(), AccountSetting.class));
         }
         //go to favorite restaurant page if clicked favlist button
-        if(v==favListBut){
+        if (v == favListBut) {
             startActivity(new Intent(getActivity(), UserFavoriteRestaurants.class));
         }
         //go to recent view page if clicked recentview button
-        if(v==recentViewListBut){
+        if (v == recentViewListBut) {
             startActivity(new Intent(getActivity(), UserRecentViewRestaurants.class));
         }
         //go to comment page if clicked comment button
-        if(v==commentBut){
+        if (v == commentBut) {
             startActivity(new Intent(getActivity(), UserCommentRestaurant.class));
         }
 

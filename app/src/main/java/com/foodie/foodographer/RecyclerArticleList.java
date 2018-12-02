@@ -1,10 +1,11 @@
-/* 
- * An adapter object for Article Page 
+/*
+ * An adapter object for Article Page
  * https://stackoverflow.com/questions/30751870/can-one-use-cardview-for-listview-item-and-how
  */
 package com.foodie.foodographer;
 
 import android.support.v7.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class RecyclerArticleList extends RecyclerView.Adapter<RecyclerArticleLis
     private List<Article> article_list;
     private Context context;
 
-    public RecyclerArticleList (ArrayList<Article> article_list){
+    public RecyclerArticleList(ArrayList<Article> article_list) {
         this.article_list = article_list;
     }
 
@@ -28,7 +29,7 @@ public class RecyclerArticleList extends RecyclerView.Adapter<RecyclerArticleLis
         // inflate the list view
         context = parent.getContext();
         View listItem = LayoutInflater.from(parent.getContext())
-            .inflate(R.layout.article_card, parent, false);
+                .inflate(R.layout.article_card, parent, false);
         return new MyViewHolder(listItem);
     }
 
@@ -41,7 +42,7 @@ public class RecyclerArticleList extends RecyclerView.Adapter<RecyclerArticleLis
         // download image from url
         new DownloadImageTask(holder.artIMG).execute(article.getIMGURL());
         // set onClick on each item
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // jump to Article page with web view
@@ -63,6 +64,7 @@ public class RecyclerArticleList extends RecyclerView.Adapter<RecyclerArticleLis
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView artTitle;
         private ImageView artIMG;
+
         // find views and assign to holder
         public MyViewHolder(View itemView) {
             super(itemView);

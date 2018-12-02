@@ -1,6 +1,7 @@
 package com.foodie.foodographer;
 
 // import everything needed in this java
+
 import android.net.Uri;
 
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import android.graphics.Bitmap;
+
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,15 +29,21 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.UploadTask;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+
 import java.util.HashMap;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Map;
+
 import android.provider.MediaStore;
+
 import com.google.android.gms.tasks.OnFailureListener;
+
 public class AccountSetting extends AppCompatActivity implements View.OnClickListener,
-UserProfileFragment.OnFragmentInteractionListener{
+        UserProfileFragment.OnFragmentInteractionListener {
+    final static int galleryPic = 1;
     // initialized saving button, four choice of interest and expert for user to pick.
     private Button savingBut;
     private Spinner changeExpertSpinner;
@@ -51,9 +59,9 @@ UserProfileFragment.OnFragmentInteractionListener{
     private DatabaseReference profileReferInterest;
     private String currentUserID;
     private CircleImageView image;
-    final static int galleryPic=1;
     private StorageReference storeUserImage;
     private Uri resultUri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,15 +69,15 @@ UserProfileFragment.OnFragmentInteractionListener{
         //connect to firebase
         mAuthSetting = FirebaseAuth.getInstance();
         // connect to firebase with unique user id
-        currentUserID=mAuthSetting.getCurrentUser().getUid();
-        profileRefer=FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
+        currentUserID = mAuthSetting.getCurrentUser().getUid();
+        profileRefer = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
         //connect to firebase storage
-        storeUserImage=FirebaseStorage.getInstance().getReference().child("Profile Images");
+        storeUserImage = FirebaseStorage.getInstance().getReference().child("Profile Images");
 
         savingBut = (Button) findViewById(R.id.savingInformation);
         savingBut.setOnClickListener(this);
-        image =(CircleImageView) findViewById(R.id.profileSettingImage);
-        ArrayAdapter<String> expertAdapter = new ArrayAdapter<String>( AccountSetting.this,
+        image = (CircleImageView) findViewById(R.id.profileSettingImage);
+        ArrayAdapter<String> expertAdapter = new ArrayAdapter<String>(AccountSetting.this,
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.expertise_array));
         // Specify the layout to use when the list of choices appears
@@ -78,7 +86,6 @@ UserProfileFragment.OnFragmentInteractionListener{
 
         changeExpertSpinner = (Spinner) findViewById(R.id.expertiseChange1);
         changeExpertSpinner.setAdapter(expertAdapter);
-
 
 
         changeExpertSpinner2 = (Spinner) findViewById(R.id.expertiseChange2);
@@ -90,7 +97,7 @@ UserProfileFragment.OnFragmentInteractionListener{
         changeExpertSpinner3.setVisibility(View.VISIBLE);
 
         // store interests that user pick into arraylist for spinner
-        ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>( AccountSetting.this,
+        ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>(AccountSetting.this,
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.expertise_array));
         interestAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -114,17 +121,17 @@ UserProfileFragment.OnFragmentInteractionListener{
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent pictureIntent= new Intent();
+                Intent pictureIntent = new Intent();
                 pictureIntent.setAction(Intent.ACTION_PICK);
                 pictureIntent.setType("image/*");
-                startActivityForResult(pictureIntent,galleryPic);
+                startActivityForResult(pictureIntent, galleryPic);
             }
         });
 
     }
 
     //update user choice and sync stored into firebase datebase
-    private void updateInformation(){
+    private void updateInformation() {
         final String expert1 = changeExpertSpinner.getSelectedItem().toString().trim();
         final String expert2 = changeExpertSpinner2.getSelectedItem().toString().trim();
         final String expert3 = changeExpertSpinner3.getSelectedItem().toString().trim();
@@ -135,59 +142,59 @@ UserProfileFragment.OnFragmentInteractionListener{
         final String interest4 = changeInterestSpinner4.getSelectedItem().toString().trim();
 
 
-        profileReferExpert=profileRefer.child("Expert");
-        HashMap usermap= new HashMap();
-        usermap.put("Expert1",expert1);
-        usermap.put("Expert2",expert2);
-        usermap.put("Expert3",expert3);
+        profileReferExpert = profileRefer.child("Expert");
+        HashMap usermap = new HashMap();
+        usermap.put("Expert1", expert1);
+        usermap.put("Expert2", expert2);
+        usermap.put("Expert3", expert3);
         //update the user choice at expert in firebase datebase
         profileReferExpert.updateChildren(usermap).addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
-                    //checking the task is success then send a message
-                    if(task.isSuccessful()){
-                        Toast.makeText( AccountSetting.this,
-                                "Update account information successfully",
-                                Toast.LENGTH_SHORT).show();
-                        finish();
-                    }else{
-                        // not success and send the error message
-                        String grab_message=task.getException().getMessage();
-                        Toast.makeText( AccountSetting.this,
-                                "Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
-                    }
+                //checking the task is success then send a message
+                if (task.isSuccessful()) {
+                    Toast.makeText(AccountSetting.this,
+                            "Update account information successfully",
+                            Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    // not success and send the error message
+                    String grab_message = task.getException().getMessage();
+                    Toast.makeText(AccountSetting.this,
+                            "Error occured:" + grab_message, Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
-        profileReferInterest=profileRefer.child("Interest");
-        HashMap usermap2= new HashMap();
-        usermap2.put("Interest1",interest1);
-        usermap2.put("Interest2",interest2);
-        usermap2.put("Interest3",interest3);
-        usermap2.put("Interest4",interest4);
+        profileReferInterest = profileRefer.child("Interest");
+        HashMap usermap2 = new HashMap();
+        usermap2.put("Interest1", interest1);
+        usermap2.put("Interest2", interest2);
+        usermap2.put("Interest3", interest3);
+        usermap2.put("Interest4", interest4);
         //update the user choice at interest in firebase datebase
         profileReferInterest.updateChildren(usermap2).addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
                 //checking the task is success then send a message
-                if(task.isSuccessful()){
-                    Toast.makeText( AccountSetting.this,
+                if (task.isSuccessful()) {
+                    Toast.makeText(AccountSetting.this,
                             "Update interest successfully",
                             Toast.LENGTH_SHORT).show();
                     finish();
-                }else{
+                } else {
                     // not success and send the error message
-                    String grab_message=task.getException().getMessage();
-                    Toast.makeText( AccountSetting.this,
-                            "Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                    String grab_message = task.getException().getMessage();
+                    Toast.makeText(AccountSetting.this,
+                            "Error occured:" + grab_message, Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
         //update user image into firebase databse with firebase storage for picture
-        if(resultUri!= null){
+        if (resultUri != null) {
             final StorageReference filePath = storeUserImage.child(currentUserID);
-            Bitmap bitmap=null;
+            Bitmap bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getApplication().
                         getContentResolver(), resultUri);
@@ -219,13 +226,13 @@ UserProfileFragment.OnFragmentInteractionListener{
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         //if the task is success, then the send successful message
                         Toast.makeText(AccountSetting.this,
                                 "Profile Image stored successfully to Firebase storage...",
                                 Toast.LENGTH_SHORT).show();
 
-                        Uri uriAddress=task.getResult();
+                        Uri uriAddress = task.getResult();
                         Map newImage = new HashMap();
                         newImage.put("profileImageUrl", uriAddress.toString());
                         profileRefer.updateChildren(newImage);
@@ -237,22 +244,23 @@ UserProfileFragment.OnFragmentInteractionListener{
 
 
     }
+
     //grab the result that user pick for his/her picure
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==galleryPic&& resultCode==RESULT_OK )
-        {
+        if (requestCode == galleryPic && resultCode == RESULT_OK) {
             final Uri ImageUri = data.getData();
-            resultUri=ImageUri;
+            resultUri = ImageUri;
             image.setImageURI(resultUri);
         }
 
 
     }
+
     // on click function
     public void onClick(View view) {
-        if(view == savingBut){
+        if (view == savingBut) {
             updateInformation();
 
         }

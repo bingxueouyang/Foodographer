@@ -1,5 +1,6 @@
 package com.foodie.foodographer;
 //import every thing needed for this java
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -22,10 +24,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 import com.google.firebase.database.DatabaseReference;
+
 import java.util.HashMap;
 
 
-public class SignUp extends AppCompatActivity  implements View.OnClickListener {
+public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private Button registBut;
     private ImageButton addExpert;
     private ImageButton addInterest;
@@ -42,6 +45,7 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
     private Spinner interestSpinner3;
     private Spinner interestSpinner4;
     private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -51,7 +55,7 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
         mAuth = FirebaseAuth.getInstance();
         // evoking the button and edittext from signup.xml
         getemail = (EditText) findViewById(R.id.EmailAdress);
-        progressDialog= new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
 
         registBut = (Button) findViewById(R.id.checkingRegister);
 
@@ -67,7 +71,7 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
         addInterest.setOnClickListener(this);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> expertAdapter = new ArrayAdapter<String>( SignUp.this,
+        ArrayAdapter<String> expertAdapter = new ArrayAdapter<String>(SignUp.this,
                 android.R.layout.simple_list_item_1, getResources().
                 getStringArray(R.array.expertise_array));
         // Specify the layout to use when the list of choices appears
@@ -76,7 +80,6 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
 
         expertSpinner = (Spinner) findViewById(R.id.ExpertiseSpinner);
         expertSpinner.setAdapter(expertAdapter);
-
 
 
         expertSpinner2 = (Spinner) findViewById(R.id.ExpertiseSpinner2);
@@ -89,7 +92,7 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
 
 
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>( SignUp.this,
+        ArrayAdapter<String> interestAdapter = new ArrayAdapter<String>(SignUp.this,
                 android.R.layout.simple_list_item_1, getResources().
                 getStringArray(R.array.expertise_array));
         // Specify the layout to use when the list of choices appears
@@ -112,50 +115,51 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
         interestSpinner4.setVisibility(View.GONE);
 
 
-
     }
+
     //register user function
-    private void registerUser(){
+    private void registerUser() {
         String infoEmail = getemail.getText().toString().trim();
         String infoPassword = getpassword.getText().toString().trim();
         //if the user doesnot enter email
-        if(TextUtils.isEmpty(infoEmail)){
-            Toast.makeText(this,"Please enter an email !",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(infoEmail)) {
+            Toast.makeText(this, "Please enter an email !", Toast.LENGTH_SHORT).show();
             return;
         }
         // if the user does not enter password
-        if(TextUtils.isEmpty(infoPassword)){
-            Toast.makeText(this,"Please enter password !",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(infoPassword)) {
+            Toast.makeText(this, "Please enter password !", Toast.LENGTH_SHORT).show();
             return;
         }
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
         //calling create user in firebase 
-        mAuth.createUserWithEmailAndPassword(infoEmail,infoPassword)
+        mAuth.createUserWithEmailAndPassword(infoEmail, infoPassword)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             send_message_verifed_email();
 
-                        }else{
-                            Toast.makeText( SignUp.this,
-                                    "Failed",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(SignUp.this,
+                                    "Failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
     }
 
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
-        if(mAuth.getCurrentUser()!= null){
+        if (mAuth.getCurrentUser() != null) {
             //handle login user
         }
     }
-    // send the verified email 
-    private void send_message_verifed_email(){
+
+    // send the verified email
+    private void send_message_verifed_email() {
         final String infoEmail = getemail.getText().toString().trim();
 
         final String expert1 = expertSpinner.getSelectedItem().toString().trim();
@@ -169,78 +173,78 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
 
 
         FirebaseUser usertemp = mAuth.getCurrentUser();
-        if(usertemp !=null){
+        if (usertemp != null) {
             usertemp.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
 
-                        Toast.makeText( SignUp.this,
-                                "Please verified your account!",Toast.LENGTH_SHORT).show();
-                        String user_id=mAuth.getCurrentUser().getUid();
-                        mDatabase=FirebaseDatabase.getInstance().
+                        Toast.makeText(SignUp.this,
+                                "Please verified your account!", Toast.LENGTH_SHORT).show();
+                        String user_id = mAuth.getCurrentUser().getUid();
+                        mDatabase = FirebaseDatabase.getInstance().
                                 getReference().child("users").child(user_id);
 
                         //updating the user basic info into datebase
-                        HashMap user_info= new HashMap();
-                        user_info.put("Email",infoEmail);
-                        user_info.put("Favorite","");
-                        user_info.put("Expert","");
-                        user_info.put("Interest","");
-                        user_info.put("RecentView","");
-                        user_info.put("comments","");
-                        
+                        HashMap user_info = new HashMap();
+                        user_info.put("Email", infoEmail);
+                        user_info.put("Favorite", "");
+                        user_info.put("Expert", "");
+                        user_info.put("Interest", "");
+                        user_info.put("RecentView", "");
+                        user_info.put("comments", "");
+
                         user_info.put("profileImageUrl",
                                 "http://img.icons8.com/color/1600/circled-user-male-skin-type-1-2.png");
                         mDatabase.setValue(user_info);
-                        DatabaseReference createExpert=mDatabase.child("Expert");
-                        HashMap userExpert= new HashMap();
-                        userExpert.put("Expert1",expert1);
-                        userExpert.put("Expert2",expert2);
-                        userExpert.put("Expert3",expert3);
+                        DatabaseReference createExpert = mDatabase.child("Expert");
+                        HashMap userExpert = new HashMap();
+                        userExpert.put("Expert1", expert1);
+                        userExpert.put("Expert2", expert2);
+                        userExpert.put("Expert3", expert3);
                         createExpert.setValue(userExpert);
-                        DatabaseReference createInterest=mDatabase.child("Interest");
-                        HashMap userInterest= new HashMap();
-                        userInterest.put("Interest1",interest1);
-                        userInterest.put("Interest2",interest2);
-                        userInterest.put("Interest3",interest3);
-                        userInterest.put("Interest4",interest4);
+                        DatabaseReference createInterest = mDatabase.child("Interest");
+                        HashMap userInterest = new HashMap();
+                        userInterest.put("Interest1", interest1);
+                        userInterest.put("Interest2", interest2);
+                        userInterest.put("Interest3", interest3);
+                        userInterest.put("Interest4", interest4);
                         createInterest.setValue(userInterest);
 
                         finish();
-                        startActivity(new Intent(getApplicationContext(),LogIn.class));
+                        startActivity(new Intent(getApplicationContext(), LogIn.class));
                         mAuth.signOut();
-                    }else{
-                        String grab_message=task.getException().getMessage();
-                        Toast.makeText( SignUp.this,
-                                "Error occured:"+grab_message,Toast.LENGTH_SHORT).show();
+                    } else {
+                        String grab_message = task.getException().getMessage();
+                        Toast.makeText(SignUp.this,
+                                "Error occured:" + grab_message, Toast.LENGTH_SHORT).show();
                         mAuth.signOut();
                     }
                 }
             });
         }
     }
+
     //onclick to jump from one activity to another activity
     @Override
     public void onClick(View view) {
-        if(view == registBut){
+        if (view == registBut) {
             registerUser();
         }
-        if(view == signupText){
+        if (view == signupText) {
 
-            startActivity(new Intent(this,LogIn.class));
+            startActivity(new Intent(this, LogIn.class));
         }
-        if(view == addExpert){
+        if (view == addExpert) {
             if (expertSpinner2.getVisibility() != View.VISIBLE) {
                 expertSpinner2.setVisibility(View.VISIBLE);
-            }
-            else{
+            } else {
                 expertSpinner3.setVisibility(View.VISIBLE);
                 //expertll3.invalidate();
                 addExpert.setVisibility(View.GONE);
             }
         }
-        if(view == addInterest){
+        if (view == addInterest) {
             if (interestSpinner2.getVisibility() != View.VISIBLE) {
                 interestSpinner2.setVisibility(View.VISIBLE);
             } else if (interestSpinner3.getVisibility() != View.VISIBLE) {

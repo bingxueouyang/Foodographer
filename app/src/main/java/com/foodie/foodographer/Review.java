@@ -8,7 +8,9 @@ public class Review {
     private String time;
     private String content;
 
-    public Review(){}
+    public Review() {
+    }
+
     public Review(String username, String userIMGURL, Float rating, String time, String content) {
         this.username = username;
         this.userIMGURL = userIMGURL;
@@ -29,11 +31,11 @@ public class Review {
         return this.rating;
     }
 
-    public String getTime(){
+    public String getTime() {
         return this.time;
     }
 
-    public String getContent(){
+    public String getContent() {
         return this.content;
     }
 
