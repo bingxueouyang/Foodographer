@@ -89,6 +89,7 @@ public class RestaurantInfo extends AppCompatActivity implements View.OnClickLis
         myRest = getIntent().getParcelableExtra("myRest");
         favoriteButton = findViewById(R.id.likeButton);
         reviewButton = (Button) findViewById(R.id.saveRating_Btn);
+        //check user login state and current user
         if (mAuthSetting.getCurrentUser() != null) {
             checkUserExixt = true;
             currentUserID = mAuthSetting.getCurrentUser().getUid();
