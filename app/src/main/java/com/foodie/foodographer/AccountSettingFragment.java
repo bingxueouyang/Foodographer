@@ -310,6 +310,7 @@ public class AccountSettingFragment extends Fragment implements View.OnClickList
     @Override
     public void onDetach() {
         super.onDetach();
+
         mListener = null;
     }
 

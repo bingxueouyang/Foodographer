@@ -150,7 +150,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
             commentBut.setOnClickListener(this);
             
             //give user the ability to change or add expert in.
-            profileRefer.addListenerForSingleValueEvent(new ValueEventListener() {
+            profileRefer.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -215,9 +215,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         }
         //go to account setting page is clicked setting button
         if(v == settingBut){
-            getFragmentManager().beginTransaction().
-                    replace(R.id.userProfile, new AccountSettingFragment()).
-                addToBackStack(null).commit();
+            startActivity(new Intent(getActivity(), AccountSetting.class));
         }
         //go to favorite restaurant page if clicked favlist button
         if(v==favListBut){

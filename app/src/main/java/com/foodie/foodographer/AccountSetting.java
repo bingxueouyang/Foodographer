@@ -3,6 +3,8 @@ package com.foodie.foodographer;
 // import everything needed in this java
 import android.net.Uri;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -32,7 +34,8 @@ import java.io.IOException;
 import java.util.Map;
 import android.provider.MediaStore;
 import com.google.android.gms.tasks.OnFailureListener;
-public class AccountSetting extends AppCompatActivity implements View.OnClickListener{
+public class AccountSetting extends AppCompatActivity implements View.OnClickListener,
+UserProfileFragment.OnFragmentInteractionListener{
     // initialized saving button, four choice of interest and expert for user to pick.
     private Button savingBut;
     private Spinner changeExpertSpinner;
@@ -147,7 +150,6 @@ public class AccountSetting extends AppCompatActivity implements View.OnClickLis
                                 "Update account information successfully",
                                 Toast.LENGTH_SHORT).show();
                         finish();
-                        startActivity(new Intent(getApplicationContext(),UserProfile.class));
                     }else{
                         // not success and send the error message
                         String grab_message=task.getException().getMessage();
@@ -170,10 +172,9 @@ public class AccountSetting extends AppCompatActivity implements View.OnClickLis
                 //checking the task is success then send a message
                 if(task.isSuccessful()){
                     Toast.makeText( AccountSetting.this,
-                            "Update account information successfully",
+                            "Update interest successfully",
                             Toast.LENGTH_SHORT).show();
                     finish();
-                    startActivity(new Intent(getApplicationContext(),UserProfile.class));
                 }else{
                     // not success and send the error message
                     String grab_message=task.getException().getMessage();
@@ -228,8 +229,6 @@ public class AccountSetting extends AppCompatActivity implements View.OnClickLis
                         Map newImage = new HashMap();
                         newImage.put("profileImageUrl", uriAddress.toString());
                         profileRefer.updateChildren(newImage);
-
-
                     }
                 }
             });
@@ -257,6 +256,11 @@ public class AccountSetting extends AppCompatActivity implements View.OnClickLis
             updateInformation();
 
         }
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 
